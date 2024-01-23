@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import "./loadEnvironment.js";
-// require("dotenv").config({ path: "../.env"}) ;
 import records from "./routes/record.js";
 
 const PORT = process.env.PORT || 5000;
