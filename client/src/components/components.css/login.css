@@ -44,7 +44,7 @@
 
   .login-button {
     width: 35%;
-    padding: 10px; /* Adjust padding for button */
+    padding: 9px; /* Adjust padding for button */
     background-color: #8f94fb; /* Adjust background color for button */
     color: #fff; /* Adjust text color for button */
     border: none;
@@ -66,4 +66,15 @@
     margin-bottom: 15px;
     font-weight: 750;
   }
+ 
 
+  .react-datepicker__navigation--previous {
+    left: 1px !important;
+    width: 1px !important;/* Adjust the left position of the previous month button */
+  }
+  
+  .react-datepicker__navigation--next {
+    right: 1px !important;
+    width: 1px !important; /* Adjust the right position of the next month button */
+  }
+  

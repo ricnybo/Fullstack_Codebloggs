@@ -84,12 +84,14 @@ function Login() {
           </div>
           <div className="form-group">
             <label htmlFor="birthday">Birthday</label>
-            <DatePicker
+            <DatePicker className= "dateBox"
               selected={formData.birthday}
               onChange={handleDateChange}
-              dateFormat="dd/MM/yyyy" // Customize date format
+              dateFormat="MM/dd/yyyy" // Customize date format
               showYearDropdown
               scrollableYearDropdown
+              maxDate={new Date(2025, 12, 31)}
+              yearDropdownItemNumber={60}
             />
           </div>
           </>
