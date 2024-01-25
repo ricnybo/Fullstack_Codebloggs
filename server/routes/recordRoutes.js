@@ -12,12 +12,12 @@ import {
   updateRecord,
 } from "../controllers/recordController.js";
 
-const router = express.Router();
+const recordRouter = express.Router();
 
-router.get("/", getAllRecords);
-router.get("/:id", getRecordById);
-router.post("/", createRecord);
-router.put("/:id", updateRecord);
-router.delete("/:id", deleteRecord);
+recordRouter.get("/", getAllRecords);
+recordRouter.get("/:id", getRecordById);
+recordRouter.post("/", createRecord);
+recordRouter.put("/:id", updateRecord);
+recordRouter.delete("/:id", deleteRecord);
 
-export default router;
+export default recordRouter;

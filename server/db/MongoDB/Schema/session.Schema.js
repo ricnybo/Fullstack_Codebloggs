@@ -19,13 +19,11 @@ const SessionSchema = new mongoose.Schema(
     },
     session_date: {
       type: Date,
-      trim: true,
       required: true,
     },
-    User: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      trim: true,
       required: true,
     },
   },
