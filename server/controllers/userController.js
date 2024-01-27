@@ -3,30 +3,41 @@
 // This file contains the methods for the user routes.
 import dotenv from "dotenv";
 dotenv.config({ path: "../../.env" });
-const secretPwd = process.env.SECRET_KEY;
-const hashSalt = process.env.HASH_SALT;
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import User from "../db/mongodb/schema/user.Schema.js";
 import Session from "../db/mongodb/schema/session.Schema.js";
-import { createSession, validateToken } from "./sessionController.js";
-//import Agent from "../db/mongodb/schema/agent.Schema.js";
-import auth from "../middleware/middleware.js";
-import dbo from "../db/conn.js";
 
 // This section will help you get a list of all the users.
 const register = async (req, res) => {
   try {
-    const { first_name, last_name, birthday, email, password, status, location, occupation, auth_level } = req.body;
+    const {
+      first_name,
+      last_name,
+      birthday,
+      email,
+      password,
+      status,
+      location,
+      occupation,
+      auth_level,
+    } = req.body;
     // Check if a user with the provided email already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       console.log("Status 400: Email already in use: " + email);
-      return res
-        .status(400)
-        .send("Registration failed. Email already in use.");
+      return res.status(400).send("Registration failed. Email already in use.");
     }
-    const user = new User({ first_name, last_name, birthday, email, password, status, location, occupation, auth_level});
+    const user = new User({
+      first_name,
+      last_name,
+      birthday,
+      email,
+      password,
+      status,
+      location,
+      occupation,
+      auth_level,
+    });
     await user.save();
     console.log("1 user added");
     res.status(200).json({
@@ -34,7 +45,7 @@ const register = async (req, res) => {
       data: {
         valid: true,
       },
-      message: "User created"
+      message: "User created",
     });
   } catch (err) {
     console.error(err);
@@ -55,7 +66,7 @@ const login = async (req, res) => {
           valid: false,
         },
         message: "Invalid username or password",
-      });;
+      });
     }
     const isMatch = bcrypt.compareSync(password, user.password);
     if (!isMatch) {
@@ -67,9 +78,8 @@ const login = async (req, res) => {
         },
         message: "Invalid username or password",
       });
-    };
-    // Create session token
-    // Validate session token
+    }
+
     console.log(`${req.body.email} logged in`);
     res.status(200).json({
       status: "ok",
@@ -91,28 +101,92 @@ const login = async (req, res) => {
 // This section will help you logout from the user session
 const logout = async (req, res) => {
   try {
-    // Fetch the user from the database using the user_id
-    const { user_id } = req.params;
-    const user = await User.findById(user_id);
-    if (!user) {
-      return res.status(404).send("User not found");
-    }
     // Fetch the session from the database using the session_id from the cookie
-    const session = await Session.findOne({ session_id: req.cookies.session_id });
+    // and populate the user field
+    const session = await Session.findOne({
+      session_id: req.cookies.session_id,
+    }).populate("user");
     if (!session) {
       return res.status(404).send("Session not found");
     }
-    // Verify that the user_id in the session matches the user_id in the request
-    if (session.user.toString() !== user_id) {
-      return res.status(403).send("Unauthorized");
-    }
-    // Clear the session_id cookie
-    res.clearCookie('session_id');
+
+    const user = session.user; // Fetch the user from the session for later use
+    
+    await Session.deleteOne({ session_id: req.cookies.session_id }); // Remove the session from the database
+    
+    res.clearCookie("session_id"); // Clear the session_id cookie
+
     console.log(`${user.email} logged out`);
     res.status(200).json({ status: "ok", message: "You are logged out" });
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error please try again.");
+  }
+};
+
+// This section will help you get a list of all the users.
+const usersList = async (req, res) => {
+  try {
+    const users = await User.find()
+      .select(
+        "_id first_name last_name birthday email status location occupation auth_level"
+      )
+      .sort({ last_name: 1 });
+    const userList = users.map((user) => ({
+      user_id: user._id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      birthday: user.birthday,
+      email: user.email,
+      status: user.status,
+      location: user.location,
+      occupation: user.occupation,
+      auth_level: user.auth_level,
+    }));
+    console.log("Users sent");
+    res.status(200).json({
+      status: "ok",
+      data: {
+        valid: true,
+        user_list: userList,
+      },
+      message: "Users sent",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error getting users list. Please try again.");
+  }
+};
+
+const getUser = async (req, res) => {
+  try {
+    const { user_id } = req.params;
+    const user = await User.findById(user_id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    console.log("User sent");
+    res.status(200).json({
+      status: "ok",
+      data: {
+        valid: true,
+        user: {
+          user_id: user._id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          birthday: user.birthday,
+          email: user.email,
+          status: user.status,
+          location: user.location,
+          occupation: user.occupation,
+          auth_level: user.auth_level,
+        },
+      },
+      message: "User sent",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error getting user please try again.");
   }
 };
 
@@ -153,6 +227,8 @@ export {
   register,
   login,
   logout,
+  usersList,
+  getUser,
   protectedRoute,
   editProfile,
 };

@@ -10,9 +10,14 @@ const createSession = async (req, res) => {
     const { user_id } = req.params;
     const session_id = uuid(); // generate a new session token
 
-    const newSession = new Session({ session_id: session_id, session_date: Date.now(), user: user_id });
+    const newSession = new Session({
+      session_id,
+      session_date: Date.now(),
+      user_id,
+    });
     await newSession.save();
     console.log("Session saved");
+
     res.cookie("session_id", session_id, { maxAge: 24 * 60 * 60 * 1000 });
     console.log("Cookie posted");
 
@@ -44,22 +49,24 @@ const validateToken = async (req, res) => {
         message: "No valid session exists",
       });
     }
-    console.log("Session found");
+    
     // validate that the session_id belongs to the user_id
     if (session.user._id.toString() !== user_id) {
-      console.log("Session does not belong to user id: "+user_id);
+      console.log("Session does not belong to user id: " + user_id);
       return res.status(404).json({
         status: "ok",
         data: { valid: false },
         message: "No valid session exists",
       });
     }
+
+    console.log("Valid Session found");
     res.status(200).json({
       status: "ok",
       data: {
         valid: true,
         user: {
-          id: session.user._id
+          id: session.user._id,
         },
       },
       message: "Valid session",
@@ -72,5 +79,5 @@ const validateToken = async (req, res) => {
 
 export {
   createSession,
-  validateToken,
+  validateToken
 };

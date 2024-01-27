@@ -24,14 +24,14 @@ const CommentSchema = new mongoose.Schema(
       ref: "Post",
       required: true,
     },
-    User: {
+    user_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     likes: {
       type: Number,
-      required: true,
+      default: 0,
     },
     time_stamp: {
       type: String,

@@ -6,6 +6,7 @@
 
 import Record from "../db/MongoDB/Schema/record.schema.js";
 
+// This section will help you get a list of all records.
 const getAllRecords = async (req, res) => {
   try {
     let results = await Record.find({});
@@ -15,6 +16,7 @@ const getAllRecords = async (req, res) => {
   }
 };
 
+// This section will help you get a single record by id.
 const getRecordById = async (req, res) => {
   try {
     let result = await Record.findById(req.params.id);
@@ -25,6 +27,7 @@ const getRecordById = async (req, res) => {
   }
 };
 
+// This section will help you create a new record.
 const createRecord = async (req, res) => {
   const newRecord = new Record({
     name: req.body.name,

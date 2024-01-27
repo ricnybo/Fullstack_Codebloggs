@@ -8,6 +8,8 @@ import "./loadEnvironment.js";
 import records from "./routes/recordRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import sessionRouter from "./routes/sessionRoutes.js";
+import postRouter from "./routes/postRoutes.js";
+import commentRouter from "./routes/commentRoutes.js";
 import { connectDB } from "./db/conn.js";
 import cookieParser from "cookie-parser";
 
@@ -22,7 +24,9 @@ app.use(cookieParser());
 
 app.use("/record", records);
 app.use("/user", userRouter);
-app.use("/session", sessionRouter);
+app.use("/", sessionRouter);
+app.use("/post", postRouter);
+app.use("/comment", commentRouter);
 
 // start the Express server
 app.listen(PORT, () => {

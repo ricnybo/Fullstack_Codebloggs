@@ -1,5 +1,5 @@
-// comment.Schema.js is the schema for the Comment model.
-// location:  /server/db/MongoDB/Schema/comment.Schema.js
+// post.Schema.js is the schema for the post model.
+// location:  /server/db/MongoDB/Schema/post.Schema.js
 
 // Here's a brief explanation of your schema:
 
@@ -19,14 +19,14 @@ const PostSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    User: {
+    user_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     likes: {
       type: Number,
-      required: true,
+      default: 0,
     },
     time_stamp: {
       type: String,

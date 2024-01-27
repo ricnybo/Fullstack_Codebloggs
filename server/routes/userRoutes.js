@@ -10,14 +10,17 @@ import {
   register,
   login,
   logout,
-  editProfile,
+  usersList,
+  getUser,
 } from "../controllers/userController.js";
 
 // User routes
 userRouter.post("/register", register);
 userRouter.post("/login", login);
-userRouter.get("/logout/:user_id", auth, logout);
-userRouter.put("/edit-profile", auth, editProfile);
+userRouter.post("/logout/", auth, logout);
+userRouter.get("/", auth, usersList);
+userRouter.get("/:user_id", auth, getUser);
+//userRouter.put("/edit-profile", auth, editProfile);
 
 // Export the userRouter
 export default userRouter;
