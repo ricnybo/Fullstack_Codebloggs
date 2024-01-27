@@ -1,18 +1,23 @@
-import {MongoClient} from "mongodb";
+// connect to MongoDB - conn.js
+//location:  /server/db/conn.js
+// This file is the connection to the MongoDB database.
+// It uses the mongoose package to connect to the database.
 
-const connectionString = process.env.ATLAS_URI || "";
+import mongoose from "mongoose";
 
+export const connectDB = async () => {
+  try {
+    const atlas_uri = process.env.ATLAS_URI;
+    await mongoose.connect(atlas_uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB connected...");
+  } catch (err) {
+    console.error(err);
+  }
+};
 
-const client = new MongoClient(connectionString);
+connectDB();
 
-let conn;
-try {
-  conn = await client.connect();
-  console.log("Connected to MongoDB Atlas...");
-} catch(e) {
-  console.error(e);
-}
-
-let db = conn.db("Codebloggs");
-
-export default db;
+export default mongoose;
