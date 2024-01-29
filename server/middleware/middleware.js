@@ -1,7 +1,7 @@
 // middleware.js
 // location: /server/middleware/middleware.js
 // middleware checks if the user is authenticated or not
-import Session from "../db/mongodb/schema/session.Schema.js";
+import Session from "../db/MongoDB/Schema/session.Schema.js";
 
 // auth is used to authenticate the user
 const auth = async (req, res, next) => {

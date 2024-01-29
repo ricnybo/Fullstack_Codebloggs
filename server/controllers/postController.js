@@ -1,7 +1,7 @@
 // postController.js
 // location: /server/controllers/postController.js
 // This file will contain the logic for handling requests from the post routes.
-import Post from "../db/mongodb/schema/post.Schema.js";
+import Post from "../db/MongoDB/Schema/post.Schema.js";
 
 // This section will help you create a new session.
 const createPost = async (req, res) => {

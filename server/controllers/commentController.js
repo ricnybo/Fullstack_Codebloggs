@@ -1,8 +1,8 @@
 // commentController.js
 // location: /server/controllers/commentController.js
 // This file will contain the logic for handling requests from the comment routes.
-import Comment from "../db/mongodb/schema/comment.Schema.js";
-import Post from "../db/mongodb/schema/post.Schema.js";
+import Comment from "../db/MongoDB/Schema/comment.Schema.js";
+import Post from "../db/MongoDB/Schema/post.Schema.js";
 
 // This section will help you create a new session.
 const createComment = async (req, res) => {

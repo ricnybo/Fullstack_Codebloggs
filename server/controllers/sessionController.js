@@ -1,7 +1,7 @@
 // sessionController.js
 // location: /server/controllers/sessionController.js
 // This file will contain the logic for creating and validating sessions.
-import Session from "../db/mongodb/schema/session.Schema.js";
+import Session from "../db/MongoDB/Schema/session.Schema.js";
 import { v4 as uuid } from "uuid";
 
 // This section will help you create a new session.
@@ -13,7 +13,7 @@ const createSession = async (req, res) => {
     const newSession = new Session({
       session_id,
       session_date: Date.now(),
-      user_id,
+      user: user_id,
     });
     await newSession.save();
     console.log("Session saved");
@@ -35,7 +35,6 @@ const createSession = async (req, res) => {
 // This section will help you validate a session.
 const validateToken = async (req, res) => {
   try {
-    const { user_id } = req.params;
     const tokenCookie = req.cookies.session_id;
     const session = await Session.findOne({ session_id: tokenCookie }).populate(
       "user"
@@ -43,16 +42,6 @@ const validateToken = async (req, res) => {
 
     if (!session) {
       console.log("No session found");
-      return res.status(404).json({
-        status: "ok",
-        data: { valid: false },
-        message: "No valid session exists",
-      });
-    }
-    
-    // validate that the session_id belongs to the user_id
-    if (session.user._id.toString() !== user_id) {
-      console.log("Session does not belong to user id: " + user_id);
       return res.status(404).json({
         status: "ok",
         data: { valid: false },

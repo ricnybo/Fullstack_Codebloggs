@@ -4,8 +4,8 @@
 import dotenv from "dotenv";
 dotenv.config({ path: "../../.env" });
 import bcrypt from "bcryptjs";
-import User from "../db/mongodb/schema/user.Schema.js";
-import Session from "../db/mongodb/schema/session.Schema.js";
+import User from "../db/MongoDB/Schema/user.Schema.js";
+import Session from "../db/MongoDB/Schema/session.Schema.js";
 
 // This section will help you get a list of all the users.
 const register = async (req, res) => {

@@ -11,6 +11,6 @@ import auth from "../middleware/middleware.js";
 
 // routes for session model
 sessionRouter.post("/session/:user_id", createSession);
-sessionRouter.get("/validate_token/:user_id", auth, validateToken);
+sessionRouter.get("/validate_token/", auth, validateToken);
 
 export default sessionRouter;
