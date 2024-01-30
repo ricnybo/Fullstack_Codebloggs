@@ -106,8 +106,8 @@ function Navbar({ user, onLogout, handlePostClick }) {
   };
 
   return (
-    <div>
-      <div className="navbar navbar-expand-lg navbar-light bg-light">
+    <div className="navbarr">
+      <nav className="nav navbar navbar-expand-lg">
         <NavLink className="" to="/">
           <img
             alt="MongoDB logo"
@@ -116,7 +116,7 @@ function Navbar({ user, onLogout, handlePostClick }) {
           ></img>
         </NavLink>
       
-        <div className="ml-auto d-flex">
+        <div className="ml-auto">
           <button className="btn btn-custom" onClick={handleModalOpen}>
             Post
           </button>
@@ -134,7 +134,7 @@ function Navbar({ user, onLogout, handlePostClick }) {
             </Dropdown.Menu>
           </Dropdown>
         </div>
-      </div>
+      </nav>
       <PostModal isOpen={isModalOpen} onClose={closePostModal} />
     </div>
   );

@@ -2,8 +2,18 @@
     background-color: #8f94fb;
     color:white;
     border: 0%;
-   border-radius: 20px; /* Apply border-radius to make the button more rounded */
-    padding: 10px 20px; /* Add padding to increase the size of the button */
+   border-radius: 20px; 
+    padding: 10px 20px; 
     font-size: 20px;
     font-weight: 700;
+}
+
+.navbarr {
+     z-index: 1000;
+    width: 100%;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    position: fixed;
+    background-color: rgb(223, 188, 255);
+    top: 0;
+    left: 0;
 }

@@ -1,3 +1,4 @@
+//app.js
 import React, { useState, useEffect, useContext } from "react";
 import {
   BrowserRouter as Router,
@@ -17,11 +18,13 @@ import "bootstrap/dist/css/bootstrap.css"
 // We import all the components we need in our app
 import Login from "./components/login.js";
 import Navbar from "./components/navbar";
+import Sidebar from "./components/sideBar.js"
 import RecordList from "./components/recordList";
 import Edit from "./components/edit";
 import Create from "./components/create.js";
 import Unauthorized from "./components/unauthorized.js";
 import Home from "./components/home.js";
+
 
 const App = () => {
   const {
@@ -49,11 +52,12 @@ const App = () => {
       <div>
         <ToastContainer />
         <Navbar />
+        <Sidebar />
         <div style={{ margin: 20 }}>
           <Routes>
             <Route path="/login" element={<Login />} />
             {/* element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} */}
-            <Route path="/signup" element={<Login />} />
+            {/* <Route path="/register" element={<Login />} /> */}
             {/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
             <Route path="/unathorized" element={<Unauthorized />} />
             {isLoggedIn ? (
@@ -74,3 +78,32 @@ const App = () => {
 };
 
 export default App;
+
+
+// return (
+//   <Router>
+//     <div>
+//       <ToastContainer />
+//       <Navbar />
+//       <div style={{ margin: 20 }}>
+//         <Routes>
+//           <Route path="/login" element={<Login />} />
+//           {/* element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} */}
+//           <Route path="/signup" element={<Login />} />
+//           {/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
+//           <Route path="/unathorized" element={<Unauthorized />} />
+//           {isLoggedIn ? (
+//             <>
+//               <Route exact path="/home" element={<Home />} />
+//               <Route exact path="/records" element={<RecordList />} />
+//               <Route path="/edit/:id" element={<Edit />} />
+//               <Route path="/create" element={<Create />} />
+//             </>
+//           ) : (
+//               <Route path="*" element={<Navigate to="/login" />} />
+//           )}
+//         </Routes>
+//       </div>
+//     </div>
+//   </Router>
+// );
