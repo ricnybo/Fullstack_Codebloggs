@@ -1,95 +1,143 @@
-import React from "react";
+// import React from "react";
+// import { NavLink } from "react-router-dom";
+// import Dropdown from "react-bootstrap/Dropdown";
+// import "./components.css/navbar.css"
+// import axios from "axios";
+
+// function Navbar({ user, onLogout, handlePostClick }) {
+
+//   //write logout function and settings function that only gives a toaster saying under construction
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+//     const formData = new FormData(event.target);
+//     try {
+//       const response = await axios.post("/api/posts", formData); // Route to your backend server
+//       console.log("Post created successfully:", response.data);
+//       // Close the modal or handle any other action
+//     } catch (error) {
+//       console.error("Error creating post:", error);
+//     }
+//   };
+
+//   return (
+//     <div>
+//     <div className="navbar navbar-expand-lg navbar-light bg-light">
+//       <NavLink className="" to="/">
+//         <img
+//           alt="MongoDB logo"
+//           style={{ width: "40%" }}
+//           src="./img/CodeBloggslogo2.png"
+//         ></img>
+//       </NavLink>
+    
+//       <div className="ml-auto d-flex">
+//       <button className="btn btn-custom" onClick={handlePostClick}>
+//         Post
+//       </button>
+//     </div>
+
+     
+//           <div className="ml-auto">
+//             <Dropdown >
+//               <Dropdown.Toggle variant="light" id="dropdown-basic">
+//                 HELLO MATT
+//               </Dropdown.Toggle>
+
+//               <Dropdown.Menu>
+//                 <Dropdown.Item 
+//                 // onClick={logout-function} 
+//                 >LOGOUT</Dropdown.Item>
+//                 <Dropdown.Item 
+//                 // onClick={settings-function} 
+//                 >SETTINGS</Dropdown.Item>
+//               </Dropdown.Menu>
+//             </Dropdown>
+//             </div>
+      
+      
+//     </div>
+//     </div>
+//   );
+// }
+
+// export default Navbar;
+
+
+//navbar.js
+// import React from "react";
 import { NavLink } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import axios from "axios";
+import "./components.css/navbar.css";
+import PostModal from './postModal.js';
+import React, { useState } from 'react';
 
-function Navbar({ user, onLogout, onPostClick }) {
+function Navbar({ user, onLogout, handlePostClick }) {
+  const [isModalOpen, setIsModalOpen] = useState(''); 
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const closePostModal = () => {
+    // setIsModalOpen(false);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    try {
+      const response = await axios.post("/api/posts", formData);
+      console.log("Post created successfully:", response.data);
+      // Close the modal or handle any other action
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
+  };
+
+  const handleLogout = () => {
+    // Implement logout functionality here
+    console.log("Logout clicked");
+  };
+
+  const handleSettings = () => {
+    // Implement settings functionality here
+    console.log("Settings clicked");
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <NavLink className="navbar-brand" to="/">
-        <img
-          alt="MongoDB logo"
-          style={{ width: "25%" }}
-          src="./img/CodeBloggslogo2.png"
-        ></img>
-      </NavLink>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
+    <div>
+      <div className="navbar navbar-expand-lg navbar-light bg-light">
+        <NavLink className="" to="/">
+          <img
+            alt="MongoDB logo"
+            style={{ width: "40%" }}
+            src="./img/CodeBloggslogo2.png"
+          ></img>
+        </NavLink>
+      
+        <div className="ml-auto d-flex">
+          <button className="btn btn-custom" onClick={handleModalOpen}>
+            Post
+          </button>
+        </div>
+        
+        <div className="ml-auto">
+          <Dropdown>
+            <Dropdown.Toggle variant="light" id="dropdown-basic">
+              {user ? `Hello, ${user}` : "User"}
+            </Dropdown.Toggle>
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav ml-auto">
-          {user && (
-            <>
-              <li className="nav-item">
-                <button
-                  className="btn btn-primary"
-                  style={{ marginRight: "10px" }}
-                  onClick={onPostClick}
-                >
-                  Post
-                </button>
-              </li>
-              <li className="nav-item">
-                <button className="btn btn-danger" onClick={onLogout}>
-                  Logout
-                </button>
-              </li>
-            </>
-          )}
-        </ul>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+              <Dropdown.Item onClick={handleSettings}>Settings</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
       </div>
-    </nav>
+      <PostModal isOpen={isModalOpen} onClose={closePostModal} />
+    </div>
   );
 }
 
 export default Navbar;
-
-
-// import React from "react";
-
-// // We import bootstrap to make our application look better.
-// import "bootstrap/dist/css/bootstrap.css";
-
-// // We import NavLink to utilize the react router.
-// import { NavLink } from "react-router-dom";
-
-// // Here, we display our Navbar
-// export default function Navbar() {
-//  return (
-//    <div>
-//      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-//        <NavLink className="navbar-brand" to="/">
-//           <img alt="MongoDB logo" style={{"width" : 25 + '%'}} src="https://d3cy9zhslanhfa.cloudfront.net/media/3800C044-6298-4575-A05D5C6B7623EE37/4B45D0EC-3482-4759-82DA37D8EA07D229/webimage-8A27671A-8A53-45DC-89D7BF8537F15A0D.png"></img>
-//        </NavLink>
-//        <button
-//          className="navbar-toggler"
-//          type="button"
-//          data-toggle="collapse"
-//          data-target="#navbarSupportedContent"
-//          aria-controls="navbarSupportedContent"
-//          aria-expanded="false"
-//          aria-label="Toggle navigation"
-//        >
-//          <span className="navbar-toggler-icon"></span>
-//        </button>
-
-//        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-//          <ul className="navbar-nav ml-auto">
-//            <li className="nav-item">
-//              <NavLink className="nav-link" to="/create">
-//                Create Record
-//              </NavLink>
-//            </li>
-//          </ul>
-//        </div>
-//      </nav>
-//    </div>
-//  );
-// }
