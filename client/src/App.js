@@ -13,7 +13,7 @@ import {
 } from "./components/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import "bootstrap/dist/css/bootstrap.css"
 // We import all the components we need in our app
 import Login from "./components/login.js";
 import Navbar from "./components/navbar";
