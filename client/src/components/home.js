@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import useValidateSession from "./ValidateSession";
-import "../Styles/Home.css"; // import the CSS file
+import useValidateSession from "./validateSession";
+// import "../Styles/Home.css"; // import the CSS file
 
 // This method allows the cards to be displayed horizontally.
 function HorizontalScroll(props) {
@@ -12,7 +12,7 @@ function HorizontalScroll(props) {
 }
 
 // This method will display the cards on the home page.
-function HomeCards() {
+function Home() {
     const { validateSession } = useValidateSession();
     const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ function HomeCards() {
         const checkSession = async () => {
             const isValid = await validateSession();
             if (!isValid) {
-                navigate("/admin/login");
+                navigate("/login");
             }
         };
 
@@ -83,4 +83,4 @@ function HomeCards() {
     );
 }
 
-export default HomeCards;
+export default Home;

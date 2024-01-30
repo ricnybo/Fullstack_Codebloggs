@@ -1,7 +1,7 @@
 // Unauthorized.js page component
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Button, Alert } from "react-bootstrap";
-import "../Styles/Unauthorized.css"; // import the CSS file
+// import "../Styles/Unauthorized.css"; // import the CSS file
 
 // This component will display the unauthorized page.
 function Unauthorized() {

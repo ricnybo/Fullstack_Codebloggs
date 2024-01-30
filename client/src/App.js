@@ -20,6 +20,8 @@ import Navbar from "./components/navbar";
 import RecordList from "./components/recordList";
 import Edit from "./components/edit";
 import Create from "./components/create.js";
+import Unauthorized from "./components/unauthorized.js";
+import Home from "./components/home.js";
 
 const App = () => {
   const {
@@ -53,8 +55,10 @@ const App = () => {
             {/* element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} */}
             <Route path="/signup" element={<Login />} />
             {/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
+            <Route path="/unathorized" element={<Unauthorized />} />
             {isLoggedIn ? (
               <>
+                <Route exact path="/home" element={<Home />} />
                 <Route exact path="/records" element={<RecordList />} />
                 <Route path="/edit/:id" element={<Edit />} />
                 <Route path="/create" element={<Create />} />
