@@ -1,556 +1,163 @@
-// import React, { useState } from "react";
-// import "./components.css/login.css";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-// import bcrypt from "bcryptjs";
 
 
-// // Login controller to handle user authentication
-// export const login = async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-//     const user = await User.findOne({ email });
-//     if (!user || !bcrypt.compareSync(password, user.password)) {
-//       // Invalid credentials
-//       return res.status(401).json({ message: "Invalid email or password" });
-//     }
-//     // Valid credentials, create a session
-//     const session = new Session({
-//       user_id: user._id,
-//     });
-//     await session.save();
-//     // Set session ID in a cookie
-//     res.cookie("session_id", session._id, { httpOnly: true });
-//     res.json({ message: "Login successful" });
-//   } catch (error) {
-//     console.error("Login error:", error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
+import React, { useState, useContext, useEffect } from "react";
+import axios from "axios";
+import { AuthContext } from "./AuthContext"; // import the AuthContext
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+// import "../Styles/Login.css"; // import the CSS file
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { getCookie } from "react-use-cookie";
 
-// // Validate token to verify session
-// export const validateToken = async (req, res) => {
-//   try {
-//     const { user_id } = req.params;
-//     const token = req.cookies.session_id;
-//     const session = await Session.findById(token);
-//     if (!session || session.user.toString() !== user_id) {
-//       return res.status(401).json({ message: "Invalid session" });
-//     }
-//     res.json({ message: "Session validated" });
-//   } catch (error) {
-//     console.error("Token validation error:", error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
-
-// function Login() {
-//   const [isLogin, setIsLogin] = useState(true);
-//   const [formData, setFormData] = useState({
-//     email: "",
-//     password: "",
-//     firstName: "",
-//     lastName: "",
-//     occupation: "",
-//     location: "",
-//     birthday: new Date()
-//   });
-
-//   const handleFormToggle = () => {
-//     setIsLogin(!isLogin);
-//   };
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prevData) => ({
-//       ...prevData,
-//       [name]: value,
-//     }));
-//   };
-
-//   const handleDateChange = (date) => {
-//     setFormData((prevData) => ({
-//       ...prevData,
-//       birthday: date,
-//     }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     const { email, password } = formData;
-//     // Your logic for handling form submission based on whether it's login or signup
-//     if (isLogin) {
-//       // Handle login form submission
-//       login({ email, password });
-//     } else {
-//       // Handle signup form submission
-//     }
-//   };
-
-//   return (
-//     <div className="login-page">
-//       <div className="login-container">
-//         <h2 className="log-sign">{isLogin ? "Login" : "Sign Up"}</h2>
-//         <form className="login-form" onSubmit={handleSubmit}>
-//           {/* Input fields */}
-//           <div className="form-group">
-//             <label htmlFor="email">Email Address</label>
-//             <input
-//               type="email"
-//               id="email"
-//               name="email"
-//               value={formData.email}
-//               onChange={handleInputChange}
-//               required
-//             />
-//           </div>
-//           <div className="form-group">
-//             <label htmlFor="password">Password</label>
-//             <input
-//               type="password"
-//               id="password"
-//               name="password"
-//               value={formData.password}
-//               onChange={handleInputChange}
-//               required
-//             />
-//           </div>
-//           {!isLogin && (
-//             <>
-//               <div className="form-group">
-//                 <label htmlFor="firstName">First Name</label>
-//                 <input
-//                   type="text"
-//                   id="firstName"
-//                   name="firstName"
-//                   value={formData.firstName}
-//                   onChange={handleInputChange}
-//                   required
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label htmlFor="lastName">Last Name</label>
-//                 <input
-//                   type="text"
-//                   id="lastName"
-//                   name="lastName"
-//                   value={formData.lastName}
-//                   onChange={handleInputChange}
-//                   required
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label htmlFor="occupation">Occupation</label>
-//                 <input
-//                   type="text"
-//                   id="occupation"
-//                   name="occupation"
-//                   value={formData.occupation}
-//                   onChange={handleInputChange}
-//                   required
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label htmlFor="location">Location</label>
-//                 <input
-//                   type="text"
-//                   id="location"
-//                   name="location"
-//                   value={formData.location}
-//                   onChange={handleInputChange}
-//                   required
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label htmlFor="birthday">Birthday</label>
-//                 <DatePicker
-//                   className="dateBox"
-//                   selected={formData.birthday}
-//                   onChange={handleDateChange}
-//                   dateFormat="MM/dd/yyyy"
-//                   showYearDropdown
-//                   scrollableYearDropdown
-//                   maxDate={new Date(2025, 12, 31)}
-//                   yearDropdownItemNumber={60}
-//                 />
-//               </div>
-//             </>
-//           )}
-//           <div className="form-group">
-//             <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
-//           </div>
-//         </form>
-//         <p className="register">
-//           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-//           <button
-//             type="button"
-//             className="login-button"
-//             onClick={handleFormToggle}
-//           >
-//             {isLogin ? "Sign Up" : "Login"}
-//           </button>
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;
-
-
-
-
-
-
-
-
-
-
-// import React, { useState } from "react";
-// import "./components.css/login.css";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-
-// function Login() {
-//   const [isLogin, setIsLogin] = useState(true); // State to track whether login or signup form is displayed
-//   const [formData, setFormData] = useState({
-//     email: "",
-//     password: "",
-//     firstName: "",
-//     lastName: "",
-//     occupation: "",
-//     location: "",
-//     birthday: new Date()
-//     // Add additional fields for signup if needed
-//   });
-
-//   const handleFormToggle = () => {
-//     setIsLogin(!isLogin); // Toggle between login and signup forms
-//   };
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prevData) => ({
-//       ...prevData,
-//       [name]: value,
-//     }));
-//   };
-
-//   const handleDateChange = (date) => { // Define handleDateChange function
-//     setFormData((prevData) => ({
-//       ...prevData,
-//       birthday: date
-//     }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // Logic for handling form submission based on whether it's login or signup
-//     if (isLogin) {
-//       // Handle login form submission
-//     } else {
-//       // Handle signup form submission
-//     }
-//   };
-
-//   const handleLogin = async () => {
-//     try {
-//       const response = await fetch('http://localhost:3000/login', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({ email, password }),
-//       });
-//       const data = await response.json();
-      
-//       if (response.ok) {
-//         // Authentication successful, store token in local storage
-//         localStorage.setItem('token', data.token);
-//         // Redirect user to dashboard or home page
-//       } else {
-//         // Authentication failed, display error message
-//         setError(data.message);
-//       }
-//     } catch (error) {
-//       console.error('Login error:', error);
-//       // Handle other errors (e.g., network issues)
-//     }
-//   };
-
-//   return (
-//     <div className="login-page">
-//     <div className="login-container">
-//     <h2 className= "log-sign">{isLogin ? "Login" : "Sign Up"}</h2>
-//     <form className="login-form" onSubmit={handleSubmit}>
-//       <div className="form-group">
-//         <label htmlFor="email">Email Address</label>
-//         <input
-//           type="email"
-//           id="email"
-//           name="email"
-//           value={formData.email}
-//           onChange={handleLogin}
-//           required
-//         />
-//       </div>
-//       <div className="form-group">
-//         <label htmlFor="password">Password</label>
-//         <input
-//           type="password"
-//           id="password"
-//           name="password"
-//           value={formData.password}
-//           onChange={handleLogin}
-//           required
-//         />
-//       </div>
-//       {!isLogin && (
-//             <>
-//       <div className="form-group">
-//         <label htmlFor="firstName">First Name</label>
-//         <input
-//           type="text"
-//           id="firstName"
-//           name="firstName"
-//           value={formData.firstName}
-//           onChange={handleInputChange}
-//           required
-//         />
-//       </div>
-//       <div className="form-group">
-//         <label htmlFor="lastName">Last Name</label>
-//         <input
-//           type="text"
-//           id="lastName"
-//           name="lastName"
-//           value={formData.lastName}
-//           onChange={handleInputChange}
-//           required
-//         />
-//       </div>
-
-//       <div className="form-group">
-//         <label htmlFor="occupation">Occupation</label>
-//         <input
-//           type="text"
-//           id="occupation"
-//           name="occupation"
-//           value={formData.occupation}
-//           onChange={handleInputChange}
-//           required
-//         />
-//       </div>
-//       <div className="form-group">
-//         <label htmlFor="location">Location</label>
-//         <input
-//           type="text"
-//           id="location"
-//           name="location"
-//           value={formData.location}
-//           onChange={handleInputChange}
-//           required
-//         />
-//       </div>
-//           <div className="form-group">
-//             <label htmlFor="birthday">Birthday</label>
-//             <DatePicker className= "dateBox"
-//               selected={formData.birthday}
-//               onChange={handleDateChange}
-//               dateFormat="MM/dd/yyyy" // Customize date format
-//               showYearDropdown
-//               scrollableYearDropdown
-//               maxDate={new Date(2025, 12, 31)}
-//               yearDropdownItemNumber={60}
-//             />
-//           </div>
-//           </>
-//            )}
-           
-
-
-//       <div className="form-group">
-//         <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
-//       </div>
-//     </form>
-//     <p className="register">
-//       {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-//       <button 
-//       type= "button"
-//       className="login-button" 
-//       onClick={handleFormToggle}>
-//         {isLogin ? "Sign Up" : "Login"}
-//       </button>
-//     </p>
-//   </div>
-//   </div>
-//   );
-// }
-
-// export default Login;
-
-
-
-
-
-
-
-
-
-
-
-import React, { useState } from "react";
 import "./components.css/login.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import bcrypt from "bcryptjs";
 
+// This component will display the login form.
 function Login() {
-  const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    occupation: "",
-    location: "",
-    birthday: new Date()
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleFormToggle = () => {
-    setIsLogin(!isLogin);
-  };
+  const {
+    setIsLoggedIn,
+    isLoggedIn,
+    setUser,
+    user,
+    validSession,
+    setValidSession,
+  } = useContext(AuthContext);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  // This function will handle the submission.
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      // JWT authentication
+      const response = await axios.post("http://localhost:5000/user/login", {
+        email: email,
+        password: password,
+      });
+      if (response.data.valid === false) {
+        throw new Error(response.data.message);
+      };
+      // localStorage.setItem("token", response.data.token); // JWT authentication
+      // axios.defaults.headers.common[
+      //   "Authorization"
+      // ] = `Bearer ${response.data.token}`; // JWT authentication header
 
-  const handleDateChange = (date) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      birthday: date,
-    }));
-  };
+      // session authentication
+      const user_id = response.data.data.user._id; // Access the user's ID from the response
+      
+      const session_response = await axios.post(
+        `http://localhost:5000/session/${user_id}`
+      ); // Create a new session for the user
+      const session_token = getCookie("session_id"); // Access the session token from the cookie
+      const user = await axios.get(
+        `http://localhost:5000/user/${user_id}`
+      ); // Access the user's data using the user's ID
+      console.log(user);
+      // If authentication is successful, update `user` with the user's data
+      setUser({
+        user_id: user.data.data.user.user_id,
+        first_name: user.data.data.user.first_name,
+        last_name: user.data.data.user.last_name,
+        birthday: user.data.data.user.birthday,
+        email: user.data.data.user.email,
+        status: user.data.data.user.status,
+        location: user.data.data.user.location,
+        occupation: user.data.data.user.occupation,
+        auth_level: user.data.data.user.auth_level,
+      });
+      setIsLoggedIn(true);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const { email, password } = formData; // Destructure email and password
-    // Your logic for handling form submission based on whether it's login or signup
-    if (isLogin) {
-      // Handle login form submission
-    } else {
-      // Handle signup form submission
+      // Send a GET request to the validate_token endpoint
+      await axios
+        .get("http://localhost:5000/validate_token" )
+        .then((response) => {
+          // If the session is valid, set validSession to true
+          console.log(response.data.data.valid);
+          if (response.data.data.valid) {
+            setValidSession(true);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      toast.success("Login successfull.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      navigate("/home"); // navigate to the Home page
+    } catch (error) {
+      console.error(error);
+      toast.error("Login failed: " + error.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      if (error.response && error.response.status === 401) {
+        navigate("/unauthorized", {
+          state: { message: error.response.data },
+        });
+      }
     }
   };
 
-  return (
-    <div className="login-page">
-      <div className="login-container">
-        <h2 className="log-sign">{isLogin ? "Login" : "Sign Up"}</h2>
-        <form className="login-form" onSubmit={handleSubmit}>
-          {/* Input fields */}
-          <div className="form-group">
-            <label htmlFor="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange} // Use handleInputChange for email
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange} // Use handleInputChange for password
-              required
-            />
-          </div>
-          {!isLogin && (
-            <>
-      <div className="form-group">
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          id="firstName"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
+  // If the user is logged in and has a valid session, navigate away from the login page
+  useEffect(() => {
+    if (isLoggedIn && validSession) {
+      navigate("/home");
+    }
+  }, []);
 
-      <div className="form-group">
-        <label htmlFor="occupation">Occupation</label>
-        <input
-          type="text"
-          id="occupation"
-          name="occupation"
-          value={formData.occupation}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="location">Location</label>
-        <input
-          type="text"
-          id="location"
-          name="location"
-          value={formData.location}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-          <div className="form-group">
-            <label htmlFor="birthday">Birthday</label>
-            <DatePicker className= "dateBox"
-              selected={formData.birthday}
-              onChange={handleDateChange}
-              dateFormat="MM/dd/yyyy" // Customize date format
-              showYearDropdown
-              scrollableYearDropdown
-              maxDate={new Date(2025, 12, 31)}
-              yearDropdownItemNumber={60}
-            />
-          </div>
-          </>
-           )}
-          <div className="form-group">
-            <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
-          </div>
-        </form>
-        <p className="register">
-          {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-          <button
-            type="button"
-            className="login-button"
-            onClick={handleFormToggle}
-          >
-            {isLogin ? "Sign Up" : "Login"}
-          </button>
+  return (
+
+    <div className="login-form">
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Log In
+        </Button>
+        <p>
+          Don't have an account? <Link to="/signup">Sign up</Link>
         </p>
-      </div>
+      </Form>
     </div>
   );
 }
