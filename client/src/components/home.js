@@ -4,6 +4,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import useValidateSession from "./validateSession";
+import Sidebar from "./sideBar.js";
+import { Container } from "react-bootstrap";
+import "./components.css/sideBar.css";
+import "./components.css/home.css";
+
 // import "../Styles/Home.css"; // import the CSS file
 
 // This method allows the cards to be displayed horizontally.
@@ -40,6 +45,9 @@ function Home() {
 
     // This section will display the cards.
     return (
+    
+        <div className="home">
+        <div className="content">
         <div className="HomeCards">
             <HorizontalScroll>
                 <Card>
@@ -79,6 +87,8 @@ function Home() {
                     </Card.Body>
                 </Card>
             </HorizontalScroll>
+        </div>
+        </div>
         </div>
     );
 }

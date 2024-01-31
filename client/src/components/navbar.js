@@ -138,8 +138,8 @@ function Navbar({ onLogout, handlePostClick }) {
   };
 
   return (
-    <div>
-      <div className="navbar navbar-expand-lg navbar-light bg-light">
+    <div className="navbarr">
+      <nav className="nav navbar navbar-expand-lg">
         <NavLink className="" to="/">
           <img
             alt="MongoDB logo"
@@ -147,28 +147,34 @@ function Navbar({ onLogout, handlePostClick }) {
             src="./img/CodeBloggslogo.png"
           ></img>
         </NavLink>
-        <div className="ml-auto d-flex">
-          <button className="btn btn-custom" onClick={handleModalOpen}>
+
+        <div className="ml-auto btn-custom">
+          <button className="btn" onClick={handleModalOpen}>
             Post
           </button>
         </div>
-        {isLoggedIn && (
-          <div className="ml-auto">
-            <Dropdown>
-              <Dropdown.Toggle variant="light" id="dropdown-basic">
-                {user.email
-                  ? `Hello, ${user.first_name} ${user.last_name}`
-                  : "User"}
-              </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-                <Dropdown.Item onClick={handleSettings}>Settings</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-        )}
-      </div>
+        <div className="ml-auto user-btn">
+          {isLoggedIn && (
+            <div className="ml-auto">
+              <Dropdown>
+                <Dropdown.Toggle variant="light" id="dropdown-basic">
+                  {user.email
+                    ? `Hello, ${user.first_name} ${user.last_name}`
+                    : "User"}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                  <Dropdown.Item onClick={handleSettings}>
+                    Settings
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          )}
+        </div>
+      </nav>
       <PostModal isOpen={isModalOpen} onClose={closePostModal} />
     </div>
   );
