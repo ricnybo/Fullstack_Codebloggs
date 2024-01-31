@@ -1,0 +1,34 @@
+.sidebar {
+    width: 15%;
+    background-color: #f0f0f0;
+    border-right: 1px solid #ccc;
+    display: grid;
+    height: 100%;
+    position: fixed;
+    margin-top: 3.7%;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 2px;
+  }
+  
+  .sidebar ul li {
+    padding: 20px 20px;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .sidebar ul li a.active {
+    font-weight: bold;
+    color: #8047d1; 
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 15% auto; 
+  }
+
