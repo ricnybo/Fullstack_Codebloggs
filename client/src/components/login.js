@@ -1,5 +1,3 @@
-
-
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "./AuthContext"; // import the AuthContext
@@ -7,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-// import "../Styles/Login.css"; // import the CSS file
+import "./components.css/login.css"; // import the CSS file
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getCookie } from "react-use-cookie";
@@ -37,29 +35,21 @@ function Login() {
     event.preventDefault();
     try {
       // JWT authentication
-      const response = await axios.post("http://localhost:5000/user/login", {
+      const response = await axios.post("/user/login", {
         email: email,
         password: password,
       });
       if (response.data.valid === false) {
         throw new Error(response.data.message);
-      };
-      // localStorage.setItem("token", response.data.token); // JWT authentication
-      // axios.defaults.headers.common[
-      //   "Authorization"
-      // ] = `Bearer ${response.data.token}`; // JWT authentication header
+      }
 
       // session authentication
       const user_id = response.data.data.user._id; // Access the user's ID from the response
-      
-      const session_response = await axios.post(
-        `http://localhost:5000/session/${user_id}`
-      ); // Create a new session for the user
+
+      const session_response = await axios.post(`/session/${user_id}`); // Create a new session for the user
       const session_token = getCookie("session_id"); // Access the session token from the cookie
-      const user = await axios.get(
-        `http://localhost:5000/user/${user_id}`
-      ); // Access the user's data using the user's ID
-      console.log(user);
+      const user = await axios.get(`/user/${user_id}`); // Access the user's data using the user's ID
+
       // If authentication is successful, update `user` with the user's data
       setUser({
         user_id: user.data.data.user.user_id,
@@ -76,10 +66,9 @@ function Login() {
 
       // Send a GET request to the validate_token endpoint
       await axios
-        .get("http://localhost:5000/validate_token" )
+        .get("/validate_token")
         .then((response) => {
           // If the session is valid, set validSession to true
-          console.log(response.data.data.valid);
           if (response.data.data.valid) {
             setValidSession(true);
           }
@@ -127,37 +116,44 @@ function Login() {
   }, []);
 
   return (
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-form">
+          <h2>Login</h2>
+          <br />
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                required
+              />
+            </Form.Group>
 
-    <div className="login-form">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Log In
-        </Button>
-        <p>
-          Don't have an account? <Link to="/signup">Sign up</Link>
-        </p>
-      </Form>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Log In
+            </Button>
+            <p></p>
+            <p>
+              Don't have an account? <Link to="/register">Register</Link>
+            </p>
+          </Form>
+        </div>
+      </div>
     </div>
   );
 }

@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.css"
 // We import all the components we need in our app
 import Login from "./components/login.js";
+import Register from "./components/register.js";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/sideBar.js"
 import RecordList from "./components/recordList";
@@ -36,17 +37,6 @@ const App = () => {
     setValidSession,
   } = useContext(AuthContext);
 
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const [loggedIn, setLoggedIn] = useState(false);
-
-  // useEffect(() => {
-  //   // Redirect to login page if not logged in and trying to access protected routes
-  //   if (!loggedIn && location.pathname !== "/login" && location.pathname !== "/signup") {
-  //     navigate("/login");
-  //   }
-  // }, [loggedIn, location.pathname, navigate]); // Include all dependencies in useEffect
-
   return (
     <Router>
       <div>
@@ -57,9 +47,8 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<Login />} />
             {/* element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} */}
-            {/* <Route path="/register" element={<Login />} /> */}
-            {/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
-            <Route path="/unathorized" element={<Unauthorized />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
             {isLoggedIn ? (
               <>
                 <Route exact path="/home" element={<Home />} />
