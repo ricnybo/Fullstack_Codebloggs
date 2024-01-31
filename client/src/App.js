@@ -20,11 +20,12 @@ import Login from "./components/login.js";
 import Register from "./components/register.js";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/sideBar.js"
-import RecordList from "./components/recordList";
+// import RecordList from "./components/recordList";
 import Edit from "./components/edit";
 import Create from "./components/create.js";
 import Unauthorized from "./components/unauthorized.js";
 import Home from "./components/home.js";
+
 
 
 const App = () => {
@@ -38,8 +39,9 @@ const App = () => {
   } = useContext(AuthContext);
 
   return (
+    <div>
     <Router>
-      <div>
+      
         <ToastContainer />
         <Navbar />
         {isLoggedIn ? (<Sidebar />) : null}
@@ -52,17 +54,21 @@ const App = () => {
             {isLoggedIn ? (
               <>
                 <Route exact path="/home" element={<Home />} />
-                <Route exact path="/records" element={<RecordList />} />
+                {/* <Route exact path="/records" element={<RecordList />} /> */}
                 <Route path="/edit/:id" element={<Edit />} />
                 <Route path="/create" element={<Create />} />
+                <Route path="*" element={<Navigate to="/home" />} />
               </>
             ) : (
                 <Route path="*" element={<Navigate to="/login" />} />
             )}
           </Routes>
         </div>
-      </div>
+      
     </Router>
+    </div>
+    
+    
   );
 };
 

@@ -76,32 +76,14 @@ import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { AuthContext } from "./AuthContext"; // import the AuthContext
 
-function Navbar({ onLogout, handlePostClick }) {
+function Navbar({ onLogout, openPostModal }) {
   const { isLoggedIn, setIsLoggedIn, user, setUser, setValidSession } =
     useContext(AuthContext); // Use useContext to get isLoggedIn and setIsLoggedIn
-  const [isModalOpen, setIsModalOpen] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-  };
 
-  const closePostModal = () => {
-    // setIsModalOpen(false);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    try {
-      const response = await axios.post("/api/posts", formData);
-      console.log("Post created successfully:", response.data);
-      // Close the modal or handle any other action
-    } catch (error) {
-      console.error("Error creating post:", error);
-    }
-  };
 
   const handleLogout = async (event) => {
     event.preventDefault(); // Prevent the default action of the link
@@ -147,15 +129,12 @@ function Navbar({ onLogout, handlePostClick }) {
             src="./img/CodeBloggslogo.png"
           ></img>
         </NavLink>
+       
+      
+        <PostModal />
 
         {isLoggedIn && (
-          <Button className="ml-center btn-custom" onClick={handleModalOpen}>
-            Post
-          </Button>
-        )}
-
-
-        {isLoggedIn && (
+          
 
           <div className="ml-auto user-btn">
             <Dropdown>
@@ -176,7 +155,7 @@ function Navbar({ onLogout, handlePostClick }) {
         )}
 
       </nav>
-      <PostModal isOpen={isModalOpen} onClose={closePostModal} />
+
     </div>
   );
 }

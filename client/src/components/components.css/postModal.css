@@ -1,0 +1,16 @@
+.modal-content {
+    top: 0;
+    left: 0; 
+    /* background-color: rgba(0, 0, 0, 0.5);  */
+    display: block; 
+    justify-content: center !important; 
+    align-items: center !important; 
+    width: 40% !important;
+   
+}
+
+.activate {
+    display: block;
+    padding-left: 20em;
+    padding-top: 20em;
+}
