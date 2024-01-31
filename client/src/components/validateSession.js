@@ -16,7 +16,6 @@ const useValidateSession = () => {
 
     try {
       const response = await axios.get("/validate_token");
-      console.log(response);
       if (!response.data.data.valid) {
         setValidSession(false);
         setUser({});
