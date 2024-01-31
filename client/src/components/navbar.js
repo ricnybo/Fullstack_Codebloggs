@@ -116,15 +116,15 @@ function Navbar({ user, onLogout, handlePostClick }) {
           ></img>
         </NavLink>
       
-        <div className="ml-auto">
-          <button className="btn btn-custom" onClick={handleModalOpen}>
+        <div className="ml-auto btn-custom">
+          <button className="btn" onClick={handleModalOpen}>
             Post
           </button>
         </div>
         
-        <div className="ml-auto">
+        <div className="ml-auto user-btn">
           <Dropdown>
-            <Dropdown.Toggle variant="light" id="dropdown-basic">
+            <Dropdown.Toggle variant="" id="dropdown-basic">
               {user ? `Hello, ${user}` : "User"}
             </Dropdown.Toggle>
 
