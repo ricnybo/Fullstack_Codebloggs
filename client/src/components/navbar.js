@@ -148,32 +148,33 @@ function Navbar({ onLogout, handlePostClick }) {
           ></img>
         </NavLink>
 
-        <div className="ml-auto btn-custom">
-          <button className="btn" onClick={handleModalOpen}>
+        {isLoggedIn && (
+          <Button className="ml-center btn-custom" onClick={handleModalOpen}>
             Post
-          </button>
-        </div>
+          </Button>
+        )}
 
-        <div className="ml-auto user-btn">
-          {isLoggedIn && (
-            <div className="ml-auto">
-              <Dropdown>
-                <Dropdown.Toggle variant="light" id="dropdown-basic">
-                  {user.email
-                    ? `Hello, ${user.first_name} ${user.last_name}`
-                    : "User"}
-                </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-                  <Dropdown.Item onClick={handleSettings}>
-                    Settings
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          )}
-        </div>
+        {isLoggedIn && (
+
+          <div className="ml-auto user-btn">
+            <Dropdown>
+              <Dropdown.Toggle variant="" id="dropdown-basic">
+                {user.email
+                  ? `Hello, ${user.first_name} ${user.last_name}`
+                  : "User"}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                <Dropdown.Item onClick={handleSettings}>
+                  Settings
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        )}
+
       </nav>
       <PostModal isOpen={isModalOpen} onClose={closePostModal} />
     </div>
