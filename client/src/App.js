@@ -42,7 +42,7 @@ const App = () => {
       <div>
         <ToastContainer />
         <Navbar />
-        <Sidebar />
+        {isLoggedIn ? (<Sidebar />) : null}
         <div style={{ margin: 20 }}>
           <Routes>
             <Route path="/login" element={<Login />} />
