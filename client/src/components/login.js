@@ -42,10 +42,6 @@ function Login() {
       if (response.data.valid === false) {
         throw new Error(response.data.message);
       }
-      // localStorage.setItem("token", response.data.token); // JWT authentication
-      // axios.defaults.headers.common[
-      //   "Authorization"
-      // ] = `Bearer ${response.data.token}`; // JWT authentication header
 
       // session authentication
       const user_id = response.data.data.user._id; // Access the user's ID from the response
@@ -133,6 +129,7 @@ function Login() {
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 required
               />
             </Form.Group>

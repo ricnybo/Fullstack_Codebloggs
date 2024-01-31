@@ -44,8 +44,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             {/* element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} */}
             <Route path="/register" element={<Register />} />
-            {/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
-            <Route path="/unathorized" element={<Unauthorized />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
             {isLoggedIn ? (
               <>
                 <Route exact path="/home" element={<Home />} />
