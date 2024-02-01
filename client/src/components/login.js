@@ -48,19 +48,20 @@ function Login() {
 
       const session_response = await axios.post(`/session/${user_id}`); // Create a new session for the user
       const session_token = getCookie("session_id"); // Access the session token from the cookie
-      const user = await axios.get(`/user/${user_id}`); // Access the user's data using the user's ID
-
+      const getUser = await axios.get(`/user/${user_id}`); // Access the user's data using the user's ID
+      console.log(`login user:`);
+      console.log(getUser);
       // If authentication is successful, update `user` with the user's data
       setUser({
-        user_id: user.data.data.user.user_id,
-        first_name: user.data.data.user.first_name,
-        last_name: user.data.data.user.last_name,
-        birthday: user.data.data.user.birthday,
-        email: user.data.data.user.email,
-        status: user.data.data.user.status,
-        location: user.data.data.user.location,
-        occupation: user.data.data.user.occupation,
-        auth_level: user.data.data.user.auth_level,
+        user_id: getUser.data.data.user.user_id,
+        first_name: getUser.data.data.user.first_name,
+        last_name: getUser.data.data.user.last_name,
+        birthday: getUser.data.data.user.birthday,
+        email: getUser.data.data.user.email,
+        status: getUser.data.data.user.status,
+        location: getUser.data.data.user.location,
+        occupation: getUser.data.data.user.occupation,
+        auth_level: getUser.data.data.user.auth_level,
       });
       setIsLoggedIn(true);
 
@@ -115,10 +116,19 @@ function Login() {
     }
   }, []);
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]); // This will run every time `user` changes
+
   return (
     <div className="login-page">
       <div className="login-container">
         <div className="login-form">
+          <img
+            alt="CodeBloggs logo"
+            style={{ width: "100%" }}
+            src="./img/CodeBloggslogo.png"
+          ></img>
           <h2>Login</h2>
           <br />
           <Form onSubmit={handleSubmit}>

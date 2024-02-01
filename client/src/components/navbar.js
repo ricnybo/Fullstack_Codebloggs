@@ -1,65 +1,3 @@
-// import React from "react";
-// import { NavLink } from "react-router-dom";
-// import Dropdown from "react-bootstrap/Dropdown";
-// import "./components.css/navbar.css"
-// import axios from "axios";
-
-// function Navbar({ user, onLogout, handlePostClick }) {
-
-//   //write logout function and settings function that only gives a toaster saying under construction
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-//     const formData = new FormData(event.target);
-//     try {
-//       const response = await axios.post("/api/posts", formData); // Route to your backend server
-//       console.log("Post created successfully:", response.data);
-//       // Close the modal or handle any other action
-//     } catch (error) {
-//       console.error("Error creating post:", error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//     <div className="navbar navbar-expand-lg navbar-light bg-light">
-//       <NavLink className="" to="/">
-//         <img
-//           alt="MongoDB logo"
-//           style={{ width: "40%" }}
-//           src="./img/CodeBloggslogo2.png"
-//         ></img>
-//       </NavLink>
-
-//       <div className="ml-auto d-flex">
-//       <button className="btn btn-custom" onClick={handlePostClick}>
-//         Post
-//       </button>
-//     </div>
-
-//           <div className="ml-auto">
-//             <Dropdown >
-//               <Dropdown.Toggle variant="light" id="dropdown-basic">
-//                 HELLO MATT
-//               </Dropdown.Toggle>
-
-//               <Dropdown.Menu>
-//                 <Dropdown.Item
-//                 // onClick={logout-function}
-//                 >LOGOUT</Dropdown.Item>
-//                 <Dropdown.Item
-//                 // onClick={settings-function}
-//                 >SETTINGS</Dropdown.Item>
-//               </Dropdown.Menu>
-//             </Dropdown>
-//             </div>
-
-//     </div>
-//     </div>
-//   );
-// }
-
-// export default Navbar;
-
 //navbar.js
 // import React from "react";
 import { NavLink } from "react-router-dom";
@@ -76,32 +14,14 @@ import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { AuthContext } from "./AuthContext"; // import the AuthContext
 
-function Navbar({ onLogout, handlePostClick }) {
+function Navbar({ onLogout, openPostModal }) {
   const { isLoggedIn, setIsLoggedIn, user, setUser, setValidSession } =
     useContext(AuthContext); // Use useContext to get isLoggedIn and setIsLoggedIn
-  const [isModalOpen, setIsModalOpen] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-  };
 
-  const closePostModal = () => {
-    // setIsModalOpen(false);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    try {
-      const response = await axios.post("/api/posts", formData);
-      console.log("Post created successfully:", response.data);
-      // Close the modal or handle any other action
-    } catch (error) {
-      console.error("Error creating post:", error);
-    }
-  };
 
   const handleLogout = async (event) => {
     event.preventDefault(); // Prevent the default action of the link
@@ -142,40 +62,35 @@ function Navbar({ onLogout, handlePostClick }) {
       <nav className="nav navbar navbar-expand-lg">
         <NavLink className="" to="/">
           <img
-            alt="MongoDB logo"
+            alt="CodeBloggs logo"
             style={{ width: "40%" }}
             src="./img/CodeBloggslogo.png"
           ></img>
         </NavLink>
+       
+      
+        <PostModal />
 
-        <div className="ml-auto btn-custom">
-          <button className="btn" onClick={handleModalOpen}>
-            Post
-          </button>
-        </div>
+        {isLoggedIn && (
+          
 
-        <div className="ml-auto user-btn">
-          {isLoggedIn && (
-            <div className="ml-auto">
-              <Dropdown>
-                <Dropdown.Toggle variant="light" id="dropdown-basic">
-                  {user.email
-                    ? `Hello, ${user.first_name} ${user.last_name}`
-                    : "User"}
-                </Dropdown.Toggle>
+          <div className="ml-auto user-btn">
+            <Dropdown>
+              <Dropdown.Toggle variant="" id="dropdown-basic">
+                {user.email
+                  ? `Hello, ${user.first_name} ${user.last_name}`
+                  : "User"}
+              </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-                  <Dropdown.Item onClick={handleSettings}>
-                    Settings
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          )}
-        </div>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                <Dropdown.Item onClick={handleSettings}>Settings</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        )}
       </nav>
-      <PostModal isOpen={isModalOpen} onClose={closePostModal} />
+
     </div>
   );
 }
