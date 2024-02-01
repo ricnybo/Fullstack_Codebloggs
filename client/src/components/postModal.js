@@ -1,12 +1,22 @@
 //postModule.js
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import "./components.css/postModal.css";
 import Modal from "react-bootstrap/Modal";
+import { AuthContext } from "./AuthContext.js";
 
 function PostModal({ }) {
+  const {
+    isLoggedIn,
+    setLoggedIn,
+    user,
+    setUser,
+    validSession,
+    setValidSession,
+  } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
-    title: "",
+    user_id: user.user_id,
     content: "",
   });
   const [isModalOpen, setIsModalOpen] = useState("");
@@ -27,7 +37,7 @@ function PostModal({ }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/api/posts", formData);
+      const response = await axios.post("/post", formData);
       console.log("Post created successfully:", response.data);
       closePostModal(); // Close the modal after successful post creation
     } catch (error) {
@@ -36,31 +46,19 @@ function PostModal({ }) {
   };
 
   return (
-    <div>
+    <div className="modal-container">
       <button className="ml-center btn-custom" onClick={handleModalOpen}>
         Post
       </button>
       {isModalOpen && (
 
-        <Modal className="activate" show={isModalOpen}>
+        <Modal  show={isModalOpen}>
           <div className="modal-background" onClick={closePostModal}></div>
           <div className="modal-content">
             <form onSubmit={handleSubmit}>
+            
               <div className="field">
-                <label className="label">Title</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <label className="label">Content</label>
+                <label className="label">Make a Post</label>
                 <div className="control">
                   <textarea
                     className="textarea"
