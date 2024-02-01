@@ -16,6 +16,7 @@ import { AuthContext, AuthProvider, UserContext } from "./AuthContext";
 import "./components.css/sideBar.css";
 import "./components.css/home.css";
 
+
 // This method allows the cards to be displayed horizontally.
 function HorizontalScroll(props) {
     return <div className="horizontal-scroll-container">{props.children}</div>;
