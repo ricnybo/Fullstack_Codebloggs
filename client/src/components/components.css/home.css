@@ -1,9 +1,57 @@
 .content {
-    display: flex; 
-    margin-left: 8%;
-    padding: 10%;
-    scroll-margin-top: 20%;
-
-
+  flex: 1;
+  padding: 40px;
+  scroll-margin-top: 20px;
 }
 
+.container {
+  display: flex;
+}
+
+.home-block {
+  background-color: #8f94fb; /* Replace with your desired color */
+}
+
+.content .col {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.profile-picture {
+  position: relative;
+  width: 30%; /* Adjust as needed */
+  /* Center the .profile-picture horizontally */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-picture .initials {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5em; /* Adjust as needed */
+  color: #8f94fb; /* Adjust as needed */
+  font-weight: bold;
+}
+
+.sidebar {
+  flex: 0 0 15%;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ccc;
+  height: 100%;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+  }
+
+  .content {
+    margin-top: 20px;
+  }
+}
