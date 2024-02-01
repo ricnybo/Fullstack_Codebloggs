@@ -19,6 +19,7 @@
     "react-scripts": "^5.0.1",
     "react-toastify": "^10.0.4",
     "react-use-cookie": "^1.4.0",
+    "styled-components": "^6.1.8",
     "web-vitals": "^3.4.0"
   },
   "scripts": {
