@@ -25,6 +25,7 @@ import Edit from "./components/edit";
 import Create from "./components/create.js";
 import Unauthorized from "./components/unauthorized.js";
 import Home from "./components/home.js";
+import Network from "./components/Network.js"
 
 
 
@@ -55,11 +56,11 @@ const App = () => {
             {isLoggedIn ? (
               <>
                 <Route path="/home" element={<Home />} />
-                {/* <Route path="/records" element={<RecordList />} /> */}
+                <Route path="/network" element={<Network />} />
                 <Route path="/edit/:id" element={<Edit />} />
                 <Route path="/create" element={<Create />} />
                 <Route path="*" element={<Navigate to="/home" />} />
-                <Route path="*" element={<Navigate to="/home" />} />
+               
               </>
             ) : (
                 <Route path="*" element={<Navigate to="/login" />} />

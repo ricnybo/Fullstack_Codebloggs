@@ -29,14 +29,7 @@
     justify-content: center;
   } */
   
-  .modal-content {
-    /* position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    max-width: 80%;
-    /* max-height: 20%; */
+  /* .modal-content {
     overflow-y: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
     border-radius: 15px;
@@ -59,4 +52,66 @@
 
   
 
+  .modal-container {
+    border-radius: 40em;
+  } */
+
+  .modal-content {
+    border-radius: 15px;
+    background-color: #0b18a8;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .textarea {
+    border-radius: 10px;
+    resize: both;
+    width: 100%;
+   
+  }
+  
+  .button {
+    border-radius: 10px;
+    background-color: #6a0dad;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .button.is-purple {
+    background-color: purple;
+  }
+  
+  .button.is-purple:hover {
+    background-color: #6600cc;
+  }
+  
+  .modal-close {
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    font-size: 18px;
+    color: #aaaaaa;
+  }
+  
+  .modal-close:hover {
+    color: #666666;
+  }
+
+  .label {
+    font-weight: 700;
+    padding-left: 170px;
+    font-size: larger;
+  }
   
