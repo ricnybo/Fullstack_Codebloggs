@@ -9,6 +9,7 @@ import { Container } from "react-bootstrap";
 import "./components.css/sideBar.css";
 import "./components.css/home.css";
 
+
 // import "../Styles/Home.css"; // import the CSS file
 
 // This method allows the cards to be displayed horizontally.

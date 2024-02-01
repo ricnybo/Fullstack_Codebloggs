@@ -4,24 +4,24 @@ import "./components.css/sideBar.css";
 
 function Sidebar() {
   return (
-    <div class="wrapper">
+  
     <div className="sidebar">
     <ul>
         <li>
-            <NavLink to="/home" activeClassName="active">Home</NavLink>
+            <NavLink to="/home" className="home">Home</NavLink>
         </li>
         <li>
-            <NavLink to="/bloggs" activeClassName="active">Bloggs</NavLink>
+            <NavLink to="/bloggs" className="bloggs">Bloggs</NavLink>
         </li>
         <li>
-            <NavLink to="/network" activeClassName="active">Network</NavLink>
+            <NavLink to="/network" className="network">Network</NavLink>
         </li>
         <li>
-            <NavLink to="/admin" activeClassName="active">Admin</NavLink>
+            <NavLink to="/admin" className="admin">Admin</NavLink>
         </li>
     </ul>
 </div>
-</div>
+
   );
 }
 
