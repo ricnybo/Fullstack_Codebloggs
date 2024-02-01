@@ -5,7 +5,7 @@
     display: grid;
     height: 100%;
     position: fixed;
-    margin-top: none;
+    margin-top: 3.5%;
   }
   
   .sidebar ul {

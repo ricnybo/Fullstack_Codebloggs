@@ -33,7 +33,7 @@ const Main = styled.main`
 const Layout = ({ children }) => {
     return (
         <React.Fragment>
-            {/* <Navbar /> */}
+            <Navbar />
             <Wrapper>
                 <Sidebar />
                 <Main>{children}</Main>

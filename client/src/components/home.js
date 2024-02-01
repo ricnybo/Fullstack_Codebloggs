@@ -55,6 +55,7 @@ function Home() {
         };
 
         fetchPosts();
+        console.log(posts);
     }, []);
 
     // This section will display the cards.
@@ -67,7 +68,7 @@ function Home() {
                     <Col>
                         {/* Display user data */}
                         {user && (
-                            <div>
+                            <div className="home-col1">
                                 <div className="profile-picture">
                                     <img
                                         alt="Profile Picture"
@@ -81,7 +82,6 @@ function Home() {
                                 </div>
                                 <br />
                                 <div className="home-block">
-                                    <br />
                                     <h5>Your Status</h5>
                                     <div>{user.status}</div>
                                 </div>

@@ -1,15 +1,31 @@
 .content {
   flex: 1;
-  padding: 40px;
-  scroll-margin-top: 20px;
+  padding-left: 20%;
 }
 
 .container {
   display: flex;
+  height: 100%;
+  padding-top: 5%;
+  padding-left: 10%;
+}
+
+.home-col1 {
+  position: none;
+  padding-left: 10%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-right: 5%;
+
 }
 
 .home-block {
   background-color: #8f94fb; /* Replace with your desired color */
+  padding-left: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-right: 5%;
+
 }
 
 .content .col {
