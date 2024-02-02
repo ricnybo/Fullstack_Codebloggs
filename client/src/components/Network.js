@@ -71,8 +71,8 @@ function Network() {
                         <h3>Users</h3>
                         <div>
                             {users && users.map((user) => (
-                                <Card key={user} onClick={() => handleUserClick(user)}>
-                                    <Card.Body>
+                                <Card className="card" key={user} onClick={() => handleUserClick(user)}>
+                                    <Card.Body className="user-card">
                                         <Card.Title>{user.first_name} {user.last_name}</Card.Title>
                                         <Card.Text>{user.email}</Card.Text>
                                     </Card.Body>

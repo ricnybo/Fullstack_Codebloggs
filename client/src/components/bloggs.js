@@ -138,7 +138,7 @@ function Bloggs() {
                                                 </div>
 
                                                 {/* Display post's comments */}
-                                                <span>Make a comment <img src="./img/pointing-right-hand-symbol.png" alt="Make a Comment" style={{ width: "30px", height: "20px" }} onClick={() => handleCommentAdd(post._id, post.user_id._id)} /></span>
+                                                <span className="bloggs-cmt-pointer" >Make a comment <img src="./img/pointing-right-hand-symbol.png" alt="Make a Comment" style={{ width: "30px", height: "20px" }} onClick={() => handleCommentAdd(post._id, post.user_id._id)} /></span>
                                                 <span className="bloggs-comments-lbl">Comments:</span>
                                                 {post.comments.map((comment) => (
                                                     <div key={comment._id}>
