@@ -90,8 +90,8 @@ function Network() {
                                         src="./img/pngtree-bright-yellow-circle-png-image_2949816.png"
                                     ></img>
                                     <div className="initials">
-                                        {user.first_name[0]}
-                                        {user.last_name[0]}
+                                        {selectedUser.first_name[0]}
+                                        {selectedUser.last_name[0]}
                                     </div>
                                 </div>
                                 <br />
