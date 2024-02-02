@@ -10,17 +10,7 @@
   padding-left: 10%;
 }
 
-.home-post-group {
-  background-color: #64eefa; /* Replace with your desired color */
-  border-radius: 20px;
-  padding-left: 2%;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  padding-right: 2%;
-
-}
-
-.home-col1 {
+.bloggs-col1 {
   position: none;
   padding-left: 10%;
   padding-top: 5%;
@@ -29,7 +19,7 @@
 
 }
 
-.home-block {
+.bloggs-block {
   background-color: #8f94fb; /* Replace with your desired color */
   border-radius: 20px;
   padding-left: 5%;
@@ -83,48 +73,70 @@
   }
 }
 
-.home-post-content {
-  background-color: #f9cc79; /* Replace with your desired color */
+.bloggs-post-group {
+  background-color: #64eefa; /* Replace with your desired color */
   border-radius: 20px;
-  padding-left: 5%;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  padding-right: 5%;
+  padding-left: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 2%;
 
 }
 
-.home-post-comment {
+.bloggs-post-content {
   background-color: #f9cc79; /* Replace with your desired color */
   border-radius: 20px;
-  padding-left: 5%;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  padding-right: 5%;
+  padding-left: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 2%;
+
+}
+
+.bloggs-post-comment {
+  background-color: #f9cc79; /* Replace with your desired color */
+  border-radius: 20px;
+  padding-left: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 2%;
   margin-left: 40%;
   max-width: 60%;
 
 }
 
-.home-likes {
+.bloggs-likes {
   margin-left: 40px;
 }
 
-.home-post-info {
+.bloggs-post-info {
     display: flex;
     justify-content: space-between;
 }
 
-.home-horizBoarder-center {
+.bloggs-horizBoarder-center {
     display: flex;
     justify-content: center;
 }
 
-.home-comments-lbl{
+.bloggs-comments-lbl{
   margin-left: 40%;
 }
 
-.home-post-comment-info {
+.bloggs-post-comment-info {
     display: flex;
     justify-content: space-between;
     margin-left: 40%;
+}
+
+.bloggs-initials {
+  background-color: #b7f979; /* Replace with your desired color */
+  border-radius: 50%; /* Make the background a circle */
+  width: 70px; /* Set a fixed width */
+  height: 70px; /* Set a fixed height */
+  display: flex; /* Use flexbox to center the initials */
+  justify-content: center; /* Center the initials horizontally */
+  align-items: center; /* Center the initials vertically */
+  font-size: 1.5em; /* Adjust as needed */
+  font-weight: bold;
 }

@@ -1,11 +1,11 @@
-//postModule.js
+//commentModule.js
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import "./components.css/postModal.css";
+import "./components.css/commentModal.css";
 import Modal from "react-bootstrap/Modal";
 import { AuthContext } from "./AuthContext.js";
 
-function PostModal({ }) {
+function CommentModal({ show, onHide, postId, refreshPosts }) {
   const {
     isLoggedIn,
     setLoggedIn,
@@ -13,22 +13,20 @@ function PostModal({ }) {
     setUser,
     validSession,
     setValidSession,
-    refreshPosts,
-    setRefreshPosts,
   } = useContext(AuthContext);
+console.log(user);
   const [isModalOpen, setIsModalOpen] = useState("");
   
   const [formData, setFormData] = useState({
     user_id: "",
+    post_id: "",
     content: "",
   });
   console.log(formData);
 
   useEffect(() => {
-    if (isModalOpen) {
-      setFormData(formData => ({ ...formData, user_id: user.user_id }));
-    }
-  }, [user.user_id, isModalOpen]);
+    setFormData(formData => ({ ...formData, user_id: user.user_id, post_id: postId }));
+  }, [user.user_id, postId]);
 
 
   const handleInputChange = (event) => {
@@ -40,38 +38,38 @@ function PostModal({ }) {
     setIsModalOpen(true);
   };
 
-  const closePostModal = () => {
-    setIsModalOpen(false);
-    setFormData({}); // Clear the form data after closing the modal
+  const closeCommentModal = () => {
+    onHide();
+    setFormData({ user_id: "", post_id: "", content: "" });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/post", formData);
-      console.log("Post created successfully:", response.data);
-      closePostModal(); // Close the modal after successful post creation
-      setRefreshPosts(prevState => !prevState);
-      setFormData({});
+      const response = await axios.post("/comment", formData);
+      console.log("Comment created successfully:", response.data);
+      onHide(); // Close the modal after successful comment creation
+      refreshPosts();
+      setFormData({ user_id: "", post_id: "", content: "" });
     } catch (error) {
-      console.error("Error creating post:", error);
+      console.error("Error creating comment:", error);
     }
   };
 
   return (
-    <div>
-      <button className="ml-center btn-custom" onClick={handleModalOpen}>
-        Post
+    <div className="modal-container">
+      <button className="ml-center btn-custom" onClick={onHide}>
+        Comment
       </button>
-      {isModalOpen && (
+      {show && (
 
-        <Modal  className="modal-background" show={isModalOpen}>
-          <div className="modal-container" onClick={closePostModal}></div>
+        <Modal  show={show}>
+          <div className="modal-background" onClick={onHide}></div>
           <div className="modal-content">
             <form onSubmit={handleSubmit}>
             
               <div className="field">
-                <label className="label">Make a Post</label>
+                <label className="label">Make a Comment</label>
                 <div className="control">
                   <textarea
                     className="textarea"
@@ -87,14 +85,14 @@ function PostModal({ }) {
                   <button type="submit" 
                   className="button" 
                   onClick={handleSubmit}>
-                    Post
+                    Comment
                   </button>
                 </div>
                 <div className="control">
                   <button
                     type="button"
                     className="button"
-                    onClick={closePostModal}>
+                    onClick={closeCommentModal}>
                     Cancel</button>
                 </div>
               </div>
@@ -103,7 +101,7 @@ function PostModal({ }) {
           <button
             className="modal-close is-large"
             aria-label="close"
-            onClick={closePostModal}
+            onClick={onHide}
           ></button>
         </Modal>
       )}
@@ -113,4 +111,4 @@ function PostModal({ }) {
 }
 
 
-export default PostModal;
+export default CommentModal;

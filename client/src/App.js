@@ -21,10 +21,12 @@ import Register from "./components/register.js";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/sideBar.js"
 // // import RecordList from "./components/recordList";
-import Edit from "./components/edit";
-import Create from "./components/create.js";
+// import Edit from "./components/edit";
+// import Create from "./components/create.js";
 import Unauthorized from "./components/unauthorized.js";
 import Home from "./components/home.js";
+import Network from "./components/Network.js"
+import Bloggs from "./components/bloggs.js";
 
 
 
@@ -55,11 +57,11 @@ const App = () => {
             {isLoggedIn ? (
               <>
                 <Route path="/home" element={<Home />} />
-                {/* <Route path="/records" element={<RecordList />} /> */}
-                <Route path="/edit/:id" element={<Edit />} />
-                <Route path="/create" element={<Create />} />
-                <Route path="*" element={<Navigate to="/home" />} />
-                <Route path="*" element={<Navigate to="/home" />} />
+                <Route path="/bloggs" element={<Bloggs />} />
+                <Route path="/network" element={<Network />} />
+                {/* <Route path="/edit/:id" element={<Edit />} />
+                <Route path="/create" element={<Create />} /> */}
+               
               </>
             ) : (
                 <Route path="*" element={<Navigate to="/login" />} />

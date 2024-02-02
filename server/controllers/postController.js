@@ -134,9 +134,20 @@ const updatePost = async (req, res) => {
   }
 };
 
+const likePost = async (req, res) => {
+  try {
+    const post = await Post.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } }, { new: true });
+    console.log("Post liked successfully");
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: error.toString() });
+  }
+};
+
 export {
   createPost,
   getAllPosts,
   getPost,
-  updatePost
+  updatePost,
+  likePost
 };

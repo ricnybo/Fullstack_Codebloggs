@@ -11,6 +11,7 @@ import {
   getAllPosts,
   getPost,
   updatePost,
+  likePost,
 } from "../controllers/postController.js";
 
 // User routes
@@ -18,6 +19,7 @@ postRouter.post("/", auth, createPost);
 postRouter.get("/", auth, getAllPosts);
 postRouter.get("/:id", auth, getPost);
 postRouter.put("/:id", auth, updatePost);
+postRouter.put("/like/:id", auth, likePost);
 
 // Export the postRouter
 export default postRouter;
