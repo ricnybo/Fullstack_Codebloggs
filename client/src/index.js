@@ -1,7 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { AuthProvider } from "./components/AuthContext";
-import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -16,9 +15,7 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      
-        <App />
-      
+      <App />
     </AuthProvider>
   </React.StrictMode>
 );

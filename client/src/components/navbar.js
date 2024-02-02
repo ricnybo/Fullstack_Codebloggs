@@ -1,5 +1,4 @@
 //navbar.js
-// import React from "react";
 import { NavLink } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
@@ -10,7 +9,6 @@ import { setCookie } from "react-use-cookie";
 import "bootstrap/dist/css/bootstrap.css";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { AuthContext } from "./AuthContext"; // import the AuthContext
 
@@ -20,8 +18,6 @@ function Navbar({ onLogout, openPostModal }) {
 
   const navigate = useNavigate();
   const location = useLocation();
-
-
 
   const handleLogout = async (event) => {
     event.preventDefault(); // Prevent the default action of the link
@@ -67,8 +63,8 @@ function Navbar({ onLogout, openPostModal }) {
             src="./img/CodeBloggslogo.png"
           ></img>
         </NavLink>
-       
-        {isLoggedIn && ( <PostModal /> )}
+
+        {isLoggedIn && <PostModal />}
 
         {isLoggedIn && (
           <div className="ml-auto user-btn">
@@ -79,7 +75,7 @@ function Navbar({ onLogout, openPostModal }) {
                   : "User"}
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
+              <Dropdown.Menu className="options">
                 <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                 <Dropdown.Item onClick={handleSettings}>Settings</Dropdown.Item>
               </Dropdown.Menu>
@@ -87,7 +83,6 @@ function Navbar({ onLogout, openPostModal }) {
           </div>
         )}
       </nav>
-
     </div>
   );
 }

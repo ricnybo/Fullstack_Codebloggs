@@ -1,129 +1,68 @@
-/* .modal-content {
-    top: 0;
-    left: 0; 
-    background-color: rgba(0, 0, 0, 0.5); 
-    display: block; 
-    justify-content: center !important; 
-    align-items: center !important; 
-    width: 40% !important;
-   
-   
+.modal-content {
+  border-radius: 15px;
+  background-color: #7575ff !important;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.activate {
-    display: block;
-    padding-left: 20em;
-    padding-top: 20em;
+.modal-form {
+  display: flex;
+  flex-direction: column;
 }
 
-.modalia {
-    width: 40%;
-} */
+.textarea {
+  border-radius: 10px;
+  resize: both;
+  width: 100%;
+}
 
-/* .modal-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 40%;
-    height: 40%;
-    justify-content: center;
-  } */
-  
-  /* .modal-content {
-    overflow-y: auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
-    border-radius: 15px;
-    padding: 6px;
+.button {
+  border-radius: 10px;
+  background-color: #8a46ce;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
-    
-   
-  }
- 
-  .modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: gray;
-    font-size: 20px;
-    cursor: pointer;
-  }
+.button.is-purple {
+  background-color: purple;
+}
 
-  
+.button.is-purple:hover {
+  background-color: #6600cc;
+}
 
-  .modal-container {
-    border-radius: 40em;
-  } */
+.modal-close {
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  font-size: 18px;
+  color: #aaaaaa;
+}
 
-  .modal-content {
-    border-radius: 15px;
-    background-color: #0b18a8;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .modal-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .textarea {
-    border-radius: 10px;
-    resize: both;
-    width: 100%;
-   
-  }
-  
-  .button {
-    border-radius: 10px;
-    background-color: #6a0dad;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .button.is-purple {
-    background-color: purple;
-  }
-  
-  .button.is-purple:hover {
-    background-color: #6600cc;
-  }
-  
-  .modal-close {
-    border-radius: 50%;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px;
-    font-size: 18px;
-    color: #aaaaaa;
-  }
-  
-  .modal-close:hover {
-    color: #666666;
-  }
+.modal-close:hover {
+  color: #666666;
+}
 
-  .label {
-    font-weight: 700;
-    padding-left: 170px;
-    font-size: larger;
-  }
-  
+.label {
+  font-weight: 700;
+  padding-left: 170px;
+  font-size: larger;
+}
 
-
-  .textarea {
-    width: 100%;
-    height: 100px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    resize: none;
-  }
+.textarea {
+  width: 100%;
+  height: 100px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}

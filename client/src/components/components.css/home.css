@@ -17,7 +17,6 @@
   padding-top: 2%;
   padding-bottom: 2%;
   padding-right: 2%;
-
 }
 
 .home-col1 {
@@ -26,7 +25,6 @@
   padding-top: 5%;
   padding-bottom: 5%;
   padding-right: 5%;
-
 }
 
 .home-block {
@@ -36,7 +34,6 @@
   padding-top: 5%;
   padding-bottom: 5%;
   padding-right: 5%;
-
 }
 
 .content .col {
@@ -90,7 +87,6 @@
   padding-top: 5%;
   padding-bottom: 5%;
   padding-right: 5%;
-
 }
 
 .home-post-comment {
@@ -102,7 +98,6 @@
   padding-right: 5%;
   margin-left: 40%;
   max-width: 60%;
-
 }
 
 .home-likes {
@@ -110,21 +105,21 @@
 }
 
 .home-post-info {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .home-horizBoarder-center {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-.home-comments-lbl{
+.home-comments-lbl {
   margin-left: 40%;
 }
 
 .home-post-comment-info {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 40%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 40%;
 }

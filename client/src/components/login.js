@@ -1,3 +1,4 @@
+// login.js is a component that will display the login form. It will also handle the submission of the form and authenticate the user.
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "./AuthContext"; // import the AuthContext
@@ -11,9 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getCookie } from "react-use-cookie";
 
 import "./components.css/login.css";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import bcrypt from "bcryptjs";
 
 // This component will display the login form.
 function Login() {
@@ -49,8 +48,6 @@ function Login() {
       const session_response = await axios.post(`/session/${user_id}`); // Create a new session for the user
       const session_token = getCookie("session_id"); // Access the session token from the cookie
       const getUser = await axios.get(`/user/${user_id}`); // Access the user's data using the user's ID
-      console.log(`login user:`);
-      console.log(getUser);
       // If authentication is successful, update `user` with the user's data
       setUser({
         user_id: getUser.data.data.user.user_id,
@@ -116,9 +113,9 @@ function Login() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]); // This will run every time `user` changes
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]); // This will run every time `user` changes. For troubleshooting purposes.
 
   return (
     <div className="login-page">
