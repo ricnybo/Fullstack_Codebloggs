@@ -1,24 +1,17 @@
 .net-cont {
-    padding-left: 17rem;
-    padding-top: 4rem;
-    
+  padding-left: 17rem;
+  padding-top: 4rem;
 }
 
 .user-card {
-    border-radius: 30px;
-    background-color: rgb(253, 238, 122);
-    
-    
+  border-radius: 30px;
+  background-color: rgb(253, 238, 122);
 }
 
 .card {
-    border: none !important;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 30px !important;
-    cursor: pointer;
-    
-
-  padding-left: 17rem;
-  padding-top: 4rem;
+  border: none !important;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 30px !important;
+  cursor: pointer;
 }
