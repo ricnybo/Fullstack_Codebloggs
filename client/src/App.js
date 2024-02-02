@@ -20,9 +20,6 @@ import Login from "./components/login.js";
 import Register from "./components/register.js";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/sideBar.js"
-// // import RecordList from "./components/recordList";
-// import Edit from "./components/edit";
-// import Create from "./components/create.js";
 import Unauthorized from "./components/unauthorized.js";
 import Home from "./components/home.js";
 import Network from "./components/Network.js"
@@ -48,10 +45,8 @@ const App = () => {
         <Navbar />
         {isLoggedIn ? (<Sidebar />) : null}
         <div style={{ margin: 20 }}>
-          {/* <Layout> */}
           <Routes>
             <Route path="/login" element={<Login />} />
-            {/* element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} */}
             <Route path="/register" element={<Register />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
             {isLoggedIn ? (
@@ -59,17 +54,13 @@ const App = () => {
                 <Route path="/home" element={<Home />} />
                 <Route path="/bloggs" element={<Bloggs />} />
                 <Route path="/network" element={<Network />} />
-                {/* <Route path="/edit/:id" element={<Edit />} />
-                <Route path="/create" element={<Create />} /> */}
-               
+                <Route path="*" element={<Navigate to="/home" />} />
               </>
             ) : (
                 <Route path="*" element={<Navigate to="/login" />} />
             )}
             </Routes>
-          {/* </Layout> */}
         </div>
-      
     </Router>
     </div>
     

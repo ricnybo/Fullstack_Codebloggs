@@ -1,3 +1,4 @@
+// login.js is a component that will display the login form. It will also handle the submission of the form and authenticate the user.
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "./AuthContext"; // import the AuthContext

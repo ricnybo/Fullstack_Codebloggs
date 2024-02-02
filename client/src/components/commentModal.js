@@ -1,7 +1,7 @@
 //commentModule.js
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import "./components.css/commentModal.css";
+import "./components.css/postModal.css";
 import Modal from "react-bootstrap/Modal";
 import { AuthContext } from "./AuthContext.js";
 
