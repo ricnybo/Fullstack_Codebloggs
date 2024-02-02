@@ -9,43 +9,43 @@ export const AuthContext = createContext(null);
 
 // Create a provider for components to consume and subscribe to changes
 export const AuthProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(
-        () => JSON.parse(localStorage.getItem("isLoggedIn")) || false
-    );
-    const [user, setUser] = useState(
-        () => JSON.parse(localStorage.getItem("user")) || null
-    );
-    const [validSession, setValidSession] = useState(
-        () => JSON.parse(localStorage.getItem("validSession")) || false
-    );
-    const [refreshPosts, setRefreshPosts] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => JSON.parse(localStorage.getItem("isLoggedIn")) || false
+  );
+  const [user, setUser] = useState(
+    () => JSON.parse(localStorage.getItem("user")) || null
+  );
+  const [validSession, setValidSession] = useState(
+    () => JSON.parse(localStorage.getItem("validSession")) || false
+  );
+  const [refreshPosts, setRefreshPosts] = useState(false);
 
-    useEffect(() => {
-        localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
-    }, [isLoggedIn]);
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+  }, [isLoggedIn]);
 
-    useEffect(() => {
-        localStorage.setItem("user", JSON.stringify(user));
-    }, [user]);
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
-    useEffect(() => {
-        localStorage.setItem("validSession", JSON.stringify(validSession));
-    }, [validSession]);
+  useEffect(() => {
+    localStorage.setItem("validSession", JSON.stringify(validSession));
+  }, [validSession]);
 
-    return (
-        <AuthContext.Provider
-            value={{
-                isLoggedIn,
-                setIsLoggedIn,
-                user,
-                setUser,
-                validSession,
-                setValidSession,
-                refreshPosts,
-                setRefreshPosts,
-            }}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider
+      value={{
+        isLoggedIn,
+        setIsLoggedIn,
+        user,
+        setUser,
+        validSession,
+        setValidSession,
+        refreshPosts,
+        setRefreshPosts,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };

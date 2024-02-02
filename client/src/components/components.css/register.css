@@ -41,8 +41,8 @@
   cursor: pointer;
   margin-top: 15px;
 }
-  
-.register-form  button {
+
+.register-form button {
   width: 100%;
   padding: 10px; /* Adjust padding for button */
   background-color: #6a71fa; /* Adjust background color for button */
@@ -52,7 +52,7 @@
   cursor: pointer;
 }
 
-.register-form  button:hover {
+.register-form button:hover {
   background-color: #555df7; /* Adjust background color on hover */
 }
 

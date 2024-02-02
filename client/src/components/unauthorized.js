@@ -6,7 +6,6 @@ import "./components.css/unauthorized.css"; // import the CSS file
 // This component will display the unauthorized page.
 function Unauthorized() {
   const location = useLocation();
-  console.log(location);
   const navigate = useNavigate();
 
   const handleOk = () => {
@@ -20,7 +19,11 @@ function Unauthorized() {
         className="d-flex flex-column justify-content-center align-items-center"
         style={{ minHeight: "100vh" }}
       >
-        <Alert variant="danger" className="text-center" style={{ width: '350px' }}>
+        <Alert
+          variant="danger"
+          className="text-center"
+          style={{ width: "350px" }}
+        >
           <img
             alt="CodeBloggs logo"
             style={{ width: "100%" }}
@@ -28,7 +31,11 @@ function Unauthorized() {
           ></img>
           <Alert.Heading>Unauthorized</Alert.Heading>
           <p>{location.state.message.message}</p>
-          <Button variant="secondary" onClick={handleOk} style={{ width: '100px' }}>
+          <Button
+            variant="secondary"
+            onClick={handleOk}
+            style={{ width: "100px" }}
+          >
             OK
           </Button>
         </Alert>

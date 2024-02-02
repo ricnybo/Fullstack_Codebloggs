@@ -14,33 +14,33 @@ function CommentModal({ show, onHide, postId, refreshPosts }) {
     validSession,
     setValidSession,
   } = useContext(AuthContext);
-console.log(user);
-  const [isModalOpen, setIsModalOpen] = useState("");
-  
   const [formData, setFormData] = useState({
     user_id: "",
     post_id: "",
     content: "",
   });
-  console.log(formData);
 
   useEffect(() => {
-    setFormData(formData => ({ ...formData, user_id: user.user_id, post_id: postId }));
+    setFormData((formData) => ({
+      ...formData,
+      user_id: user.user_id,
+      post_id: postId,
+    }));
   }, [user.user_id, postId]);
-
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-  };
+  //troubleshooting
+  // useEffect(() => {
+  //   console.log('formData:', formData);
+  // }, [formData]);
 
-  const closeCommentModal = () => {
+  const closeCommentModal = async () => {
     onHide();
-    setFormData({ user_id: "", post_id: "", content: "" });
+    setFormData({ user_id: user.user_id, post_id: postId, content: "" });
   };
 
   const handleSubmit = async (event) => {
@@ -50,7 +50,7 @@ console.log(user);
       console.log("Comment created successfully:", response.data);
       onHide(); // Close the modal after successful comment creation
       refreshPosts();
-      setFormData({ user_id: "", post_id: "", content: "" });
+      setFormData({ user_id: user.user_id, post_id: postId, content: "" });
     } catch (error) {
       console.error("Error creating comment:", error);
     }
@@ -62,12 +62,10 @@ console.log(user);
         Comment
       </button>
       {show && (
-
-        <Modal  show={show}>
+        <Modal show={show}>
           <div className="modal-background" onClick={onHide}></div>
           <div className="modal-content">
             <form onSubmit={handleSubmit}>
-            
               <div className="field">
                 <label className="label">Make a Comment</label>
                 <div className="control">
@@ -80,11 +78,16 @@ console.log(user);
                   ></textarea>
                 </div>
               </div>
-              <div className="field is-grouped" style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div
+                className="field is-grouped"
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
                 <div className="control">
-                  <button type="submit" 
-                  className="button" 
-                  onClick={handleSubmit}>
+                  <button
+                    type="submit"
+                    className="button"
+                    onClick={handleSubmit}
+                  >
                     Comment
                   </button>
                 </div>
@@ -92,8 +95,10 @@ console.log(user);
                   <button
                     type="button"
                     className="button"
-                    onClick={closeCommentModal}>
-                    Cancel</button>
+                    onClick={closeCommentModal}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </div>
             </form>
@@ -106,9 +111,7 @@ console.log(user);
         </Modal>
       )}
     </div>
-
   );
 }
-
 
 export default CommentModal;
