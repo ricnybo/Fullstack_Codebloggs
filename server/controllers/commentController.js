@@ -130,9 +130,20 @@ const updateComment = async (req, res) => {
   }
 };
 
+const likeComment = async (req, res) => {
+  try {
+    const comment = await Comment.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } }, { new: true });
+    console.log("Comment liked successfully");
+    res.json(comment);
+  } catch (error) {
+    res.status(500).json({ error: error.toString() });
+  }
+};
+
 export {
   createComment,
   getAllComments,
   getComment,
-  updateComment
+  updateComment,
+  likeComment
 };

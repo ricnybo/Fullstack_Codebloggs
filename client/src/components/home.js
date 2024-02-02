@@ -34,7 +34,31 @@ function Home() {
         setUser,
         validSession,
         setValidSession,
+        refreshPosts,
+        setRefreshPosts,
     } = useContext(AuthContext);
+
+    const fetchPosts = async () => {
+        // Fetch user's posts
+        const postsResponse = await axios.get(`/post`);
+        console.log(postsResponse.data.data.posts);
+        setPosts(postsResponse.data.data.posts);
+    };
+
+    const handleLike = async (id, commentUserId) => {
+        // Prevent the user from liking their own comments
+        if (user.user_id === commentUserId) {
+            return;
+        }
+
+        try {
+            await axios.put(`/comment/like/${id}`);
+            // After the request, fetch the posts again to update the UI
+            fetchPosts();
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     // This method will validate the session.
     useEffect(() => {
@@ -49,15 +73,14 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            // Fetch user's posts
-            const postsResponse = await axios.get(`/post`);
-            setPosts(postsResponse.data.data.posts);
-        };
-
         fetchPosts();
+    }, [refreshPosts]);
+
+
+
+    useEffect(() => {
         console.log(posts);
-    }, []);
+    }, [posts]); // This will log the posts to the console whenever they change.
 
     // This section will display the cards.
     return (
@@ -104,19 +127,38 @@ function Home() {
 
                     <Col>
                         {/* Display user's posts */}
-                        {posts.map((post) => (
+                        <h5>Your Posts</h5>
+                        {posts.filter(post => post.user_id._id === user.user_id).map((post, index) => (
                             <div key={post._id}>
-                                <div>{post.content}</div>
-                                <div>{post.time_stamp}</div>
-                                <div>{post.likes}</div>
-                                {/* Display post's comments */}
-                                {post.comments.map((comment) => (
-                                    <div key={comment._id}>
-                                        <div>{comment.content}</div>
-                                        <div>{comment.time_stamp}</div>
-                                        <div>{comment.likes}</div>
+                                <div className="home-post-group" >
+                                    <div className="home-post-content">{post.content}</div>
+                                    <div className="home-post-info">
+                                        <span>{new Date(post.time_stamp).toLocaleString()}</span>
+                                        <span className=""><img src="./img/like vector icon.png" alt="Likes" style={{ width: "30px", height: "30px" }} /> {post.likes}</span>
                                     </div>
-                                ))}
+
+                                    {/* Display post's comments */}
+                                    <span className="home-comments-lbl">Comments:</span>
+                                    {post.comments.map((comment) => (
+                                        <div key={comment._id}>
+                                            <div className="home-post-comment">
+                                                <div>Commenter: {comment.user_id.first_name} {comment.user_id.last_name}</div>
+                                                <br />
+                                                <div >Comment: {comment.content}</div>
+                                            </div>
+                                            <div className="home-post-comment-info">
+                                                <span>{new Date(comment.time_stamp).toLocaleString()}</span>
+                                                <span className=""><img src="./img/like vector icon.png" alt="Likes" style={{ width: "30px", height: "30px" }} onClick={() => handleLike(comment._id, comment.user_id._id)} /> {comment.likes}</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                {/* Add a horizontal image between posts, but not after the last post */}
+                                {index < posts.length - 1 &&
+                                    <div className="home-horizBoarder-center">
+                                        <img src="./img/horizBoarder.png" alt="Horizontal" style={{ width: "70%", height: "auto" }} />
+                                    </div>
+                                }
                             </div>
                         ))}
                     </Col>

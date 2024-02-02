@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
     const [validSession, setValidSession] = useState(
         () => JSON.parse(localStorage.getItem("validSession")) || false
     );
+    const [refreshPosts, setRefreshPosts] = useState(false);
 
     useEffect(() => {
         localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
@@ -40,6 +41,8 @@ export const AuthProvider = ({ children }) => {
                 setUser,
                 validSession,
                 setValidSession,
+                refreshPosts,
+                setRefreshPosts,
             }}
         >
             {children}
