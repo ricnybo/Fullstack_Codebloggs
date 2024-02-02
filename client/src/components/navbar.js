@@ -68,12 +68,9 @@ function Navbar({ onLogout, openPostModal }) {
           ></img>
         </NavLink>
        
-      
-        <PostModal />
+        {isLoggedIn && ( <PostModal /> )}
 
         {isLoggedIn && (
-          
-
           <div className="ml-auto user-btn">
             <Dropdown>
               <Dropdown.Toggle variant="" id="dropdown-basic">
