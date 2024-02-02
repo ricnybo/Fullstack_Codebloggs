@@ -59,14 +59,14 @@ function PostModal({ }) {
   };
 
   return (
-    <div className="modal-container">
+    <div>
       <button className="ml-center btn-custom" onClick={handleModalOpen}>
         Post
       </button>
       {isModalOpen && (
 
-        <Modal  show={isModalOpen}>
-          <div className="modal-background" onClick={closePostModal}></div>
+        <Modal  className="modal-background" show={isModalOpen}>
+          <div className="modal-container" onClick={closePostModal}></div>
           <div className="modal-content">
             <form onSubmit={handleSubmit}>
             

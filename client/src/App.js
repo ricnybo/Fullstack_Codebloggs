@@ -25,6 +25,7 @@ import Sidebar from "./components/sideBar.js"
 // import Create from "./components/create.js";
 import Unauthorized from "./components/unauthorized.js";
 import Home from "./components/home.js";
+import Network from "./components/Network.js"
 import Bloggs from "./components/bloggs.js";
 
 
@@ -57,10 +58,10 @@ const App = () => {
               <>
                 <Route path="/home" element={<Home />} />
                 <Route path="/bloggs" element={<Bloggs />} />
-                {/* <Route path="/records" element={<RecordList />} /> */}
+                <Route path="/network" element={<Network />} />
                 {/* <Route path="/edit/:id" element={<Edit />} />
                 <Route path="/create" element={<Create />} /> */}
-                <Route path="*" element={<Navigate to="/home" />} />
+               
               </>
             ) : (
                 <Route path="*" element={<Navigate to="/login" />} />
