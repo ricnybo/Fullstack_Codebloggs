@@ -57,68 +57,63 @@ function Network() {
     setSelectedUser(user);
   };
 
-  return (
-    <>
-      <Navbar />
-      <Sidebar />
-      <Container fluid>
-        <Row className="net-cont">
-          <Col md={4}>
-            <h3>Users</h3>
-            <div>
-              {users &&
-                users.map((user) => (
-                  <Card key={user} onClick={() => handleUserClick(user)}>
-                    <Card.Body>
-                      <Card.Title>
-                        {user.first_name} {user.last_name}
-                      </Card.Title>
-                      <Card.Text>{user.email}</Card.Text>
-                    </Card.Body>
-                  </Card>
-                ))}
-            </div>
-          </Col>
-          <Col md={4}>
-            {selectedUser && (
-              <div className="home-col1">
-                <div className="profile-picture">
-                  <img
-                    alt="Profile Picture"
-                    style={{ width: "100%" }}
-                    src="./img/pngtree-bright-yellow-circle-png-image_2949816.png"
-                  ></img>
-                  <div className="initials">
-                    {selectedUser.first_name[0]}
-                    {selectedUser.last_name[0]}
-                  </div>
-                </div>
-                <br />
-                <div className="home-block">
-                  <h5>Your Status</h5>
-                  <div>{selectedUser.status}</div>
-                </div>
-                <br />
-                <div className="home-block">
-                  <h5>Your information</h5>
-                  <p>First Name: {selectedUser.first_name}</p>
-                  <p>Last Name: {selectedUser.last_name}</p>
-                  <p>
-                    Birthday:{" "}
-                    {new Date(selectedUser.birthday).toLocaleDateString()}
-                  </p>
-                  <p>Email: {selectedUser.email}</p>
-                  <p>Location: {selectedUser.location}</p>
-                  <p>Occupation: {selectedUser.occupation}</p>
-                  <p>Auth Level: {selectedUser.auth_level}</p>
-                </div>
-              </div>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    </>
-  );
+    return (
+        <>
+            <Navbar />
+            <Sidebar />
+            <Container fluid>
+                <Row className="net-cont">
+                    <Col md={4}>
+                        <h3>Users</h3>
+                        <div>
+                            {users && users.map((user) => (
+                                <Card className="card" key={user} onClick={() => handleUserClick(user)}>
+                                    <Card.Body className="user-card">
+                                        <Card.Title>{user.first_name} {user.last_name}</Card.Title>
+                                        <Card.Text>{user.email}</Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            ))}
+                        </div>
+                    </Col>
+                    <Col md={4}>
+                        {selectedUser && (
+                            <div className="home-col1">
+                                <div className="profile-picture">
+                                    <img
+                                        alt="Profile Picture"
+                                        style={{ width: "100%" }}
+                                        src="./img/pngtree-bright-yellow-circle-png-image_2949816.png"
+                                    ></img>
+                                    <div className="initials">
+                                        {selectedUser.first_name[0]}
+                                        {selectedUser.last_name[0]}
+                                    </div>
+                                </div>
+                                <br />
+                                <div className="home-block">
+                                    <h5>Your Status</h5>
+                                    <div>{selectedUser.status}</div>
+                                </div>
+                                <br />
+                                <div className="home-block">
+                                    <h5>Your information</h5>
+                                    <p>First Name: {selectedUser.first_name}</p>
+                                    <p>Last Name: {selectedUser.last_name}</p>
+                                    <p>Birthday: {new Date(selectedUser.birthday).toLocaleDateString()}</p>
+                                    <p>Email: {selectedUser.email}</p>
+                                    <p>Location: {selectedUser.location}</p>
+                                    <p>Occupation: {selectedUser.occupation}</p>
+                                    <p>Auth Level: {selectedUser.auth_level}</p>
+                                </div>
+                            </div>
+                        )}
+                    </Col>
+                </Row>
+            </Container>
+        </>
+    );
+
 }
 
 export default Network;

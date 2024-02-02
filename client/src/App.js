@@ -23,6 +23,7 @@ import Unauthorized from "./components/unauthorized.js";
 import Home from "./components/home.js";
 import Network from "./components/Network.js";
 import Bloggs from "./components/bloggs.js";
+import Admin from "./components/admin.js";
 
 const App = () => {
   const {
@@ -50,6 +51,7 @@ const App = () => {
                 <Route path="/home" element={<Home />} />
                 <Route path="/bloggs" element={<Bloggs />} />
                 <Route path="/network" element={<Network />} />
+                <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<Navigate to="/home" />} />
               </>
             ) : (

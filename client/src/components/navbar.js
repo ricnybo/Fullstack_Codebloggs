@@ -75,7 +75,7 @@ function Navbar({ onLogout, openPostModal }) {
                   : "User"}
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
+              <Dropdown.Menu className="options">
                 <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                 <Dropdown.Item onClick={handleSettings}>Settings</Dropdown.Item>
               </Dropdown.Menu>
