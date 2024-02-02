@@ -66,7 +66,4 @@ const validateToken = async (req, res) => {
   }
 };
 
-export {
-  createSession,
-  validateToken
-};
+export { createSession, validateToken };

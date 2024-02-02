@@ -5,7 +5,7 @@ import "./components.css/postModal.css";
 import Modal from "react-bootstrap/Modal";
 import { AuthContext } from "./AuthContext.js";
 
-function PostModal({ }) {
+function PostModal({}) {
   const {
     isLoggedIn,
     setLoggedIn,
@@ -17,19 +17,17 @@ function PostModal({ }) {
     setRefreshPosts,
   } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState("");
-  
+
   const [formData, setFormData] = useState({
     user_id: "",
     content: "",
   });
-  console.log(formData);
 
   useEffect(() => {
     if (isModalOpen) {
-      setFormData(formData => ({ ...formData, user_id: user.user_id }));
+      setFormData((formData) => ({ ...formData, user_id: user.user_id }));
     }
   }, [user.user_id, isModalOpen]);
-
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -51,7 +49,7 @@ function PostModal({ }) {
       const response = await axios.post("/post", formData);
       console.log("Post created successfully:", response.data);
       closePostModal(); // Close the modal after successful post creation
-      setRefreshPosts(prevState => !prevState);
+      setRefreshPosts((prevState) => !prevState);
       setFormData({});
     } catch (error) {
       console.error("Error creating post:", error);
@@ -64,12 +62,10 @@ function PostModal({ }) {
         Post
       </button>
       {isModalOpen && (
-
-        <Modal  className="modal-background" show={isModalOpen}>
+        <Modal className="modal-background" show={isModalOpen}>
           <div className="modal-container" onClick={closePostModal}></div>
           <div className="modal-content">
             <form onSubmit={handleSubmit}>
-            
               <div className="field">
                 <label className="label">Make a Post</label>
                 <div className="control">
@@ -82,11 +78,16 @@ function PostModal({ }) {
                   ></textarea>
                 </div>
               </div>
-              <div className="field is-grouped" style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div
+                className="field is-grouped"
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
                 <div className="control">
-                  <button type="submit" 
-                  className="button" 
-                  onClick={handleSubmit}>
+                  <button
+                    type="submit"
+                    className="button"
+                    onClick={handleSubmit}
+                  >
                     Post
                   </button>
                 </div>
@@ -94,8 +95,10 @@ function PostModal({ }) {
                   <button
                     type="button"
                     className="button"
-                    onClick={closePostModal}>
-                    Cancel</button>
+                    onClick={closePostModal}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </div>
             </form>
@@ -108,9 +111,7 @@ function PostModal({ }) {
         </Modal>
       )}
     </div>
-
   );
 }
-
 
 export default PostModal;

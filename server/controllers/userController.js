@@ -111,9 +111,9 @@ const logout = async (req, res) => {
     }
 
     const user = session.user; // Fetch the user from the session for later use
-    
+
     await Session.deleteOne({ session_id: req.cookies.session_id }); // Remove the session from the database
-    
+
     res.clearCookie("session_id"); // Clear the session_id cookie
 
     console.log(`${user.email} logged out`);

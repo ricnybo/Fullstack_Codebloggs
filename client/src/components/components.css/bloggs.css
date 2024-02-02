@@ -16,7 +16,6 @@
   padding-top: 5%;
   padding-bottom: 5%;
   padding-right: 5%;
-
 }
 
 .bloggs-block {
@@ -26,7 +25,6 @@
   padding-top: 5%;
   padding-bottom: 5%;
   padding-right: 5%;
-
 }
 
 .content .col {
@@ -80,7 +78,6 @@
   padding-top: 2%;
   padding-bottom: 2%;
   padding-right: 2%;
-
 }
 
 .bloggs-post-content {
@@ -90,7 +87,6 @@
   padding-top: 2%;
   padding-bottom: 2%;
   padding-right: 2%;
-
 }
 
 .bloggs-post-comment {
@@ -102,7 +98,6 @@
   padding-right: 2%;
   margin-left: 40%;
   max-width: 60%;
-
 }
 
 .bloggs-likes {
@@ -116,11 +111,11 @@
 }
 
 .bloggs-horizBoarder-center {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-.bloggs-comments-lbl{
+.bloggs-comments-lbl {
   margin-left: 40%;
 }
 

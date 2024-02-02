@@ -5,7 +5,6 @@
 import express from "express";
 import cors from "cors";
 import "./loadEnvironment.js";
-import records from "./routes/recordRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import sessionRouter from "./routes/sessionRoutes.js";
 import postRouter from "./routes/postRoutes.js";
@@ -28,7 +27,6 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/record", records);
 app.use("/user", userRouter);
 app.use("/", sessionRouter);
 app.use("/post", postRouter);

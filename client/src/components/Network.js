@@ -1,7 +1,6 @@
 //network.js
 import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
 import { Container } from "react-bootstrap";
 import { Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
@@ -11,55 +10,52 @@ import Sidebar from "./sideBar.js";
 import { AuthContext, AuthProvider, UserContext } from "./AuthContext";
 import "./components.css/sideBar.css";
 import "./components.css/home.css";
-import "./components.css/Network.css"
+import "./components.css/Network.css";
 
 // This method will display the cards on the home page.
 function Network() {
-    const { validateSession } = useValidateSession();
-    const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
-    // const [posts, setPosts] = useState([]);
-    const [selectedUser, setSelectedUser] = useState();
-    const {
-        isLoggedIn,
-        setIsLoggedIn,
-        user,
-        setUser,
-        validSession,
-        setValidSession,
-    } = useContext(AuthContext);
+  const { validateSession } = useValidateSession();
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState();
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    user,
+    setUser,
+    validSession,
+    setValidSession,
+  } = useContext(AuthContext);
 
-    // This method will validate the session.
-    useEffect(() => {
-        const checkSession = async () => {
-            const isValid = await validateSession();
-            if (!isValid) {
-                navigate("/login");
-            }
-        };
-
-        checkSession();
-    }, []);
-
-    useEffect(() => {
-        // Fetch users from the backend
-        const fetchUsers = async () => {
-            console.log(users)
-            try {
-                const response = await axios.get("/user");
-                setUsers(response.data.data.user_list);
-            } catch (error) {
-                console.error("Error fetching users:", error);
-            }
-        };
-
-        fetchUsers();
-        
-    }, []);
-
-    const handleUserClick = (user) => {
-        setSelectedUser(user);
+  // This method will validate the session.
+  useEffect(() => {
+    const checkSession = async () => {
+      const isValid = await validateSession();
+      if (!isValid) {
+        navigate("/login");
+      }
     };
+
+    checkSession();
+  }, []);
+
+  useEffect(() => {
+    // Fetch users from the backend
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("/user");
+        setUsers(response.data.data.user_list);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+  };
 
     return (
         <>

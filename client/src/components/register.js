@@ -74,29 +74,25 @@ const Register = () => {
   return (
     <div className="register-page">
       <div className="register-container">
-        {/* <Container> */}
         <div className="register-form">
           <Row className="justify-content-md-center">
             <Col xs={12} className="text-center">
-            {/* <div> */}
-            <img
-              alt="CodeBloggs logo"
-              style={{
-                width: "100%",
-                maxWidth: "500px",
-              }}
-              src="./img/CodeBloggslogo.png"
-            ></img>
-            <h1 className="text-center">Register</h1>
-              {/* </div> */}
+              <img
+                alt="CodeBloggs logo"
+                style={{
+                  width: "100%",
+                  maxWidth: "500px",
+                }}
+                src="./img/CodeBloggslogo.png"
+              ></img>
+              <h1 className="text-center">Register</h1>
             </Col>
           </Row>
           <Row className="justify-content-md-center g-6">
-            <Col xs={12} md={11} >
+            <Col xs={12} md={11}>
               <Form onSubmit={handleSubmit}>
                 <Row className="justify-content-md-center g-6">
-                  <Col md={6} style={{ paddingRight: '30px' }}>
-
+                  <Col md={6} style={{ paddingRight: "30px" }}>
                     <Form.Group className="mb-3" controlId="formBasicFirstName">
                       <Form.Label>First Name</Form.Label>
                       <Form.Control
@@ -143,7 +139,7 @@ const Register = () => {
                     </Form.Group>
                   </Col>
 
-                  <Col md={6} style={{ paddingLeft: '30px' }}>
+                  <Col md={6} style={{ paddingLeft: "30px" }}>
                     <Form.Group className="mb-3" controlId="formBasicStatus">
                       <Form.Label>Status</Form.Label>
                       <Form.Control
@@ -204,7 +200,6 @@ const Register = () => {
             </Col>
           </Row>
         </div>
-        {/* </Container> */}
       </div>
     </div>
   );
