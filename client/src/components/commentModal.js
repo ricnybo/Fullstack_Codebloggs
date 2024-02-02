@@ -40,7 +40,7 @@ console.log(user);
 
   const closeCommentModal = () => {
     onHide();
-    setFormData({ user_id: "", post_id: "", content: "" });
+    setFormData({ user_id: user.user_id, post_id: postId, content: "" });
   };
 
   const handleSubmit = async (event) => {
@@ -50,7 +50,7 @@ console.log(user);
       console.log("Comment created successfully:", response.data);
       onHide(); // Close the modal after successful comment creation
       refreshPosts();
-      setFormData({ user_id: "", post_id: "", content: "" });
+      setFormData({ user_id: user.user_id, post_id: postId, content: "" });
     } catch (error) {
       console.error("Error creating comment:", error);
     }
