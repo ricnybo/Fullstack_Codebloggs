@@ -266,10 +266,10 @@ The API will take the user_id and create a uuid v4 token to be used as a session
 **Sample Response**
 ```json
 {
-  status:"ok",
+  status: "ok",
   data: {
-	valid: true,
-	newSession: {
+	    valid: true,
+	    newSession: {
             session_id: "1d64c842-e345-4424-92ea-725a3f44c2c5",
             session_date: "2024-01-25T18:43:37.532Z",
             user: "65b273edd030c1e2fcfd6f02",
@@ -277,8 +277,9 @@ The API will take the user_id and create a uuid v4 token to be used as a session
             createdAt: "2024-01-25T18:43:37.544Z",
             updatedAt: "2024-01-25T18:43:37.544Z",
             __v: 0
-        }
-  message:"Session saved successfully”
+        },
+    },
+    message: "Session saved successfully”
 }
 ```
 ### validateToken API
