@@ -138,7 +138,11 @@ const likeComment = async (req, res) => {
       { new: true }
     );
     console.log("Comment liked successfully");
-    res.json(comment);
+    res.status(200).json({
+      status: "ok",
+      data: { valid: true, comment },
+      message: "Comment liked successfully",
+      });
   } catch (error) {
     res.status(500).json({ error: error.toString() });
   }

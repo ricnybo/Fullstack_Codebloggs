@@ -142,7 +142,14 @@ const likePost = async (req, res) => {
       { new: true }
     );
     console.log("Post liked successfully");
-    res.json(post);
+    res.status(200).json({
+      status: "ok",
+      data: {
+        valid: true,
+        post
+      },
+      message: "Post liked successfully", 
+      });
   } catch (error) {
     res.status(500).json({ error: error.toString() });
   }
