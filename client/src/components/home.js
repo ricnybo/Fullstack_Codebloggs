@@ -27,6 +27,11 @@ function Home() {
     refreshPosts,
     setRefreshPosts,
   } = useContext(AuthContext);
+  // Calculate total number of posts by the user and the date of the user's last post
+  const userPosts = posts.filter(post => post.user_id._id === user.user_id);
+  const totalPosts = userPosts.length;
+  const lastPostDate = userPosts.sort((a, b) => new Date(b.time_stamp) - new Date(a.time_stamp))[0]?.time_stamp;
+
 
   const fetchPosts = async () => {
     // Fetch user's posts
@@ -99,6 +104,8 @@ function Home() {
                   <h5>Your information</h5>
                   <p>First Name: {user.first_name}</p>
                   <p>Last Name: {user.last_name}</p>
+                  <p>Total Posts: {totalPosts}</p>
+                  <p>Last Post Date: {new Date(lastPostDate).toLocaleDateString()}</p>
                   <p>
                     Birthday: {new Date(user.birthday).toLocaleDateString()}
                   </p>

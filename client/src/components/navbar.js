@@ -50,7 +50,16 @@ function Navbar({ onLogout, openPostModal }) {
 
   const handleSettings = () => {
     // Implement settings functionality here
-    console.log("Settings clicked");
+    toast.success("Settings clicked.", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   };
 
   return (
