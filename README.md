@@ -20,36 +20,54 @@ To start the frontend, navigate to `./client/` and execute `'npm start'`
 .env:  see the submition file
 
 # Research Answers / Documentation:
+<!-- ![CodeBloggs](./images/CodeBloggsTitle2.png) -->
+<img src="./images/CodeBloggs logo2.png" alt="CodeBloggs" width="300" height="78"></img>
 
 ## Wireframes:
+<div style="clear: both;">
+<img src="./images/codebloggs1.png" alt="Login Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
 
-### Login Wireframe
+### Login Wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
 No DATA is required from the backend to render the wireframe.
 
 2. What, if any, ACTIONS is this wireframe responsible for? 
 The wireframe takes input of email and password with basic validation.  When the Submit button is clicked, the email and password are sent to the Login API to initiate the login process.  Save information (not password) in the authContext useState variables.
 API Call: POST(URL/user/login) req.body = { email, password }  [see API Description]
+</div>
+<br />
+<br />
+<br />
+<div style="clear: both;">
+<img src="./images/codebloggs2.png" alt="Regiser Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
 
-
-### Register Wireframe
+### Register Wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
 No DATA is required from the backend to render the wireframe.
 
 2. What, if any, ACTIONS is this wireframe responsible for? 
 This wireframe is used to register a new user.  It has 7 input fields for the user to provide information.  This information will be sent to the backend to create a new user.  
 API Call: POST(URL/user/register) req.body = { first_name, last_name, birthday, email, password, status, occupation, location, auth_level }  [see API Description]
+</div>
+<br />
+<br />
+<br />
+<div style="clear: both;">
+<img src="./images/codebloggs3.png" alt="Base Frames and Dropdown Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
 
-
-### Base Frames and Dropdown wireframe
+### Base Frames and Dropdown wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
 DATA needs to be retrieved to populate MAIN.  MAIN will be covered in the next several wireframes.  User name is retrieved from the authContext useState which was saved from the LOGIN.
 
 2. What, if any, ACTIONS is this wireframe responsible for? 
 The action is to initiate the population of the MAIN area of the page.  It needs to provide a means to logout and access settings.  It also provides a navigation pain for navigation to other main pages.
+</div>
+<br />
+<br />
+<div style="clear: both;">
+<img src="./images/codebloggs5-new.png" alt="User view Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
 
-
-### Main - User View Wireframe
+### Main - User View Wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
 A list of posts will be needed from the backend  to render the wireframe.  The list will be filtered down to the user, and the number of posts and the date of the last post will be calculated.
 API call:  GET(URL/post/) {See API Description}
@@ -57,7 +75,9 @@ API call:  GET(URL/post/) {See API Description}
 2. What, if any, ACTIONS is this wireframe responsible for? 
 This wireframe will display user information in the left column, and the user’s posts in the right column.  The wireframe will get user information which is stored in the authContext, and it will calculate from the list of user’s posts the number of posts, and the date of the last post.  It will format the user information and the user’s posts on the display.  The user is not allowed to make any comments on their own posts or like their own posts. On this wire frame, the user may like comments from others.   
 API Call: PUT(URL/comment/like/:id) where id is the comment id.  [see API Description]
-
+</div>
+<div style="clear: both;">
+<img src="./images/codebloggs4.png" alt="Post modal Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
 
 ### Post Modal wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
@@ -66,9 +86,16 @@ No DATA is required from the backend to render the wireframe.
 2. What, if any, ACTIONS is this wireframe responsible for? 
 The action is to take the user input in the text box and create a new blogg post.
 API Call: POST(URL/post/) req.body = { content , user_id }  [see API Description]
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<div style="clear: both;">
+<img src="./images/codebloggs6.png" alt="Bloggs Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
 
-
-### Main - Bloggs View wireframe
+### Main - Bloggs View wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
 Get the X number of recent blogg posts and display them as a list.  Can be modified to omit the user’s own posts.
 API Call: GET(URL/post/) [see API Description]
@@ -77,29 +104,64 @@ API Call: GET(URL/post/) [see API Description]
 This wire frame will allow the user to read the post and comments.  Also, they can like and comment on the post or comments which are not their own. 
 API Call: PUT(URL/comment/like/:id) where id is the comment id.  [see API Description]
 API Call: PUT(URL/post/like/:id) where id is the post id.  [see API Description]
+</div>
+<br />
+<br />
+<div style="clear: both;">
+<img src="./images/codebloggs7.png" alt="Network Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
 
-
-### MAIN-Network Wireframe
+### MAIN-Network Wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
 Get the X number of users and display them as a list. 
 API Call: GET(URL/user/) [see API Description]
 
 2. What, if any, ACTIONS is this wireframe responsible for? 
 Clicking a user will show all user info in a separate area.  
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<div style="clear: both;">
+<img src="./images/codebloggs8.png" alt="Admin Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
 
-
-### Main-Admin View Wireframe
+### Main-Admin View Wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
 This wireframe will be available to those users with auth_level of “Admin”.  Currently it is not developed.  Two cards are available that will be developed in the future.  
 
 2. What, if any, ACTIONS is this wireframe responsible for? 
 When developed, the cards will take the admin to the appropriate management pages.
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</div>
 
 # API DESCRIPTIONS
 
-## MongoDB Schema Wireframe
-These four schemas define the MongoDB utilized by this site.  They are managed by the backend via several APIs.
+## MongoDB Schema Wire frame
+<div style="clear: both;">
+<img src="./images/codebloggs11-newnew.png" alt="Schema Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
 
+These four schemas define the MongoDB utilized by this site.  They are managed by the backend via several APIs.
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</div>
 
 ## User APIs
 ### usersList
