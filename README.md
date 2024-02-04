@@ -21,11 +21,12 @@ To start the frontend, navigate to `./client/` and execute `'npm start'`
 
 # Research Answers / Documentation:
 <!-- ![CodeBloggs](./images/CodeBloggsTitle2.png) -->
+<!-- <img src="./images/codebloggs1.png" alt="Login Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img> -->
 <img src="./images/CodeBloggs logo2.png" alt="CodeBloggs" width="300" height="78"></img>
 
 ## Wireframes:
 <div style="clear: both;">
-<img src="./images/codebloggs1.png" alt="Login Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
+<img src="./images/codebloggs1.png" alt="Login Wire Frame" width="480" height="270" ></img>
 
 ### Login Wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
@@ -37,9 +38,8 @@ API Call: POST(URL/user/login) req.body = { email, password }  [see API Descript
 </div>
 <br />
 <br />
-<br />
 <div style="clear: both;">
-<img src="./images/codebloggs2.png" alt="Regiser Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
+<img src="./images/codebloggs2.png" alt="Regiser Wire Frame" width="480" height="270" ></img>
 
 ### Register Wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
@@ -51,9 +51,8 @@ API Call: POST(URL/user/register) req.body = { first_name, last_name, birthday, 
 </div>
 <br />
 <br />
-<br />
 <div style="clear: both;">
-<img src="./images/codebloggs3.png" alt="Base Frames and Dropdown Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
+<img src="./images/codebloggs3.png" alt="Base Frames and Dropdown Wire Frame" width="480" height="270" ></img>
 
 ### Base Frames and Dropdown wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
@@ -65,7 +64,7 @@ The action is to initiate the population of the MAIN area of the page.  It needs
 <br />
 <br />
 <div style="clear: both;">
-<img src="./images/codebloggs5-new.png" alt="User view Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
+<img src="./images/codebloggs5-new.png" alt="User view Wire Frame" width="480" height="270" ></img>
 
 ### Main - User View Wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
@@ -76,8 +75,10 @@ API call:  GET(URL/post/) {See API Description}
 This wireframe will display user information in the left column, and the user’s posts in the right column.  The wireframe will get user information which is stored in the authContext, and it will calculate from the list of user’s posts the number of posts, and the date of the last post.  It will format the user information and the user’s posts on the display.  The user is not allowed to make any comments on their own posts or like their own posts. On this wire frame, the user may like comments from others.   
 API Call: PUT(URL/comment/like/:id) where id is the comment id.  [see API Description]
 </div>
+<br />
+<br />
 <div style="clear: both;">
-<img src="./images/codebloggs4.png" alt="Post modal Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
+<img src="./images/codebloggs4.png" alt="Post modal Wire Frame" width="480" height="270" ></img>
 
 ### Post Modal wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
@@ -89,11 +90,8 @@ API Call: POST(URL/post/) req.body = { content , user_id }  [see API Description
 </div>
 <br />
 <br />
-<br />
-<br />
-<br />
 <div style="clear: both;">
-<img src="./images/codebloggs6.png" alt="Bloggs Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
+<img src="./images/codebloggs6.png" alt="Bloggs Wire Frame" width="480" height="270" ></img>
 
 ### Main - Bloggs View wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
@@ -108,7 +106,7 @@ API Call: PUT(URL/post/like/:id) where id is the post id.  [see API Description]
 <br />
 <br />
 <div style="clear: both;">
-<img src="./images/codebloggs7.png" alt="Network Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
+<img src="./images/codebloggs7.png" alt="Network Wire Frame" width="480" height="270" ></img>
 
 ### MAIN-Network Wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
@@ -120,11 +118,8 @@ Clicking a user will show all user info in a separate area.
 </div>
 <br />
 <br />
-<br />
-<br />
-<br />
 <div style="clear: both;">
-<img src="./images/codebloggs8.png" alt="Admin Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
+<img src="./images/codebloggs8.png" alt="Admin Wire Frame" width="480" height="270" ></img>
 
 ### Main-Admin View Wire frame
 1. What, if any DATA is required from the backend to render the wireframe?
@@ -134,31 +129,15 @@ This wireframe will be available to those users with auth_level of “Admin”. 
 When developed, the cards will take the admin to the appropriate management pages.
 <br />
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 </div>
 
 # API DESCRIPTIONS
 
 ## MongoDB Schema Wire frame
 <div style="clear: both;">
-<img src="./images/codebloggs11-newnew.png" alt="Schema Wire Frame" width="480" height="270" style="float: left; margin-right: 20px;"></img>
+<img src="./images/codebloggs11-newnew.png" alt="Schema Wire Frame" width="480" height="270" ></img>
 
 These four schemas define the MongoDB utilized by this site.  They are managed by the backend via several APIs.
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 <br />
 <br />
 </div>
@@ -225,7 +204,7 @@ This API Takes no parameters.  The API checks for a session that matches the ses
 ```json
 {
   "status": "ok",
-  "message": "You are logged out”
+  "message": "You are logged out"
 }
 ```
 ### usersList API
@@ -341,7 +320,7 @@ The API will take the user_id and create a uuid v4 token to be used as a session
             "__v": 0
         },
     },
-    "message": "Session saved successfully”
+    "message": "Session saved successfully"
 }
 ```
 ### validateToken API
