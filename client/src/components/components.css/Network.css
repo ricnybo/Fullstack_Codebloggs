@@ -15,3 +15,21 @@
   border-radius: 30px !important;
   cursor: pointer;
 }
+
+.scrollable-column {
+  overflow-y: auto;
+  max-height: 100vh; 
+  scrollbar-width: none;
+}
+
+.fixed-column {
+  position: sticky; 
+  top: 0; 
+  height: 100vh; 
+  overflow-y: auto; 
+}
+
+.net-page {
+  overflow: hidden;
+  
+}

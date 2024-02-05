@@ -1,0 +1,14 @@
+.admin-header {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  
+  .net-cont {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40em;
+  }
+  
+  .net-cont .col-md-4 {
+    margin: 20px; 
+  }
