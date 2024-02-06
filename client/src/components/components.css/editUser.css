@@ -1,0 +1,8 @@
+.edit-user-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh; /* Set to the height of the viewport */
+    margin-left: 10em;
+    margin-top: 20em;
+  }
