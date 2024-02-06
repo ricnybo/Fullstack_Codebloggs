@@ -110,7 +110,7 @@ const updatePost = async (req, res) => {
       time_stamp,
       comments,
     };
-    const post = await Post.findByIdAndUpdate(id, updatedPost, { new: true });
+    const post = await Post.findByIdAndUpdate(id, updatedPost, { new: true, omitUndefined: true });
     if (!post) {
       return res.status(404).json({
         status: "ok",

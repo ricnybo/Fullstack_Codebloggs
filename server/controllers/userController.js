@@ -199,10 +199,10 @@ const protectedRoute = (req, res) => {
 };
 
 // This section will help you update a user by id.
-const editProfile = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
-    const { first_name, last_name, email, password } = req.body;
-    const userId = req.userId; // Assuming the auth middleware adds the user object to the request
+    const { first_name, last_name, email, password, birthday, status, location, occupation, auth_level } = req.body;
+    const userId = req.params.user_id; // Get the user ID from the URL parameters
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).send("User not found");
@@ -211,6 +211,11 @@ const editProfile = async (req, res) => {
     user.first_name = first_name || user.first_name;
     user.last_name = last_name || user.last_name;
     user.email = email || user.email;
+    user.birthday = birthday || user.birthday;
+    user.status = status || user.status;
+    user.location = location || user.location;
+    user.occupation = occupation || user.occupation;
+    user.auth_level = auth_level || user.auth_level;
 
     if (password) {
       user.password = password;
@@ -218,7 +223,24 @@ const editProfile = async (req, res) => {
 
     await user.save();
     console.log(`${req.body.email} updated`);
-    res.status(200).send("Profile updated successfully");
+    res.status(200).json({
+      status: "ok",
+      data: {
+        valid: true,
+        user: {
+          user_id: user._id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          birthday: user.birthday,
+          email: user.email,
+          status: user.status,
+          location: user.location,
+          occupation: user.occupation,
+          auth_level: user.auth_level,
+        },
+      },
+      message: "Profile updated successfully",
+    }); 
   } catch (err) {
     console.error(err);
     res.status(500).send("Error updating profile please try again.");
@@ -304,6 +326,6 @@ export {
   usersList,
   getUser,
   protectedRoute,
-  editProfile,
+  updateUser,
   deleteUser,
 };

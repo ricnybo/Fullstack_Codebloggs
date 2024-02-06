@@ -106,6 +106,7 @@ const updateComment = async (req, res) => {
     };
     const comment = await Comment.findByIdAndUpdate(id, updatedComment, {
       new: true,
+      omitUndefined: true,
     });
     if (!comment) {
       return res.status(404).json({
