@@ -61,9 +61,9 @@ function Network() {
         <>
             <Navbar />
             <Sidebar />
-            <Container fluid>
+            <Container fluid className="net-page">
                 <Row className="net-cont">
-                    <Col md={4}>
+                    <Col md={4} className="scrollable-column">
                         <h3>Users</h3>
                         <div>
                             {users && users.map((user) => (
@@ -76,7 +76,7 @@ function Network() {
                             ))}
                         </div>
                     </Col>
-                    <Col md={4}>
+                    <Col md={4} className="fixed-column">
                         {selectedUser && (
                             <div className="home-col1">
                                 <div className="profile-picture">
