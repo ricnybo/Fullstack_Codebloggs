@@ -2,10 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
-import Navbar from "./navbar";
+import Navbar from "./navbar.js";
 import Sidebar from "./sideBar.js";
-import { AuthContext } from "./AuthContext";
-import useValidateSession from "./validateSession";
+import { AuthContext } from "./AuthContext.js";
+import useValidateSession from "./validateSession.js";
 
 function ContentManager() {
     const { validateSession } = useValidateSession();

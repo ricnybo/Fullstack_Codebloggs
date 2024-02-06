@@ -24,8 +24,8 @@ import Home from "./components/home.js";
 import Network from "./components/Network.js";
 import Bloggs from "./components/bloggs.js";
 import Admin from "./components/admin.js";
-import UserManager from "./components/userM.js";
-import ContentManager from "./components/contentM.js";
+import UserManager from "./components/userManager.js";
+import ContentManager from "./components/contentManager.js";
 
 const App = () => {
   const {

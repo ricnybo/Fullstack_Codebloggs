@@ -4,7 +4,8 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
 import useValidateSession from "./validateSession";
-import "./components.css/userM.css";
+import "./components.css/userManager.css";
+import "./components.css/sideBar.css";
 
 
 function UserManager() {

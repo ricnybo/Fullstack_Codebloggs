@@ -4,7 +4,6 @@
 
 .user-list {
     list-style: none; 
-    padding: 0;
 }
 
 .user-item {
@@ -17,6 +16,8 @@
 h2.user-header {
     color:blue;
     max-width: 100% !important;
+    padding-left: 10em;
+    
 
 }
 
@@ -30,5 +31,14 @@ ul.user-list {
 }
 
 .user-button {
-    margin-left: 30em;
+    margin-left: 25em;
+    display: table;
+}
+
+li.user-item {
+    font-weight: 700;
+    font-size:larger;
+    margin-left:25px;
+    margin-top:20px;
+    
 }
