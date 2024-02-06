@@ -2,6 +2,8 @@
 // location: /server/controllers/postController.js
 // This file will contain the logic for handling requests from the post routes.
 import Post from "../db/MongoDB/Schema/post.Schema.js";
+import Comment from "../db/MongoDB/Schema/comment.Schema.js";
+import User from "../db/MongoDB/Schema/user.Schema.js";
 
 // This section will help you create a new session.
 const createPost = async (req, res) => {
@@ -22,7 +24,6 @@ const createPost = async (req, res) => {
       time_stamp: new Date().toISOString(),
       comments: [],
     });
-    console.log(newPost);
     const savedPost = await newPost.save();
 
     console.log("Post saved successfully");
@@ -155,10 +156,83 @@ const likePost = async (req, res) => {
   }
 };
 
+// This section will help you delete a post.
+const deletePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find the post
+    const post = await Post.findById(id);
+    if (!post) {
+      return res.status(404).json({
+        status: "ok",
+        data: { valid: false },
+        message: "Post not found",
+      });
+    }
+
+    // Delete all comments associated with the post
+    await Comment.deleteMany({ _id: { $in: post.comments } });
+
+    // Delete the post
+    await Post.findByIdAndDelete(id);
+
+    console.log("Post deleted successfully");
+    res.status(200).json({
+      status: "ok",
+      data: { valid: true },
+      message: "Post deleted successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      status: "ok",
+      data: { valid: false },
+      message: "Error deleting post.",
+    });
+  }
+};
+
+const getOrphanedPosts = async (req, res) => {
+  try {
+    const posts = await Post.find();
+    const orphanedPosts = [];
+
+    for (let post of posts) {
+      const userExists = await User.exists({ _id: post.user_id });
+
+      if (!userExists) {
+        orphanedPosts.push(post);
+      }
+    }
+
+    if (orphanedPosts.length === 0) {
+      console.log("No orphaned posts found");
+      res.status(200).json({
+        status: "ok",
+        data: { valid: true },
+        message: "No orphaned posts found",
+      });
+    } else {
+      console.log("Orphaned posts fetched successfully");
+      res.status(200).json({
+        status: "ok",
+        data: { valid: true, orphanedPosts },
+        message: "Orphaned posts fetched successfully",
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error fetching orphaned posts.");
+  }
+};
+
 export {
   createPost,
   getAllPosts,
   getPost,
   updatePost,
-  likePost
+  likePost,
+  deletePost,
+  getOrphanedPosts,
 };

@@ -12,14 +12,18 @@ import {
   getPost,
   updatePost,
   likePost,
+  deletePost,
+  getOrphanedPosts, 
 } from "../controllers/postController.js";
 
 // User routes
 postRouter.post("/", auth, createPost);
 postRouter.get("/", auth, getAllPosts);
+postRouter.get("/orphaned", auth, getOrphanedPosts);
 postRouter.get("/:id", auth, getPost);
 postRouter.put("/:id", auth, updatePost);
 postRouter.put("/like/:id", auth, likePost);
+postRouter.delete("/:id", auth, deletePost);
 
 // Export the postRouter
 export default postRouter;

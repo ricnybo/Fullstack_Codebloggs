@@ -12,6 +12,7 @@ import {
   logout,
   usersList,
   getUser,
+  deleteUser,
 } from "../controllers/userController.js";
 
 // User routes
@@ -20,6 +21,7 @@ userRouter.post("/login", login);
 userRouter.post("/logout/", auth, logout);
 userRouter.get("/", auth, usersList);
 userRouter.get("/:user_id", auth, getUser);
+userRouter.delete("/:user_id", auth, deleteUser);
 //userRouter.put("/edit-profile", auth, editProfile);
 
 // Export the userRouter

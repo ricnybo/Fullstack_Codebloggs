@@ -3,6 +3,7 @@
 // This file will contain the logic for handling requests from the comment routes.
 import Comment from "../db/MongoDB/Schema/comment.Schema.js";
 import Post from "../db/MongoDB/Schema/post.Schema.js";
+import User from "../db/MongoDB/Schema/user.Schema.js";
 
 // This section will help you create a new session.
 const createComment = async (req, res) => {
@@ -148,10 +149,89 @@ const likeComment = async (req, res) => {
   }
 };
 
+// This section will help you delete a comment.
+const deleteComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find the comment
+    const comment = await Comment.findById(id);
+    if (!comment) {
+      return res.status(404).json({
+        status: "ok",
+        data: { valid: false },
+        message: "Comment not found",
+      });
+    }
+
+    // Remove the comment's id from the post's comments array
+    await Post.findByIdAndUpdate(
+      comment.post_id,
+      { $pull: { comments: comment._id } },
+      { new: true, useFindAndModify: false }
+    );
+
+    // Delete the comment
+    // await Comment.findByIdAndRemove(id);
+    await Comment.findOneAndDelete({ _id: id });
+
+    console.log("Comment deleted successfully");
+    res.status(200).json({
+      status: "ok",
+      data: { valid: true },
+      message: "Comment deleted successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      status: "ok",
+      data: { valid: false },
+      message: "Error deleting comment.",
+    });
+  }
+};
+
+const getOrphanedComments = async (req, res) => {
+  try {
+    const comments = await Comment.find();
+    const orphanedComments = [];
+
+    for (let comment of comments) {
+      const postExists = await Post.exists({ _id: comment.post_id });
+      const userExists = await User.exists({ _id: comment.user_id });
+
+      if (!postExists || !userExists) {
+        orphanedComments.push(comment);
+      }
+    }
+
+    if (orphanedComments.length === 0) {
+      console.log("No orphaned comments found");
+      res.status(200).json({
+        status: "ok",
+        data: { valid: true },
+        message: "No orphaned comments found",
+      });
+    } else {
+      console.log("Orphaned comments fetched successfully");
+      res.status(200).json({
+        status: "ok",
+        data: { valid: true, orphanedComments },
+        message: "Orphaned comments fetched successfully",
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error fetching orphaned comments.");
+  }
+};
+
 export {
   createComment,
   getAllComments,
   getComment,
   updateComment,
   likeComment,
+  deleteComment,
+  getOrphanedComments,
 };
