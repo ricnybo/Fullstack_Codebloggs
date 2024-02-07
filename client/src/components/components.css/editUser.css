@@ -2,7 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60vh; /* Set to the height of the viewport */
+    height: 60vh; 
     margin-left: 10em;
-    margin-top: 20em;
   }
+
+.edit-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  background: linear-gradient(to right top, #fbf8f8, #8f94fb);
+  margin-top: 10vh;
+  padding: 0vh;
+}
+
+h2.user-header{
+  margin-top: 40vh;
+}

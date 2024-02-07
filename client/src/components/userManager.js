@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
 import useValidateSession from "./validateSession";
@@ -13,6 +13,9 @@ function UserManager() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [sortField, setSortField] = useState(null);
+    const [sortDirection, setSortDirection] = useState('asc');
+    const [searchQuery, setSearchQuery] = useState('');
 
     const {
         isLoggedIn,
@@ -47,6 +50,40 @@ function UserManager() {
         fetchUsers();
     }, []);
 
+    const handleSort = (field) => {
+        if (field === sortField) {
+            // If already sorting by the same field, toggle direction
+            setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+        } else {
+            // If sorting by a different field, set it to the new field
+            setSortField(field);
+            setSortDirection('asc'); // Default direction when changing field
+        }
+        setUsers(sortedUsers);
+    };
+
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const filteredUsers = users.filter(user =>
+        user.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.last_name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+
+    const sortedUsers = [...users].sort((a, b) => {
+        const nameA = sortField === 'first_name' ? a.first_name : a.last_name;
+        const nameB = sortField === 'first_name' ? b.first_name : b.last_name;
+
+        if (sortDirection === 'asc') {
+            return nameA.localeCompare(nameB);
+        } else {
+            return nameB.localeCompare(nameA);
+        }
+    });
+    
+
     const handleEditUser = (userId) => {
         // Navigate to the edit user page with the userId as a parameter
         // navigate(`/edit-user/${userId}`);
@@ -64,13 +101,26 @@ function UserManager() {
         }
     };
 
+   
     return (
         
         <div className="user-man">
-        {/* <Container> */}
             <h2 className="user-header">User Manager</h2>
+            <div className="sort-buttons">
+                <Button variant="primary" onClick={() => handleSort('first_name')}>Sort by First Name</Button>
+                <span style={{ margin: '0 10px' }}></span>
+                <Button variant="primary" onClick={() => handleSort('last_name')}>Sort by Last Name</Button>
+                <Form.Control
+                    type="text"
+                    style={{width: "20em"}}
+                    placeholder="Search by name"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                />
+            </div>
+            
             <ul className="user-list">
-                {users.map((selUser) => (
+                {filteredUsers.map((selUser) => (
                     <li className="user-item" key={selUser.user_id}>
                         <span>{selUser.first_name} {selUser.last_name}</span>
                         <div className="user-button">
@@ -80,7 +130,6 @@ function UserManager() {
                     </li>
                 ))}
             </ul>
-        {/* </Container> */}
         </div>
     );
 }
