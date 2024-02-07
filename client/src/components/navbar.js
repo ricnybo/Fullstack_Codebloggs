@@ -6,6 +6,7 @@ import "./components.css/navbar.css";
 import PostModal from "./postModal.js";
 import React, { useState, useContext } from "react";
 import { setCookie } from "react-use-cookie";
+import { getCookie } from "react-use-cookie";
 import "bootstrap/dist/css/bootstrap.css";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -15,6 +16,7 @@ import { AuthContext } from "./AuthContext"; // import the AuthContext
 function Navbar({ onLogout, openPostModal }) {
   const { isLoggedIn, setIsLoggedIn, user, setUser, setValidSession } =
     useContext(AuthContext); // Use useContext to get isLoggedIn and setIsLoggedIn
+  const session_id = getCookie('session_id');
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,7 +33,9 @@ function Navbar({ onLogout, openPostModal }) {
     // Logs out no matter what
     // Clear the token from local storage and the session token from the cookie
     localStorage.removeItem("token");
-    setCookie("session_token", "", -1); // Clear session token from cookie
+    if (session_id) {
+      setCookie("session_id", "", -1); // Clear session token from cookie
+    }
     setIsLoggedIn(false);
     setUser({});
     setValidSession(false);
