@@ -44,7 +44,8 @@ const App = () => {
         <ToastContainer />
         <Navbar />
         {isLoggedIn ? <Sidebar /> : null}
-        <div style={{ margin: 20 }}>
+        {/* <div style={{ margin: "20px" }}> */}
+        <div>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

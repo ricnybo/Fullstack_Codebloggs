@@ -103,7 +103,7 @@ function Bloggs() {
         postId={postIdForComment}
         refreshPosts={fetchPosts}
       />
-      <Container className="content">
+      <Container className="bloggs-content ">
         <Row>
           <Col>
             <div className="bloggs-col1">
