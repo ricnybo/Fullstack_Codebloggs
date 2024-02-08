@@ -70,9 +70,8 @@ function Navbar({ onLogout, openPostModal }) {
     <div className="navbarr">
       <nav className="nav navbar navbar-expand-lg">
         <NavLink className="" to="/">
-          <img
+          <img className="navbar-logo"
             alt="CodeBloggs logo"
-            style={{ width: "40%" }}
             src="./img/CodeBloggslogo.png"
           ></img>
         </NavLink>
@@ -80,7 +79,7 @@ function Navbar({ onLogout, openPostModal }) {
         {isLoggedIn && <PostModal />}
 
         {isLoggedIn && (
-          <div className="ml-auto user-btn">
+          <div className="ml-auto user-btn"> 
             <Dropdown>
               <Dropdown.Toggle variant="" id="dropdown-basic">
                 {user.email

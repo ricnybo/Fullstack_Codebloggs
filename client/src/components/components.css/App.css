@@ -1,0 +1,24 @@
+/* App.css */
+/* .container {
+  display: flex;
+} */
+
+.sidebar {
+  width: 15%;
+  /* other styles */
+}
+
+.container > div {
+  width: 100%;
+  /* other styles */
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar, .container > div {
+    width: 100%;
+  }
+}

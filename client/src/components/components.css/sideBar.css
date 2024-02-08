@@ -1,11 +1,12 @@
+/* CSS for large screens */
 .sidebar {
-  width: 15%;
+  width: 150px;
   background-color: #f0f0f0;
   border-right: 1px solid #ccc;
   display: grid;
-  height: 100%;
+  height: calc(100vh-80px);
   position: fixed;
-  margin-top: 3.5%;
+  margin-top: 80px;
 }
 
 .sidebar ul {
@@ -28,6 +29,21 @@
 }
 
 .container {
-  display: grid;
-  grid-template-columns: 15% auto;
+  display: flex;
+  /* grid-template-columns: 15% auto; */
+}
+
+/* CSS for medium screens */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100vw;
+    height: auto;
+    position: relative;
+    /* margin-top: 0; */
+    border-right: none;
+  }
+
+  .container {
+    flex-direction: column;
+  }
 }

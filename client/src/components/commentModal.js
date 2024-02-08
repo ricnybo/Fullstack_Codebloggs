@@ -1,7 +1,7 @@
 //commentModule.js
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import "./components.css/postModal.css";
+// import "./components.css/postModal.css";
 import Modal from "react-bootstrap/Modal";
 import { AuthContext } from "./AuthContext.js";
 
@@ -58,9 +58,9 @@ function CommentModal({ show, onHide, postId, refreshPosts }) {
 
   return (
     <div className="modal-container">
-      <button className="ml-center btn-custom" onClick={onHide}>
+      {/* <button className="ml-center btn-custom" onClick={onHide}>
         Comment
-      </button>
+      </button> */}
       {show && (
         <Modal show={show}>
           <div className="modal-background" onClick={onHide}></div>
