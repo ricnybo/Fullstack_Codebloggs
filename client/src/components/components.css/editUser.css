@@ -1,21 +1,28 @@
 .edit-user-container {
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
-    height: 60vh; 
-    margin-left: 10em;
+    height: auto;
+    margin-left: 20em;
   }
 
 .edit-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60vh;
+  margin-top: 30px;
   background: linear-gradient(to right top, #fbf8f8, #8f94fb);
-  margin-top: 10vh;
-  padding: 0vh;
+  width: 60%;
+
 }
 
 h2.user-header{
-  margin-top: 40vh;
+  margin-top: 7vh;
+  font-weight: 700;
+  font-style: oblique;
+}
+
+form.edit-page {
+  border-radius: 10px;
+  padding: 60px;
 }

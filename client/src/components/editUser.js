@@ -15,6 +15,8 @@ const EditUser = () => {
     const { state } = useLocation();
     const [birthday, setBirthday] = useState(new Date());
     const userId = state.selUserId
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [passwordsMatch, setPasswordsMatch] = useState(true);
 
     useEffect(() => {
         // Fetch user details based on userId
@@ -35,15 +37,23 @@ const EditUser = () => {
     // Function to handle form submission (save action)
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (updateUser.password !== confirmPassword) {
+            setPasswordsMatch(false);
+            return; // Exit early if passwords do not match
+        }
+
         try {
             updateUser.birthday = birthday;
             await axios.put(`/user/${userId}`, updateUser); // Update user details
+            setShowModal(true);
             toast.success("User updated successfully.");
             navigate("/user-manager"); // Navigate back to user manager page
         } catch (error) {
             console.error("Error updating user:", error);
             toast.error("Failed to update user.");
         }
+        
     };
 
     // Function to handle modal close
@@ -99,14 +109,33 @@ const EditUser = () => {
                                 <Form.Group>
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control
-                                        type="text"
+                                        type="password"
                                         value={updateUser.password}
                                         onChange={(e) =>
                                             setUpdateUser({ ...updateUser, password: e.target.value })
                                         }
+                                        placeholder="********"
                                         required
                                     />
                                 </Form.Group>
+
+                                {updateUser.password && ( // Display the confirmation password field only when the password is not empty
+                                    <Form.Group>
+                                        <Form.Label>Confirm Password</Form.Label>
+                                        <Form.Control
+                                            type="password" // Change type to "password" to hide the input characters
+                                            value={confirmPassword}
+                                            placeholder="Confirm Password"
+                                            onChange={(e) => {
+                                                setConfirmPassword(e.target.value);
+                                                setPasswordsMatch(true);
+                                            }}
+                                            required
+                                        />
+                                        {!passwordsMatch && <p className="error-text">Passwords do not match</p>}
+                                    </Form.Group>
+                                )}
+
                             </Col>
 
                             <Col>
@@ -149,6 +178,7 @@ const EditUser = () => {
 
                                 <Form.Group>
                                     <Form.Label>Birthday</Form.Label>
+                                    <span style={{ margin: '0 10px' }}></span>
                                     <DatePicker
                                         selected={birthday}
                                         onChange={setBirthday}
@@ -169,6 +199,7 @@ const EditUser = () => {
                                 <Button variant="primary" type="submit" onClick={() => setShowModal(true)}>
                                     Save
                                 </Button>
+                                <span style={{ margin: '0 5px' }}></span>
                                 <Button variant="secondary" onClick={() => navigate("/user-manager")}>
                                     Back
                                 </Button>

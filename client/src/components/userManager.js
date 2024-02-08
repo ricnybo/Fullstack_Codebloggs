@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Form, Pagination } from "react-bootstrap";
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
 import useValidateSession from "./validateSession";
@@ -16,6 +16,9 @@ function UserManager() {
     const [sortField, setSortField] = useState(null);
     const [sortDirection, setSortDirection] = useState('asc');
     const [searchQuery, setSearchQuery] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [resultsPerPage, setResultsPerPage] = useState(10); // Define resultsPerPage
+    const [totalPages, setTotalPages] = useState(1); // Define totalPages
 
     const {
         isLoggedIn,
@@ -42,13 +45,14 @@ function UserManager() {
           try {
             const response = await axios.get("/user");
             setUsers(response.data.data.user_list);
+            setTotalPages(Math.ceil(response.data.data.user_list.length / resultsPerPage));
           } catch (error) {
             console.error("Error fetching users:", error);
           }
         };
 
         fetchUsers();
-    }, []);
+    }, [resultsPerPage]);
 
     const handleSort = (field) => {
         if (field === sortField) {
@@ -71,7 +75,6 @@ function UserManager() {
         user.last_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-
     const sortedUsers = [...users].sort((a, b) => {
         const nameA = sortField === 'first_name' ? a.first_name : a.last_name;
         const nameB = sortField === 'first_name' ? b.first_name : b.last_name;
@@ -82,12 +85,20 @@ function UserManager() {
             return nameB.localeCompare(nameA);
         }
     });
-    
 
+    const indexOfLastUser = currentPage * resultsPerPage;
+    const indexOfFirstUser = indexOfLastUser - resultsPerPage;
+    const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+    useEffect (()  =>  {
+    }, [searchQuery, users]);
+    
+ 
+     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    
+// Navigate to the edit user page with the userId as a parameter
     const handleEditUser = (userId) => {
-        // Navigate to the edit user page with the userId as a parameter
-        // navigate(`/edit-user/${userId}`);
-        navigate(`/edit-user/`,{state:{selUserId: userId}});
+         navigate(`/edit-user/`,{state:{selUserId: userId}});
     };
 
     const handleDeleteUser = async (userId) => {
@@ -96,19 +107,30 @@ function UserManager() {
             // After successful deletion, fetch users again to update the list
             const response = await axios.get("/user");
             setUsers(response.data.data.user_list);
+            setTotalPages(Math.ceil(response.data.data.user_list.length / resultsPerPage));
         } catch (error) {
             console.error("Error deleting user:", error);
         }
     };
 
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
    
     return (
         
         <div className="user-man">
             <h2 className="user-header">User Manager</h2>
             <div className="sort-buttons">
+            <label className="results-per-page">
+                Results per page:
+                <select value={resultsPerPage} onChange={(e) => setResultsPerPage(Number(e.target.value))}>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </label>
                 <Button variant="primary" onClick={() => handleSort('first_name')}>Sort by First Name</Button>
-                <span style={{ margin: '0 10px' }}></span>
                 <Button variant="primary" onClick={() => handleSort('last_name')}>Sort by Last Name</Button>
                 <Form.Control
                     type="text"
@@ -117,95 +139,34 @@ function UserManager() {
                     value={searchQuery}
                     onChange={handleSearchChange}
                 />
+              
             </div>
             
             <ul className="user-list">
-                {filteredUsers.map((selUser) => (
+                {currentUsers.map((selUser) => (
                     <li className="user-item" key={selUser.user_id}>
-                        <span>{selUser.first_name} {selUser.last_name}</span>
+                        <span className="fullname">{selUser.first_name} {selUser.last_name}</span>
                         <div className="user-button">
                             <Button variant="primary" onClick={() => handleEditUser(selUser.user_id)}>Edit</Button>
+                            <span style={{ margin: '0 5px' }}></span>
                             <Button variant="secondary" onClick={() => handleDeleteUser(selUser.user_id)}>Delete</Button>
                         </div>
                     </li>
                 ))}
             </ul>
+            <Pagination>
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <Pagination.Item 
+                        key={index + 1} 
+                        onClick={() => handlePageChange(index + 1)} 
+                        active={index + 1 === currentPage}
+                        >
+                            {index + 1}
+                        </Pagination.Item>
+                    ))}
+            </Pagination>
         </div>
     );
 }
 
 export default UserManager;
-
-// //userM.js
-// import { useState, useEffect, useContext } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { Container, Row, Col, Card } from "react-bootstrap";
-// import axios from "axios";
-// import Navbar from "./navbar";
-// import Sidebar from "./sideBar.js";
-// import { AuthContext } from "./AuthContext";
-// import useValidateSession from "./validateSession";
-// import "./components.css/userM.css";
-
-// function UserManager() {
-//     const { validateSession } = useValidateSession();
-//     const navigate = useNavigate();
-//     const [users, setUsers] = useState([]); 
-//     const [isLoading, setIsLoading] = useState(true);
-//     const [selectedUser, setSelectedUser] = useState([]);
-
-//     const {
-//         isLoggedIn,
-//         setIsLoggedIn,
-//         user,
-//         setUser,
-//         validSession,
-//         setValidSession,
-//     } = useContext(AuthContext);
-
-//     useEffect(() => {
-//         const checkSession = async () => {
-//             const isValid = await validateSession();
-//             if (!isValid) {
-//                 navigate("/login");
-//             } 
-//             if (user.auth_level !== "Admin" ) {
-//                 navigate("/home");
-//             }
-//         };
-
-//         checkSession();
-//     }, []);
-
-//     useEffect(() => {
-//         fetchUsers();
-//     }, []);
-
-//     const fetchUsers = async () => {
-//         try {
-//             const response = await axios.get("http://localhost:5000/user_id");
-//             setUsers(response.data);
-//         } catch (error) {
-//             console.error("Error fetching users:", error);
-//         }
-//     };
-
-//     return (
-       
-//         <div>
-//             <h3 className="user-li">User List</h3>
-//             <ul>
-//                 {users.map((user) => (
-//                     <li key={user._id}>
-//                         {user.first_name} {user.last_name}
-//                     </li>
-//                 ))}
-//             </ul>
-//         </div>
-    
-//     );
-
-// }
-
-
-// export default UserManager;
