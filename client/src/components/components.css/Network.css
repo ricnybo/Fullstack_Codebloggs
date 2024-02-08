@@ -1,6 +1,6 @@
 .net-cont {
-  padding-left: 17rem;
-  padding-top: 4rem;
+  padding-left: 20px;
+  padding-top: none;
 }
 
 .user-card {
@@ -14,4 +14,21 @@
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
   border-radius: 30px !important;
   cursor: pointer;
+}
+
+.scrollable-column {
+  overflow-y: auto;
+  max-height: 100vh; 
+  scrollbar-width: none;
+}
+
+.fixed-column {
+  position: sticky; 
+  top: 0; 
+  height: 100vh; 
+  overflow-y: auto; 
+}
+
+.net-page {
+  overflow: hidden;
 }

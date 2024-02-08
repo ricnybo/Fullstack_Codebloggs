@@ -12,7 +12,7 @@ const useValidateSession = () => {
 
   // Get cookie and send a GET request to the validate_token endpoint
   const validateSession = async () => {
-    const session_token = getCookie("session_id");
+    // const session_token = getCookie("session_id");
 
     try {
       const response = await axios.get("/validate_token");
@@ -30,7 +30,7 @@ const useValidateSession = () => {
       setValidSession(false);
       setUser({});
       setIsLoggedIn(false);
-      setCookie("session_token", "", { expires: -1 });
+      setCookie("session_id", "", { expires: -1 });
       return false;
     }
   };
