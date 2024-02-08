@@ -9,7 +9,7 @@ import axios from "axios";
 import useValidateSession from "./validateSession";
 import { AuthContext, AuthProvider, UserContext } from "./AuthContext";
 
-import "./components.css/sideBar.css";
+// import "./components.css/sideBar.css";
 import "./components.css/home.css";
 
 // This method will display the cards on the home page.
@@ -77,7 +77,7 @@ function Home() {
   // This section will display the page.
   return (
     <>
-      <Container className="content">
+      <Container className="">
         <Row>
           <Col>
             {/* Display user data */}

@@ -10,7 +10,7 @@ import useValidateSession from "./validateSession.js";
 import CommentModal from "./commentModal.js";
 import { AuthContext, AuthProvider, UserContext } from "./AuthContext.js";
 
-import "./components.css/sideBar.css";
+// import "./components.css/sideBar.css";
 import "./components.css/bloggs.css";
 
 // This method will display the cards on the home page.
@@ -103,10 +103,10 @@ function Bloggs() {
         postId={postIdForComment}
         refreshPosts={fetchPosts}
       />
-      <Container className="bloggs-content ">
-        <Row>
+      <div className="bloggs-container">
+        <Row className="bloggs-Row">
           <Col>
-            <div className="bloggs-col1">
+            <div className="bloggs-col">
               {/* Display posts */}
 
               {posts.map((post, index) => (
@@ -193,22 +193,23 @@ function Bloggs() {
                       </div>
                     </div>
                   </div>
+                  <br />
                   {/* Add a horizontal image between posts, but not after the last post */}
-                  {index < posts.length - 1 && (
+                  {/* {index < posts.length - 1 && (
                     <div className="bloggs-horizBoarder-center">
                       <img
                         src="./img/horizBoarder.png"
                         alt="Horizontal"
-                        style={{ width: "70%", height: "auto" }}
+                        style={{ maxWidth: "300px", width: "auto", height: "auto", position: "center"}}
                       />
                     </div>
-                  )}
+                  )} */}
                 </div>
               ))}
             </div>
           </Col>
         </Row>
-      </Container>
+      </div>
     </>
   );
 }

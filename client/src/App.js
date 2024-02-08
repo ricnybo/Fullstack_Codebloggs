@@ -26,6 +26,7 @@ import Bloggs from "./components/bloggs.js";
 import Admin from "./components/admin.js";
 import UserManager from "./components/userManager.js";
 import ContentManager from "./components/contentManager.js";
+import Layout from "./components/Layout.js";
 
 const App = () => {
   const {
@@ -41,10 +42,11 @@ const App = () => {
     <div>
       <Router>
         <ToastContainer />
-        <Navbar />
-        {isLoggedIn ? <Sidebar /> : null}
+        {/* <Navbar />
+        {isLoggedIn ? <Sidebar /> : null} */}
         {/* <div style={{ margin: "20px" }}> */}
-        <div>
+        <Layout>
+        {/* <div> */}
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -62,8 +64,9 @@ const App = () => {
             ) : (
               <Route path="*" element={<Navigate to="/login" />} />
             )}
-          </Routes>
-        </div>
+        </Routes>
+        </Layout>
+        {/* </div> */}
       </Router>
     </div>
   );

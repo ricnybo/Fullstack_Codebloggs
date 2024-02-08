@@ -51,19 +51,18 @@ function Admin() {
 
     return (
         <>
-            {/* <Navbar />
-            <Sidebar /> */}
             <Container fluid>
+                <h3 className="admin-header">Admin Page</h3>
                 <Row className="net-cont">
-                    <Col md={4}>
-                        <h3 className="admin-header">Admin Page</h3>
+                    <Col md={6}>
+                        
                         <Card onClick={handleUserManagerClick}>
                             <Card.Body>
                                 <Card.Title>User Manager</Card.Title>
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={4}>
+                    <Col md={6}>
                         <Card onClick={handleContentManagerClick}>
                             <Card.Body>
                                 <Card.Title>Content Manager</Card.Title>

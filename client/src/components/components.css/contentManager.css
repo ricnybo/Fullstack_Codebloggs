@@ -9,19 +9,19 @@
   z-index: 10;
 }
 
-.bloggs-content {
+.content-content {
   flex: 1;
   padding-left: 20%;
 }
 
-.bloggs-container {
-  display: flex;
+.content-container {
+  /* display: flex; */
   height: 100%;
   padding-top: 5%;
   padding-left: 10%;
 }
 
-.bloggs-col1 {
+.content-col1 {
   position: none;
   padding-left: 10%;
   padding-top: 5%;
@@ -29,7 +29,7 @@
   padding-right: 5%;
 }
 
-.bloggs-block {
+.content-block {
   background-color: #8f94fb; /* Replace with your desired color */
   border-radius: 20px;
   padding-left: 5%;
@@ -61,16 +61,16 @@
   font-weight: bold;
 }
 
-.sidebar {
+/* .sidebar {
   flex: 0 0 15%;
   background-color: #f0f0f0;
   border-right: 1px solid #ccc;
   height: 100%;
   padding: 20px;
-}
+} */
 
 @media (max-width: 768px) {
-  .sidebar {
+  /* .sidebar {
     position: fixed;
     width: 100%;
     height: auto;
@@ -79,10 +79,10 @@
 
   .content {
     margin-top: 20px;
-  }
+  } */
 }
 
-.bloggs-post-group {
+.content-post-group {
   background-color: #64eefa; /* Replace with your desired color */
   border-radius: 20px;
   padding-left: 2%;
@@ -91,7 +91,7 @@
   padding-right: 2%;
 }
 
-.bloggs-post-content {
+.content-post-content {
   background-color: #f9cc79; /* Replace with your desired color */
   border-radius: 20px;
   padding-left: 2%;
@@ -100,7 +100,7 @@
   padding-right: 2%;
 }
 
-.bloggs-post-comment {
+.content-post-comment {
   background-color: #f9cc79; /* Replace with your desired color */
   border-radius: 20px;
   padding-left: 2%;
@@ -111,41 +111,41 @@
   max-width: 60%;
 }
 
-.bloggs-likes {
+.content-likes {
   margin-left: 40px;
 }
 
-.bloggs-post-info {
+.content-post-info {
     display: flex;
     justify-content: space-between;
     cursor: pointer;
 }
 
-.bloggs-horizBoarder-center {
+.content-horizBoarder-center {
   display: flex;
   justify-content: center;
   width: 70%;
   height: auto;
 }
 
-.bloggs-horizBoarder-img {
+.content-horizBoarder-img {
   width: 70%;
   height: auto;
   background-color: none;
 }
 
-.bloggs-comments-lbl {
+.content-comments-lbl {
   margin-left: 40%;
 }
 
-.bloggs-post-comment-info {
+.content-post-comment-info {
     display: flex;
     justify-content: space-between;
     margin-left: 40%;
     cursor: pointer;
 }
 
-.bloggs-initials {
+.content-initials {
   background-color: #b7f979; /* Replace with your desired color */
   border-radius: 50%; /* Make the background a circle */
   width: 70px; /* Set a fixed width */
@@ -157,6 +157,6 @@
   font-weight: bold;
 }
 
-.bloggs-cmt-pointer {
+.content-cmt-pointer {
   cursor: pointer;
 }
