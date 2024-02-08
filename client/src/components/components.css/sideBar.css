@@ -1,7 +1,8 @@
 /* CSS for large screens */
 .sidebar {
   width: 150px;
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
+  background: linear-gradient(to right top, #8f94fb, #fbf8f8);
   border-right: 1px solid #ccc;
   display: grid;
   height: calc(100vh-80px);

@@ -29,7 +29,7 @@
 }
 
 #dropdown-basic {
-  color: white !important;
+  color: white;
   border: none;
   border-radius: 20px;
   padding: 4px 20px;
@@ -43,9 +43,9 @@
   border: none;
   height: calc(100% - 20px);
   width: auto;
-  border-radius: 20px;
-  padding: 10px 10px;
-  font-size: auto;
+  border-radius: 15px;
+  padding: 15px 20px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -75,6 +75,11 @@
     padding: 5px 5px;
     font-size: 16px;
   }
+
+  .btn-custom {
+    padding: 8px 10px;
+    font-size: 16px;
+  }
 }
 
 /* CSS for small screens */
@@ -90,6 +95,11 @@
 
   #dropdown-basic {
     padding: 2px 2px;
+    font-size: 14px;
+  }
+
+  .btn-custom {
+    padding: 4px 6px;
     font-size: 14px;
   }
 }
