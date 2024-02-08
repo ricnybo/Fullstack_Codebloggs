@@ -26,6 +26,7 @@ import Bloggs from "./components/bloggs.js";
 import Admin from "./components/admin.js";
 import UserManager from "./components/userManager.js";
 import ContentManager from "./components/contentManager.js";
+import EditUser from "./components/editUser.js";
 import Layout from "./components/Layout.js";
 
 const App = () => {
@@ -59,6 +60,7 @@ const App = () => {
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/user-manager" element={<UserManager />} />
                 <Route path="/content-manager" element={<ContentManager />} />
+                <Route path="/edit-user/" element={<EditUser />} />
                 <Route path="*" element={<Navigate to="/home" />} />
               </>
             ) : (
