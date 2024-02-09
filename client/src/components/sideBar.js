@@ -7,9 +7,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext, AuthProvider, UserContext } from "./AuthContext";
 
 import styled from 'styled-components';
+// background: #f0f0f0;
 const Nav = styled.nav`
     padding: 1em;
-    background: #f0f0f0;
+    background: linear-gradient(to right top, #8f94fb, #fbf8f8);
     border-right: 1px solid #ccc;
     padding: 20px;
     @media (max-width: 700px) {
