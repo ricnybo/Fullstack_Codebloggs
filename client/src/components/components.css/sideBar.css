@@ -1,7 +1,6 @@
-/* CSS for large screens */
+/* 
 .sidebar {
   width: 150px;
-  /* background-color: #f0f0f0; */
   background: linear-gradient(to right top, #8f94fb, #fbf8f8);
   border-right: 1px solid #ccc;
   display: grid;
@@ -31,20 +30,25 @@
 
 .container {
   display: flex;
-  /* grid-template-columns: 15% auto; */
+
 }
 
-/* CSS for medium screens */
+
 @media (max-width: 768px) {
   .sidebar {
     width: 100vw;
     height: auto;
     position: relative;
-    /* margin-top: 0; */
+
     border-right: none;
   }
 
   .container {
     flex-direction: column;
   }
-}
+} */
+
+.active {
+  font-weight: bold;
+  color: #8047d1 !important; 
+} 
