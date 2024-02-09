@@ -25,7 +25,7 @@ function UserManager() {
         user,
     } = useContext(AuthContext);
 
-     useEffect(() => {
+    useEffect(() => {
         const checkSession = async () => {
             const isValid = await validateSession();
             if (!isValid) {
@@ -42,27 +42,43 @@ function UserManager() {
     useEffect(() => {
         // Fetch users from the backend
         const fetchUsers = async () => {
-          try {
-            const response = await axios.get("/user");
-            setUsers(response.data.data.user_list);
-            setTotalPages(Math.ceil(response.data.data.user_list.length / resultsPerPage));
-          } catch (error) {
-            console.error("Error fetching users:", error);
-          }
+            try {
+                const response = await axios.get("/user");
+                setUsers(response.data.data.user_list);
+                setTotalPages(Math.ceil(response.data.data.user_list.length / resultsPerPage));
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
         };
 
         fetchUsers();
     }, [resultsPerPage]);
 
     const handleSort = (field) => {
+        let direction = sortDirection;
         if (field === sortField) {
             // If already sorting by the same field, toggle direction
-            setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+            direction = sortDirection === 'asc' ? 'desc' : 'asc';
+            setSortDirection(direction);
         } else {
             // If sorting by a different field, set it to the new field
             setSortField(field);
-            setSortDirection('asc'); // Default direction when changing field
+            direction = 'asc'; // Default direction when changing field
+            setSortDirection(direction);
         }
+
+        // Sort the users here
+        const sortedUsers = [...users].sort((a, b) => {
+            const nameA = field === 'first_name' ? a.first_name : a.last_name;
+            const nameB = field === 'first_name' ? b.first_name : b.last_name;
+
+            if (direction === 'asc') {
+                return nameA.localeCompare(nameB);
+            } else {
+                return nameB.localeCompare(nameA);
+            }
+        });
+
         setUsers(sortedUsers);
     };
 
@@ -71,34 +87,25 @@ function UserManager() {
     };
 
     const filteredUsers = users.filter(user =>
-        user.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.last_name.toLowerCase().includes(searchQuery.toLowerCase())
+        user.first_name.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+        user.last_name.toLowerCase().startsWith(searchQuery.toLowerCase())
     );
 
-    const sortedUsers = [...users].sort((a, b) => {
-        const nameA = sortField === 'first_name' ? a.first_name : a.last_name;
-        const nameB = sortField === 'first_name' ? b.first_name : b.last_name;
-
-        if (sortDirection === 'asc') {
-            return nameA.localeCompare(nameB);
-        } else {
-            return nameB.localeCompare(nameA);
-        }
-    });
+    
 
     const indexOfLastUser = currentPage * resultsPerPage;
     const indexOfFirstUser = indexOfLastUser - resultsPerPage;
     const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
-    useEffect (()  =>  {
+    useEffect(() => {
     }, [searchQuery, users]);
-    
- 
-     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    
-// Navigate to the edit user page with the userId as a parameter
+
+
+    // const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // Navigate to the edit user page with the userId as a parameter
     const handleEditUser = (userId) => {
-         navigate(`/edit-user/`,{state:{selUserId: userId}});
+        navigate(`/edit-user/`, { state: { selUserId: userId } });
     };
 
     const handleDeleteUser = async (userId) => {
@@ -116,32 +123,39 @@ function UserManager() {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-   
+
     return (
-        
-        <div className="user-man">
-            <h2 className="user-header">User Manager</h2>
-            <div className="sort-buttons">
-            <label className="results-per-page">
-                Results per page:
-                <select value={resultsPerPage} onChange={(e) => setResultsPerPage(Number(e.target.value))}>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                </select>
-            </label>
-                <Button variant="primary" onClick={() => handleSort('first_name')}>Sort by First Name</Button>
-                <Button variant="primary" onClick={() => handleSort('last_name')}>Sort by Last Name</Button>
+
+        <div className="">
+
+            <div className="user-sort-buttons">
+                <label className="results-per-page">
+                    Results per page:
+                    <select className="user-spacer" value={resultsPerPage} onChange={(e) => setResultsPerPage(Number(e.target.value))}>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </label>
+                <div>
+                    <div className="user-sortBy-ctr">Sort by:</div>
+                    <div>
+                        <Button variant="primary" onClick={() => handleSort('first_name')}>First Name</Button>
+                        <Button className="user-spacer" variant="primary" onClick={() => handleSort('last_name')}>Last Name</Button>
+                    </div>
+                </div>
                 <Form.Control
+                    className="user-searchBox"
                     type="text"
-                    style={{width: "20em"}}
+                    // style={{ width: "20em" }}
                     placeholder="Search by name"
                     value={searchQuery}
                     onChange={handleSearchChange}
                 />
-              
             </div>
-            
+
+            <div className="user-man">
+            <p className="user-header">User Manager</p>
             <ul className="user-list">
                 {currentUsers.map((selUser) => (
                     <li className="user-item" key={selUser.user_id}>
@@ -155,16 +169,17 @@ function UserManager() {
                 ))}
             </ul>
             <Pagination>
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <Pagination.Item 
-                        key={index + 1} 
-                        onClick={() => handlePageChange(index + 1)} 
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <Pagination.Item
+                        key={index + 1}
+                        onClick={() => handlePageChange(index + 1)}
                         active={index + 1 === currentPage}
-                        >
-                            {index + 1}
-                        </Pagination.Item>
-                    ))}
-            </Pagination>
+                    >
+                        {index + 1}
+                    </Pagination.Item>
+                ))}
+                </Pagination>
+            </div>
         </div>
     );
 }
