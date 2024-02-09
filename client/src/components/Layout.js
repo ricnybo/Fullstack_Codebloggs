@@ -24,13 +24,13 @@ const Main = styled.main`
     position: fixed;
     height: calc(100% - 185px);
     width: 100%;
-    padding-top: 20px;
+    padding-top: 0px;
     padding: none;
     overflow-y: scroll;
     @media (min-width: 700px) {
         flex: 1;
         margin-left: 150px;
-        height: calc(100% - 64px);
+        height: calc(100% - 80px);
         width: calc(100% - 150px);
     }
 `;
