@@ -25,12 +25,13 @@ const Main = styled.main`
     height: calc(100% - 185px);
     width: 100%;
     padding-top: 0px;
+    padding-top: 0px;
     padding: none;
     overflow-y: scroll;
     @media (min-width: 700px) {
         flex: 1;
         margin-left: 150px;
-        height: calc(100vh - 64px);
+        height: calc(100% - 80px);
         width: calc(100% - 150px);
     }
 `;
