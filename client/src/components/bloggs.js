@@ -107,21 +107,20 @@ function Bloggs() {
         <Row className="bloggs-Row">
           <Col>
             <div className="bloggs-col">
-              {/* Display posts */}
 
               {posts.map((post, index) => (
                 <div key={post._id}>
                   <div className="bloggs-post-group">
                     <div style={{ display: "flex" }}>
                       {" "}
-                      {/* Add a flex container */}
+                     
                       <div className="bloggs-initials">
                         {post.user_id.first_name[0]}
                         {post.user_id.last_name[0]}
                       </div>
                       <div style={{ marginLeft: "10px", flexGrow: "1" }}>
                         {" "}
-                        {/* Add some space between the initials and the rest of the content */}
+                        
                         <div className="bloggs-post-content">
                           <div>
                             Poster: {post.user_id.first_name}{" "}
@@ -146,7 +145,7 @@ function Bloggs() {
                             {post.likes}
                           </span>
                         </div>
-                        {/* Display post's comments */}
+                       
                         <span>
                           Make a comment{" "}
                           <img
@@ -194,16 +193,6 @@ function Bloggs() {
                     </div>
                   </div>
                   <br />
-                  {/* Add a horizontal image between posts, but not after the last post */}
-                  {/* {index < posts.length - 1 && (
-                    <div className="bloggs-horizBoarder-center">
-                      <img
-                        src="./img/horizBoarder.png"
-                        alt="Horizontal"
-                        style={{ maxWidth: "300px", width: "auto", height: "auto", position: "center"}}
-                      />
-                    </div>
-                  )} */}
                 </div>
               ))}
             </div>

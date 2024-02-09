@@ -18,7 +18,6 @@ function ConfirmModal({
   // This method will handle the cancel button.
   const handleCancel = () => {
     setShow(false);
-    // onHide();
   };
 
   // This method will show the modal.
@@ -48,12 +47,7 @@ function ConfirmModal({
         </Button>
       )}
 
-      <Modal
-        show={show}
-        // onHide={handleCancel}
-        backdrop="static"
-        keyboard={false}
-      >
+      <Modal show={show} backdrop="static" keyboard={false}>
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>

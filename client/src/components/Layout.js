@@ -1,4 +1,4 @@
-// import React from 'react';
+// Layout.js
 import React, { useState, useEffect, useContext } from "react";
 import Navbar from './navbar';
 import Sidebar from './sideBar';

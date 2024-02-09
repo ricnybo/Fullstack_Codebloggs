@@ -8,7 +8,6 @@ import { AuthContext, AuthProvider, UserContext } from "./AuthContext";
 import "./components.css/sideBar.css";
 
 import styled from 'styled-components';
-// background: #f0f0f0;
 const Nav = styled.nav`
     padding: 1em;
     background: linear-gradient(to right top, #8f94fb, #fbf8f8);

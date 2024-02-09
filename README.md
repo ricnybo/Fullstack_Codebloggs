@@ -777,3 +777,16 @@ The likeComment API takes the comment id of the comment to be liked.  It then in
     "message": "Comment liked successfully"
 }
 ```
+**Matt Research Document**
+
+    --Reactive design--
+ Reactive design allows a website to seamlessly adjust its layout, content, and functionality based on user interactions, screen sizes, and device capabilities. It's all about providing users with a dynamic and engaging experience, where the website responds intelligently to their actions, ensuring smooth navigation and optimal usability regardless of the device they're using.
+
+    --Responsive Design--
+Responsive design makes the webiste capable of gracefully contorting and adjusting itself to fit any screen size or device type. Whether you're browsing on a large desktop monitor or a tiny smartphone screen, responsive design ensures that the website's layout, images, and text resize and rearrange themselves fluidly to provide the best possible viewing experience. The website should adapt seamlessly to your device making navigation effortless and it's content easily accessible.
+
+
+Reactive design and responsive design, while both aiming to enhance user experience across various devices, operate in distinct ways. 
+Responsive design primarily focuses on adapting the layout and content of a website to different screen sizes, ensuring readability and accessibility across devices like desktops, tablets, and smartphones. It employs fluid grids, flexible images, and media queries to achieve this adaptability, allowing the website to seamlessly resize and restructure its elements.
+On the other hand, reactive design goes beyond mere adaptation by introducing dynamic interactivity and real-time responsiveness to user actions and environmental changes. Unlike responsive design, which mainly adjusts based on screen dimensions, reactive design leverages technologies like JavaScript and reactive frameworks to create highly interactive and engaging user experiences. It responds not only to screen size variations but also to user inputs, device capabilities, and other contextual factors, offering a more personalized and intuitive interaction model.
+While responsive design ensures consistent display and usability across devices, reactive design elevates the user experience by adding layers of interactivity and responsiveness, making the website feel more alive and dynamic. Each approach has its merits depending on the goals and requirements of the project, with responsive design focusing on universal accessibility and reactive design emphasizing user engagement and interaction.

@@ -1,12 +1,12 @@
 // login.js is a component that will display the login form. It will also handle the submission of the form and authenticate the user.
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { AuthContext } from "./AuthContext"; // import the AuthContext
+import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import "./components.css/login.css"; // import the CSS file
+import "./components.css/login.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getCookie } from "react-use-cookie";
@@ -46,8 +46,8 @@ function Login() {
       const user_id = response.data.data.user._id; // Access the user's ID from the response
 
       const session_response = await axios.post(`/session/${user_id}`); // Create a new session for the user
-      // const session_token = getCookie("session_id"); // Access the session token from the cookie
       const getUser = await axios.get(`/user/${user_id}`); // Access the user's data using the user's ID
+     
       // If authentication is successful, update `user` with the user's data
       setUser({
         user_id: getUser.data.data.user.user_id,
@@ -85,7 +85,7 @@ function Login() {
         progress: undefined,
         theme: "colored",
       });
-      navigate("/home"); // navigate to the Home page
+      navigate("/home");
     } catch (error) {
       console.error(error);
       toast.error("Login failed: " + error.message, {
@@ -112,10 +112,6 @@ function Login() {
       navigate("/home");
     }
   }, []);
-
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]); // This will run every time `user` changes. For troubleshooting purposes.
 
   return (
     <div className="login-page">

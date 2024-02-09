@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
-// import "bootstrap/dist/css/bootstrap.css";
-import "./components.css/register.css"; // import the CSS file
+import "./components.css/register.css"; 
 
 // This component will display the signup form.
 const Register = () => {
@@ -49,7 +48,7 @@ const Register = () => {
       });
 
       // Handle the response from the server
-      navigate("/login"); // navigate to the login page
+      navigate("/login");
     } catch (error) {
       toast.error("User creation failed: " + error.message, {
         position: "top-center",
