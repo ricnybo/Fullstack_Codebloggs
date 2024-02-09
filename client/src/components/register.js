@@ -76,23 +76,20 @@ const Register = () => {
       <div className="register-container">
         <div className="register-form">
           <Row className="justify-content-md-center">
-            <Col xs={12} className="text-center">
+            <Col xs={12} md={11} className="text-center">
               <img
+                className="register-img"
                 alt="CodeBloggs logo"
-                style={{
-                  width: "100%",
-                  maxWidth: "500px",
-                }}
                 src="./img/CodeBloggslogo.png"
               ></img>
-              <h1 className="text-center">Register</h1>
+              <h1 className="register-text-center">Register</h1>
             </Col>
           </Row>
           <Row className="justify-content-md-center g-6">
             <Col xs={12} md={11}>
               <Form onSubmit={handleSubmit}>
                 <Row className="justify-content-md-center g-6">
-                  <Col md={6} style={{ paddingRight: "30px" }}>
+                  <Col md={6} >
                     <Form.Group className="mb-3" controlId="formBasicFirstName">
                       <Form.Label>First Name</Form.Label>
                       <Form.Control
@@ -122,7 +119,7 @@ const Register = () => {
                         placeholder="Enter email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        pattern="/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/"
                         required
                       />
                     </Form.Group>
@@ -139,7 +136,7 @@ const Register = () => {
                     </Form.Group>
                   </Col>
 
-                  <Col md={6} style={{ paddingLeft: "30px" }}>
+                  <Col md={6} >
                     <Form.Group className="mb-3" controlId="formBasicStatus">
                       <Form.Label>Status</Form.Label>
                       <Form.Control
@@ -176,8 +173,7 @@ const Register = () => {
                       />
                     </Form.Group>
 
-                    <br />
-                    <Form.Group className="mb-3" controlId="formBasicBirthday">
+                      <Form.Group className="mb-3" controlId="formBasicBirthday">
                       <Form.Label className="mr-3">Birthday</Form.Label>
                       <DatePicker
                         selected={birthday}

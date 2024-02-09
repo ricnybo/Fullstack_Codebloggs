@@ -118,7 +118,7 @@ function Home() {
             )}
           </Col>
 
-          <Col>
+          <Col style={{ paddingTop: 20 }}>
             {/* Display user's posts */}
             <h5>Your Posts</h5>
             {posts

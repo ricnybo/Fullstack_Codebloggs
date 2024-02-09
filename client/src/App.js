@@ -49,9 +49,9 @@ const App = () => {
         <Layout>
         {/* <div> */}
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/unauthorized" element={<Unauthorized />} />
+            <Route path="/login" element={<Layout mainClassOverride="main-override"><Login /></Layout>} />
+            <Route path="/register" element={<Layout mainClassOverride="main-override"><Register /></Layout>} />
+            <Route path="/unauthorized" element={<Layout mainClassOverride="main-override"><Unauthorized /></Layout>} />
             {isLoggedIn ? (
               <>
                 <Route path="/home" element={<Home />} />

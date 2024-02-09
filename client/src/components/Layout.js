@@ -25,6 +25,7 @@ const Main = styled.main`
     height: calc(100% - 185px);
     width: 100%;
     padding-top: 0px;
+    padding-top: 0px;
     padding: none;
     overflow-y: scroll;
     @media (min-width: 700px) {
@@ -35,17 +36,17 @@ const Main = styled.main`
     }
 `;
   
-const Layout = ({ children }) => {
+const Layout = ({ children, mainClassOverride }) => {
     const {
         isLoggedIn,
     } = useContext(AuthContext);
 
     return (
         <React.Fragment>
-            <Navbar />
+            {isLoggedIn ? <Navbar /> : null}
             <Wrapper>
                 {isLoggedIn ? <Sidebar /> : null}
-                <Main>{children}</Main>
+                <Main className={mainClassOverride}>{children}</Main>
             </Wrapper>
         </React.Fragment>
     );
