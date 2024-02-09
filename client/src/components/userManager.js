@@ -6,7 +6,7 @@ import { AuthContext } from "./AuthContext";
 import useValidateSession from "./validateSession";
 import "./components.css/userManager.css";
 import "./components.css/sideBar.css";
-
+import ConfirmModal from './confirmModal.js';
 
 function UserManager() {
     const { validateSession } = useValidateSession();
@@ -19,6 +19,7 @@ function UserManager() {
     const [currentPage, setCurrentPage] = useState(1);
     const [resultsPerPage, setResultsPerPage] = useState(10); // Define resultsPerPage
     const [totalPages, setTotalPages] = useState(1); // Define totalPages
+    const [userIdToDelete, setUserIdToDelete] = useState(null);
 
     const {
         isLoggedIn,
@@ -43,8 +44,11 @@ function UserManager() {
         // Fetch users from the backend
         const fetchUsers = async () => {
             try {
+                setIsLoading(true);
+                await new Promise(resolve => setTimeout(resolve, 1200)); // Simulate a slow network
                 const response = await axios.get("/user");
                 setUsers(response.data.data.user_list);
+                setIsLoading(false);
                 setTotalPages(Math.ceil(response.data.data.user_list.length / resultsPerPage));
             } catch (error) {
                 console.error("Error fetching users:", error);
@@ -107,14 +111,21 @@ function UserManager() {
     const handleEditUser = (userId) => {
         navigate(`/edit-user/`, { state: { selUserId: userId } });
     };
+    
+    const handleDeleteUser = (userId) => {
+        // Set the ID of the user to be deleted
+        setUserIdToDelete(userId);
+    };
 
-    const handleDeleteUser = async (userId) => {
+    const confirmDeleteUser = async (userId) => {
         try {
+            // Wait for the delete request to complete before fetching the list of users
             await axios.delete(`/user/${userId}`);
-            // After successful deletion, fetch users again to update the list
             const response = await axios.get("/user");
             setUsers(response.data.data.user_list);
             setTotalPages(Math.ceil(response.data.data.user_list.length / resultsPerPage));
+            // Clear the ID of the user to be deleted
+            setUserIdToDelete(null);
         } catch (error) {
             console.error("Error deleting user:", error);
         }
@@ -124,10 +135,16 @@ function UserManager() {
         setCurrentPage(page);
     };
 
+    useEffect(() => {
+        if (currentPage > totalPages) {
+            setCurrentPage(totalPages);
+        }
+    }, [totalPages, currentPage]);
+
     return (
 
         <div className="">
-
+            
             <div className="user-sort-buttons">
                 <label className="results-per-page">
                     Results per page:
@@ -156,18 +173,41 @@ function UserManager() {
 
             <div className="user-man">
             <p className="user-header">User Manager</p>
-            <ul className="user-list">
-                {currentUsers.map((selUser) => (
-                    <li className="user-item" key={selUser.user_id}>
-                        <span className="fullname">{selUser.first_name} {selUser.last_name}</span>
-                        <div className="user-button">
-                            <Button variant="primary" onClick={() => handleEditUser(selUser.user_id)}>Edit</Button>
-                            <span style={{ margin: '0 5px' }}></span>
-                            <Button variant="secondary" onClick={() => handleDeleteUser(selUser.user_id)}>Delete</Button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+                <ul className="user-list">
+                    {isLoading ? (
+                        <>
+                            <div className="user-skeleton" />
+                            <div className="user-skeleton" />
+                            <div className="user-skeleton" />
+                            <div className="user-skeleton" />
+                            <div className="user-skeleton" />
+                            <div className="user-skeleton" />
+                            <div className="user-skeleton" />
+                            <div className="user-skeleton" />
+                            <div className="user-skeleton" />
+                            <div className="user-skeleton" />
+                        </>
+                    ) : (
+                        currentUsers.map((selUser) => (
+                            <li className="user-item" key={selUser.user_id}>
+                                <span className="fullname">{selUser.first_name} {selUser.last_name}</span>
+                                <div className="user-button">
+                                    <Button variant="primary" onClick={() => handleEditUser(selUser.user_id)}>Edit</Button>
+                                    <span style={{ margin: '0 5px' }}></span>
+                                    <ConfirmModal
+                                        className="user-confirmModal"
+                                        buttonLabel="Delete"
+                                        title="Confirm Delete"
+                                        message="Are you sure you want to delete this user?"
+                                        confirmAction={() => confirmDeleteUser(selUser.user_id)}
+                                        show={userIdToDelete === selUser.user_id}
+                                        onHide={() => setUserIdToDelete(null)}
+                                    />
+                                </div>
+                            </li>
+                        ))
+                    )}
+                </ul>
             <Pagination>
                 {Array.from({ length: totalPages }, (_, index) => (
                     <Pagination.Item

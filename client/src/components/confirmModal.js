@@ -41,7 +41,7 @@ function ConfirmModal({
       {showButton && (
         <Button
           className="btn btn-primary btn-sm"
-          variant="primary"
+          variant="secondary"
           onClick={handleShow}
         >
           {buttonLabel}
