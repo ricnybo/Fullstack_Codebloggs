@@ -17,8 +17,6 @@ import "bootstrap/dist/css/bootstrap.css";
 // We import all the components we need in our app
 import Login from "./components/login.js";
 import Register from "./components/register.js";
-import Navbar from "./components/navbar";
-import Sidebar from "./components/sideBar.js";
 import Unauthorized from "./components/unauthorized.js";
 import Home from "./components/home.js";
 import Network from "./components/Network.js";
@@ -43,15 +41,32 @@ const App = () => {
     <div>
       <Router>
         <ToastContainer />
-        {/* <Navbar />
-        {isLoggedIn ? <Sidebar /> : null} */}
-        {/* <div style={{ margin: "20px" }}> */}
         <Layout>
-        {/* <div> */}
           <Routes>
-            <Route path="/login" element={<Layout mainClassOverride="main-override"><Login /></Layout>} />
-            <Route path="/register" element={<Layout mainClassOverride="main-override"><Register /></Layout>} />
-            <Route path="/unauthorized" element={<Layout mainClassOverride="main-override"><Unauthorized /></Layout>} />
+            <Route
+              path="/login"
+              element={
+                <Layout mainClassOverride="main-override">
+                  <Login />
+                </Layout>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <Layout mainClassOverride="main-override">
+                  <Register />
+                </Layout>
+              }
+            />
+            <Route
+              path="/unauthorized"
+              element={
+                <Layout mainClassOverride="main-override">
+                  <Unauthorized />
+                </Layout>
+              }
+            />
             {isLoggedIn ? (
               <>
                 <Route path="/home" element={<Home />} />
@@ -60,15 +75,14 @@ const App = () => {
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/user-manager" element={<UserManager />} />
                 <Route path="/content-manager" element={<ContentManager />} />
-                <Route path="/edit-user/" element={<EditUser />} />
+                <Route path="/edit-user" element={<EditUser />} />
                 <Route path="*" element={<Navigate to="/home" />} />
               </>
             ) : (
               <Route path="*" element={<Navigate to="/login" />} />
             )}
-        </Routes>
+          </Routes>
         </Layout>
-        {/* </div> */}
       </Router>
     </div>
   );

@@ -1,21 +1,48 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Form, Button, Modal, Row, Col, Container } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
+import useValidateSession from "./validateSession";
+import { AuthContext } from "./AuthContext";
 import "./components.css/editUser.css";
 
 const EditUser = () => {
+    let userId = "";
+    const { validateSession } = useValidateSession();
     const navigate = useNavigate();
     const { state } = useLocation();
-    const userId = state.selUserId;
     const [updateUser, setUpdateUser] = useState(null); // State to hold user details
     const [showModal, setShowModal] = useState(false); // State for modal visibility
     const [birthday, setBirthday] = useState(new Date());
     const [confirmPassword, setConfirmPassword] = useState("");
     const [passwordsMatch, setPasswordsMatch] = useState(false);
+    const {
+        isLoggedIn,
+        user,
+    } = useContext(AuthContext);
+
+    if (state === null || state === undefined || state.selUserId === null || state.selUserId === undefined) {
+        navigate("/home");
+    } else {
+        userId = state.selUserId;
+    }
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const isValid = await validateSession();
+            if (!isValid) {
+                navigate("/login");
+            }
+            if (user.auth_level !== "Admin") {
+                navigate("/home");
+            }
+        };
+
+        checkSession();
+    }, []);
 
     useEffect(() => {
         // Fetch user details based on userId
@@ -54,6 +81,14 @@ const EditUser = () => {
 
     const handleSaveClick = (event) => {
         event.preventDefault();
+
+        // Check if passwords match
+        if (updateUser.password && updateUser.password !== confirmPassword) {
+            setPasswordsMatch(false);
+            return; // Exit early if passwords do not match
+        }
+
+        // If passwords match, show the modal
         setShowModal(true);
     };
 
