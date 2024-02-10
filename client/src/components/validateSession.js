@@ -12,7 +12,6 @@ const useValidateSession = () => {
 
   // Get cookie and send a GET request to the validate_token endpoint
   const validateSession = async () => {
-    // const session_token = getCookie("session_id");
 
     try {
       const response = await axios.get("/validate_token");

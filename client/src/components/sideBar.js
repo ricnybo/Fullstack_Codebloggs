@@ -5,9 +5,9 @@ import { useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext, AuthProvider, UserContext } from "./AuthContext";
+import "./components.css/sideBar.css";
 
 import styled from 'styled-components';
-// background: #f0f0f0;
 const Nav = styled.nav`
     padding: 1em;
     background: linear-gradient(to right top, #8f94fb, #fbf8f8);
@@ -77,23 +77,23 @@ function Sidebar() {
     <div className="">
       <NavList >
         <li>
-          <NavLink to="/home" className="home">
+          <NavLink to="/home" className="home" activeClassName="active">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/bloggs" className="bloggs">
+          <NavLink to="/bloggs" className="bloggs" activeClassName="active">
             Bloggs
           </NavLink>
         </li>
         <li>
-          <NavLink to="/network" className="network">
+          <NavLink to="/network" className="network" activeClassName="active">
             Network
           </NavLink>
         </li>
         {user_admin && (
           <li>
-            <NavLink to="/admin" className="admin">
+            <NavLink to="/admin" className="admin" activeClassName="active">
               Admin
             </NavLink>
           </li>

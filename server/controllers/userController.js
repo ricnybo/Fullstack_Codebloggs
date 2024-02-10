@@ -201,7 +201,17 @@ const protectedRoute = (req, res) => {
 // This section will help you update a user by id.
 const updateUser = async (req, res) => {
   try {
-    const { first_name, last_name, email, password, birthday, status, location, occupation, auth_level } = req.body;
+    const {
+      first_name,
+      last_name,
+      email,
+      password,
+      birthday,
+      status,
+      location,
+      occupation,
+      auth_level,
+    } = req.body;
     const userId = req.params.user_id; // Get the user ID from the URL parameters
     const user = await User.findById(userId);
     if (!user) {
@@ -240,7 +250,7 @@ const updateUser = async (req, res) => {
         },
       },
       message: "Profile updated successfully",
-    }); 
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send("Error updating profile please try again.");

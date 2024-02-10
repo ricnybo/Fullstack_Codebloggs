@@ -5,11 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 import axios from "axios";
-
 import useValidateSession from "./validateSession";
 import { AuthContext, AuthProvider, UserContext } from "./AuthContext";
-
-// import "./components.css/sideBar.css";
 import "./components.css/home.css";
 
 // This method will display the cards on the home page.
@@ -69,10 +66,6 @@ function Home() {
   useEffect(() => {
     fetchPosts();
   }, [refreshPosts]);
-
-  //   useEffect(() => {
-  //     console.log(posts);
-  //   }, [posts]); // This will log the posts to the console whenever they change. For troublshooting purposes.
 
   // This section will display the page.
   return (
@@ -170,7 +163,6 @@ function Home() {
                       </div>
                     ))}
                   </div>
-                  {/* Add a horizontal image between posts, but not after the last post */}
                   {index < posts.length - 1 && (
                     <div className="home-horizBoarder-center">
                       <img

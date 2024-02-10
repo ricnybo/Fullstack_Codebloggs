@@ -17,8 +17,8 @@ function UserManager() {
     const [sortDirection, setSortDirection] = useState('asc');
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [resultsPerPage, setResultsPerPage] = useState(10); // Define resultsPerPage
-    const [totalPages, setTotalPages] = useState(1); // Define totalPages
+    const [resultsPerPage, setResultsPerPage] = useState(10);
+    const [totalPages, setTotalPages] = useState(1);
     const [userIdToDelete, setUserIdToDelete] = useState(null);
 
     const {
@@ -95,17 +95,12 @@ function UserManager() {
         user.last_name.toLowerCase().startsWith(searchQuery.toLowerCase())
     );
 
-    
-
     const indexOfLastUser = currentPage * resultsPerPage;
     const indexOfFirstUser = indexOfLastUser - resultsPerPage;
     const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
     useEffect(() => {
     }, [searchQuery, users]);
-
-
-    // const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     // Navigate to the edit user page with the userId as a parameter
     const handleEditUser = (userId) => {
@@ -164,7 +159,6 @@ function UserManager() {
                 <Form.Control
                     className="user-searchBox"
                     type="text"
-                    // style={{ width: "20em" }}
                     placeholder="Search by name"
                     value={searchQuery}
                     onChange={handleSearchChange}
