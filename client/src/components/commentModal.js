@@ -1,7 +1,6 @@
 //commentModule.js
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-// import "./components.css/postModal.css";
 import Modal from "react-bootstrap/Modal";
 import { AuthContext } from "./AuthContext.js";
 
@@ -33,11 +32,6 @@ function CommentModal({ show, onHide, postId, refreshPosts }) {
     setFormData({ ...formData, [name]: value });
   };
 
-  //troubleshooting
-  // useEffect(() => {
-  //   console.log('formData:', formData);
-  // }, [formData]);
-
   const closeCommentModal = async () => {
     onHide();
     setFormData({ user_id: user.user_id, post_id: postId, content: "" });
@@ -58,9 +52,6 @@ function CommentModal({ show, onHide, postId, refreshPosts }) {
 
   return (
     <div className="modal-container">
-      {/* <button className="ml-center btn-custom" onClick={onHide}>
-        Comment
-      </button> */}
       {show && (
         <Modal show={show}>
           <div className="modal-background" onClick={onHide}></div>

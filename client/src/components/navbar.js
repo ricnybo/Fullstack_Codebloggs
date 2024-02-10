@@ -11,18 +11,18 @@ import "bootstrap/dist/css/bootstrap.css";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { AuthContext } from "./AuthContext"; // import the AuthContext
+import { AuthContext } from "./AuthContext";
 
 function Navbar({ onLogout, openPostModal }) {
   const { isLoggedIn, setIsLoggedIn, user, setUser, setValidSession } =
-    useContext(AuthContext); // Use useContext to get isLoggedIn and setIsLoggedIn
+    useContext(AuthContext);
   const session_id = getCookie('session_id');
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogout = async (event) => {
-    event.preventDefault(); // Prevent the default action of the link
+    event.preventDefault();
 
     try {
       // Make a GET request to the logout API to logou of the sever.
@@ -49,7 +49,7 @@ function Navbar({ onLogout, openPostModal }) {
       progress: undefined,
       theme: "colored",
     });
-    navigate("/login"); // Redirect to login page
+    navigate("/login");
   };
 
   const handleSettings = () => {
