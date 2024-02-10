@@ -110,7 +110,10 @@ const updatePost = async (req, res) => {
       time_stamp,
       comments,
     };
-    const post = await Post.findByIdAndUpdate(id, updatedPost, { new: true, omitUndefined: true });
+    const post = await Post.findByIdAndUpdate(id, updatedPost, {
+      new: true,
+      omitUndefined: true,
+    });
     if (!post) {
       return res.status(404).json({
         status: "ok",
@@ -147,10 +150,10 @@ const likePost = async (req, res) => {
       status: "ok",
       data: {
         valid: true,
-        post
+        post,
       },
-      message: "Post liked successfully", 
-      });
+      message: "Post liked successfully",
+    });
   } catch (error) {
     res.status(500).json({ error: error.toString() });
   }

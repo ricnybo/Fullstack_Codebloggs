@@ -13,7 +13,7 @@ import {
   updatePost,
   likePost,
   deletePost,
-  getOrphanedPosts, 
+  getOrphanedPosts,
 } from "../controllers/postController.js";
 
 // User routes
