@@ -1,0 +1,32 @@
+.unauthorized {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.unauthorized-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right top, #fbf8f8, #8f94fb);
+  margin: 0vh;
+  padding: 0vh;
+}
+
+.unauthorized-page button {
+  width: 100%;
+  padding: 10px; /* Adjust padding for button */
+  background-color: #6a71fa; /* Adjust background color for button */
+  color: #fff; /* Adjust text color for button */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.unauthorized-page button:hover {
+  background-color: #555df7; /* Adjust background color on hover */
+}

@@ -1,0 +1,15 @@
+.admin-header {
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+  
+  .admin-cont {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40em;
+  }
+  
+  .admin-cont .col-md-4 {
+    margin: 20px; 
+  }

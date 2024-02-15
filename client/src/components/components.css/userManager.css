@@ -1,0 +1,156 @@
+/* userManager.css */
+
+.user-man {
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+ul.user-list {
+  list-style: none;
+  margin-right: 30%;
+  border-radius: 10px;
+  border-color: #ccc;
+}
+
+.user-header {
+  display: flex;
+  color: #8f94fb;
+  width: auto;
+  justify-content: center;
+  font: 2em sans-serif;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.user-spacer {
+  margin-left: 5px;
+}
+
+.user-sortBy-ctr {
+  margin-left: 80px;
+}
+
+.user-item {
+  display: flex;
+
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.results-per-page {
+  margin-left: 10px;
+  padding: 10px; /* Adjust the spacing between the search bar and the dropdown */
+}
+
+.user-button {
+  margin-left: 14em;
+  display: table;
+  display: flex;
+  align-items: flex;
+  margin-left: 10px;
+}
+
+.user-sort-buttons {
+  display: flex;
+  background: linear-gradient(to right top, #fbf8f8, #8f94fb);
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  top: 0;
+  z-index: 10;
+}
+
+.user-searchBox {
+  width: 20em !important;
+}
+
+.sort-buttons {
+  margin-right: 10px; /* Adjust the spacing between elements */
+}
+
+li.user-item {
+  font-weight: 700;
+  font-size: larger;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+
+.fullname {
+  margin-right: 10%;
+  width: 20em;
+}
+
+.user-confirmModal {
+  flex-grow: 0; /* The ConfirmModal should not grow */
+  flex-shrink: 0; /* The ConfirmModal should not shrink */
+  flex-basis: auto; /* The default size of the ConfirmModal is determined by its content */
+}
+
+@media (max-width: 930px) {
+  .user-header {
+    width: auto;
+    font-size: 1.5em;
+  }
+
+  .user-sort-buttons {
+    font-size: 0.8em;
+  }
+  .user-sort-buttons Button {
+    font-size: 0.8em;
+  }
+  .user-searchBox {
+    width: 15em !important;
+  }
+  .user-sortBy-ctr {
+    margin-left: 60px;
+  }
+}
+
+@media (max-width: 760px) {
+  .user-searchBox {
+    width: 10em !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .user-header {
+    width: auto;
+    font-size: 1em;
+  }
+
+  .user-sort-buttons {
+    font-size: 0.7em;
+  }
+  .user-sort-buttons Button {
+    font-size: 0.5em;
+  }
+  .user-searchBox {
+    width: 10em !important;
+  }
+  .user-sortBy-ctr {
+    margin-left: 40px;
+  }
+}
+
+.user-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1s infinite;
+  height: 40px;
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
